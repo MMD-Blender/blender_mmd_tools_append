@@ -3,9 +3,9 @@
 # This file is part of MMD UuuNyaa Tools.
 
 import bpy
-from mmd_uuunyaa_tools.asset_search.assets import ASSETS, AssetUpdater
-from mmd_uuunyaa_tools.asset_search.cache import CONTENT_CACHE
-from mmd_uuunyaa_tools.m17n import _
+from ..asset_search.assets import ASSETS, AssetUpdater
+from ..asset_search.cache import CONTENT_CACHE
+from ..m17n import _
 
 
 class ReloadAssetJsons(bpy.types.Operator):

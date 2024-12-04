@@ -3,9 +3,9 @@
 # This file is part of MMD UuuNyaa Tools.
 
 import bpy
-from mmd_uuunyaa_tools.editors.meshes import MeshEditor
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.tuners import TunerABC, TunerRegistry
+from ...editors.meshes import MeshEditor
+from ...m17n import _
+from ...tuners import TunerABC, TunerRegistry
 
 
 class UuuNyaaDynamicPaintAdjuster(bpy.types.Panel):

@@ -4,11 +4,12 @@
 
 import hashlib
 import importlib
+import importlib.util
 import math
 import re
 
 import bpy
-from mmd_uuunyaa_tools.m17n import _
+from .m17n import _
 
 
 def to_int32(value: int) -> int:
@@ -66,12 +67,12 @@ def sanitize_path_fragment(path_fragment: str) -> str:
 
 
 def is_mmd_tools_installed() -> bool:
-    return importlib.find_loader('mmd_tools')  # pylint: disable=deprecated-method
+    return importlib.util.find_spec('bl_ext.blender_org.mmd_tools')  # pylint: disable=deprecated-method
 
 
 def import_mmd_tools():
     try:
-        return importlib.import_module('mmd_tools')
+        return importlib.import_module('bl_ext.blender_org.mmd_tools')
     except ImportError as exception:
         raise RuntimeError(_("MMD Tools is not installed correctly. Please install MMD Tools using the correct steps, as UuuNyaa Tools depends on MMD Tools.")) from exception
 

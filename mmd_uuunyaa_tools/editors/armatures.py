@@ -12,8 +12,10 @@ from typing import Dict, Iterable, List, Optional
 import bpy
 import rna_prop_ui
 from mathutils import Matrix, Vector
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.utilities import raise_installation_error
+
+
+from .. import PACKAGE_PATH
+from ..utilities import raise_installation_error
 
 PATH_BLENDS_RIGSHAPELIBRARY = os.path.join(PACKAGE_PATH, 'blends', 'RigShapeLibrary.blend')
 
@@ -334,8 +336,8 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
         return self.raw_object.pose.bones
 
     @property
-    def pose_bone_groups(self) -> bpy.types.BoneGroups:
-        return self.raw_object.pose.bone_groups
+    def pose_bone_groups(self) -> bpy.types.BoneCollection:
+        return self.raw_object.data.collections
 
     @property
     def edit_bones(self) -> bpy.types.ArmatureEditBones:

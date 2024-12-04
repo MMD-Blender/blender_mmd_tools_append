@@ -5,13 +5,13 @@
 from typing import Iterable, Optional, Tuple
 
 import bpy
-from mmd_uuunyaa_tools.converters.armatures import (AutoRigArmatureObject,
+from ...converters.armatures import (AutoRigArmatureObject,
                                                     MetarigArmatureObject,
                                                     MMDArmatureObject,
                                                     MMDRigifyArmatureObject,
                                                     RigifyArmatureObject)
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import MessageException, import_mmd_tools
+from ...m17n import _
+from ...utilities import MessageException, import_mmd_tools
 
 
 class MMDArmatureAddMetarig(bpy.types.Operator):

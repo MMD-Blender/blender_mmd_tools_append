@@ -14,10 +14,10 @@ from concurrent.futures import Future, ThreadPoolExecutor
 from enum import Enum
 from typing import Callable, Dict, List, Optional, OrderedDict
 
-from mmd_uuunyaa_tools import REGISTER_HOOKS
-from mmd_uuunyaa_tools.asset_search.url_resolvers import (URLResolver,
+from .. import REGISTER_HOOKS
+from ..asset_search.url_resolvers import (URLResolver,
                                                           URLResolverABC)
-from mmd_uuunyaa_tools.utilities import get_preferences
+from ..utilities import get_preferences
 
 URL = str
 Callback = Callable[['Content'], None]

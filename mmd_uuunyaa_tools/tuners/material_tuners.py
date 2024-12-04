@@ -4,10 +4,10 @@
 
 # pylint: disable=too-many-lines
 
-from mmd_uuunyaa_tools.editors.nodes import MaterialEditor
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.tuners import TunerABC, TunerRegistry
-from mmd_uuunyaa_tools.tuners.material_adjusters import (SubsurfaceAdjuster,
+from ..editors.nodes import MaterialEditor
+from ..m17n import _
+from ..tuners import TunerABC, TunerRegistry
+from ..tuners.material_adjusters import (SubsurfaceAdjuster,
                                                          WetAdjuster)
 
 

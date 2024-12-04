@@ -5,7 +5,7 @@
 import os
 
 import bpy
-from mmd_uuunyaa_tools.utilities import raise_installation_error
+from ..utilities import raise_installation_error
 
 
 class ObjectMarker:

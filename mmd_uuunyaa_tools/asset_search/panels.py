@@ -10,13 +10,13 @@ from typing import List, Optional, Tuple
 
 import bpy
 import bpy.utils.previews
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.asset_search.actions import ImportActionExecutor, MessageException
-from mmd_uuunyaa_tools.asset_search.assets import ASSETS, AssetDescription, AssetType
-from mmd_uuunyaa_tools.asset_search.cache import CONTENT_CACHE, Content, Task
-from mmd_uuunyaa_tools.asset_search.operators import DeleteDebugAssetJson, ReloadAssetJsons, UpdateAssetJson, UpdateDebugAssetJson
-from mmd_uuunyaa_tools.m17n import _, iface_
-from mmd_uuunyaa_tools.utilities import get_preferences, label_multiline, to_human_friendly_text, to_int32
+from .. import PACKAGE_PATH
+from ..asset_search.actions import ImportActionExecutor, MessageException
+from ..asset_search.assets import ASSETS, AssetDescription, AssetType
+from ..asset_search.cache import CONTENT_CACHE, Content, Task
+from ..asset_search.operators import DeleteDebugAssetJson, ReloadAssetJsons, UpdateAssetJson, UpdateDebugAssetJson
+from ..m17n import _, iface_
+from ..utilities import get_preferences, label_multiline, to_human_friendly_text, to_int32
 
 PREVIEWS: Optional[bpy.utils.previews.ImagePreviewCollection]
 

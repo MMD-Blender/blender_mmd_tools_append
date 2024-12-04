@@ -7,9 +7,9 @@ from typing import Dict, Iterable, Tuple
 
 import bpy
 from mathutils import Euler, Matrix, Vector
-from mmd_uuunyaa_tools.converters.armatures.mmd import (MMDArmatureObject,
+from ...converters.armatures.mmd import (MMDArmatureObject,
                                                         MMDBoneInfo)
-from mmd_uuunyaa_tools.converters.armatures.mmd_bind import (
+from ...converters.armatures.mmd_bind import (
     ControlType, DataPath, GroupType, MMDBindArmatureObjectABC, MMDBindInfo,
     MMDBindType)
 

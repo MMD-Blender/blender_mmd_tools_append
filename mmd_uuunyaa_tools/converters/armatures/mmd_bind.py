@@ -8,8 +8,8 @@ from enum import Enum
 from typing import Dict, List, Optional
 
 import bpy
-from mmd_uuunyaa_tools.converters.armatures.mmd import MMDBoneInfo
-from mmd_uuunyaa_tools.editors.armatures import ArmatureEditor, PoseBoneEditor
+from ...converters.armatures.mmd import MMDBoneInfo
+from ...editors.armatures import ArmatureEditor, PoseBoneEditor
 
 
 class GroupType(Enum):

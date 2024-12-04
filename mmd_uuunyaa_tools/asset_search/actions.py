@@ -17,10 +17,10 @@ from typing import List, Optional
 
 import bpy
 import requests
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.asset_search.assets import AssetDescription, _Utilities
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import MessageException
+from .. import PACKAGE_PATH
+from ..asset_search.assets import AssetDescription, _Utilities
+from ..m17n import _
+from ..utilities import MessageException
 
 
 class RestrictionChecker(ast.NodeVisitor):

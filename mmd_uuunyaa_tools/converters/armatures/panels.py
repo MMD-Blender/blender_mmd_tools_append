@@ -3,10 +3,10 @@
 # This file is part of MMD UuuNyaa Tools.
 
 import bpy
-from mmd_uuunyaa_tools.converters.armatures import (AutoRigArmatureObject,
+from ...converters.armatures import (AutoRigArmatureObject,
                                                     ControlType,
                                                     MMDRigifyArmatureObject)
-from mmd_uuunyaa_tools.m17n import _
+from ...m17n import _
 
 
 class MMDRigifyPanel(bpy.types.Panel):

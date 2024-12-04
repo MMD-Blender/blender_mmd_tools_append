@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Tuple
 import bpy
 import mathutils
 from mathutils import Matrix, Vector
-from mmd_uuunyaa_tools.m17n import _
+from ...m17n import _
 
 
 class StretchBoneToVertexOperator(bpy.types.Operator):

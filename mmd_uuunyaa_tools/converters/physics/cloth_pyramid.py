@@ -13,10 +13,10 @@ import bpy
 import mathutils
 import numpy as np
 from mathutils import Matrix, Vector
-from mmd_uuunyaa_tools.editors.armatures import ArmatureEditor
-from mmd_uuunyaa_tools.editors.meshes import MeshEditor
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import MessageException
+from ...editors.armatures import ArmatureEditor
+from ...editors.meshes import MeshEditor
+from ...m17n import _
+from ...utilities import MessageException
 
 
 class PyramidVertex(IntEnum):

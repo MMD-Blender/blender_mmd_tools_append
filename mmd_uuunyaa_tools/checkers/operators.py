@@ -8,7 +8,7 @@ from enum import Enum
 from typing import Optional, Set, Tuple
 
 import bpy
-from mmd_uuunyaa_tools.m17n import _, iface_
+from ..m17n import _, iface_
 
 
 class CheckResultStatus(Enum):

@@ -9,7 +9,7 @@ from typing import Iterable, List, Tuple
 import bpy
 import bpy_extras
 from mathutils import Quaternion, Vector
-from mmd_uuunyaa_tools.m17n import _
+from ..m17n import _
 
 
 def create_skin_hair(  # pylint: disable=too-many-arguments

@@ -5,8 +5,8 @@
 from abc import abstractmethod
 
 from bpy.types import NodeFrame, ShaderNodeGroup
-from mmd_uuunyaa_tools.editors.nodes import MaterialEditor
-from mmd_uuunyaa_tools.m17n import _
+from ..editors.nodes import MaterialEditor
+from ..m17n import _
 
 
 class MaterialAdjusterUtilities(MaterialEditor):

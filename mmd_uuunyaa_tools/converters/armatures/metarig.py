@@ -6,9 +6,9 @@ import math
 
 import bpy
 from mathutils import Vector
-from mmd_uuunyaa_tools.converters.armatures.mmd import (MMDArmatureObject,
+from ...converters.armatures.mmd import (MMDArmatureObject,
                                                         MMDBoneType)
-from mmd_uuunyaa_tools.editors.armatures import ArmatureEditor
+from ...editors.armatures import ArmatureEditor
 
 
 class MetarigArmatureObject(ArmatureEditor):

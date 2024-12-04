@@ -4,27 +4,27 @@
 
 import bpy
 
-from mmd_uuunyaa_tools.checkers.operators import CheckEeveeRenderingPerformance
-from mmd_uuunyaa_tools.converters.armatures.operators import (
+from .checkers.operators import CheckEeveeRenderingPerformance
+from .converters.armatures.operators import (
     MMDArmatureAddMetarig, MMDAutoRigApplyMMDRestPose, MMDAutoRigConvert,
     MMDRigifyApplyMMDRestPose, MMDRigifyConvert, MMDRigifyIntegrateFocusOnMMD,
     MMDRigifyIntegrateFocusOnRigify)
-from mmd_uuunyaa_tools.converters.physics.cloth import (
+from .converters.physics.cloth import (
     ConvertRigidBodyToClothOperator, RemoveMeshCloth, SelectClothMesh)
-from mmd_uuunyaa_tools.converters.physics.cloth_bone import \
+from .converters.physics.cloth_bone import \
     StretchBoneToVertexOperator
-from mmd_uuunyaa_tools.converters.physics.cloth_pyramid import (
+from .converters.physics.cloth_pyramid import (
     AddPyramidMeshByBreastBoneOperator, AssignPyramidWeightsOperator,
     ConvertPyramidMeshToClothOperator)
-from mmd_uuunyaa_tools.converters.physics.collision import (
+from .converters.physics.collision import (
     RemoveMeshCollision, SelectCollisionMesh)
-from mmd_uuunyaa_tools.editors.operators import (PaintSelectedFacesOperator, RestoreSegmentationColorPaletteOperator, SetupSegmentationColorPaletteOperator, AutoSegmentationOperator,
+from .editors.operators import (PaintSelectedFacesOperator, RestoreSegmentationColorPaletteOperator, SetupSegmentationColorPaletteOperator, AutoSegmentationOperator,
                                                  SetupRenderEngineForEevee,
                                                  SetupRenderEngineForToonEevee,
                                                  SetupRenderEngineForWorkbench)
-from mmd_uuunyaa_tools.generators.physics import AddCenterOfGravityObject
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import import_mmd_tools
+from .generators.physics import AddCenterOfGravityObject
+from .m17n import _
+from .utilities import import_mmd_tools
 
 mmd_tools = import_mmd_tools()
 

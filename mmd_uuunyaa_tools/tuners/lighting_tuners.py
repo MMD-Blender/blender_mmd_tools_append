@@ -6,10 +6,10 @@ import os
 from typing import Optional
 
 import bpy
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.tuners import TunerABC, TunerRegistry
-from mmd_uuunyaa_tools.tuners.utilities import ObjectAppender, ObjectMarker
+from . import PACKAGE_PATH
+from ..m17n import _
+from ..tuners import TunerABC, TunerRegistry
+from ..tuners.utilities import ObjectAppender, ObjectMarker
 
 PATH_BLENDS_UUUNYAA_LIGHTINGS = os.path.join(PACKAGE_PATH, 'blends', 'UuuNyaa_Lightings.blend')
 

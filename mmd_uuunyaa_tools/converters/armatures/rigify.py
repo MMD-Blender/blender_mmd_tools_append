@@ -7,13 +7,13 @@ from typing import Dict, Set, Tuple
 
 import bpy
 from mathutils import Color, Euler, Matrix, Vector
-from mmd_uuunyaa_tools.converters.armatures.mmd import (MMDArmatureObject,
+from ...converters.armatures.mmd import (MMDArmatureObject,
                                                         MMDBoneInfo,
                                                         MMDBoneType)
-from mmd_uuunyaa_tools.converters.armatures.mmd_bind import (
+from ...converters.armatures.mmd_bind import (
     ControlType, DataPath, GroupType, MMDBindArmatureObjectABC, MMDBindInfo,
     MMDBindType, PoseBoneEditor)
-from mmd_uuunyaa_tools.editors.armatures import DriverVariable
+from ...editors.armatures import DriverVariable
 
 
 class RigifyArmatureObject(MMDBindArmatureObjectABC):

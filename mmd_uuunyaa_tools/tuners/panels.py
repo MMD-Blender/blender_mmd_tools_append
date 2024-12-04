@@ -4,13 +4,13 @@
 
 
 import bpy
-from mmd_uuunyaa_tools.editors.nodes import MaterialEditor
-from mmd_uuunyaa_tools.m17n import _, iface_
-from mmd_uuunyaa_tools.tuners.lighting_tuners import LightingUtilities
-from mmd_uuunyaa_tools.tuners.material_adjusters import (
+from ..editors.nodes import MaterialEditor
+from ..m17n import _, iface_
+from ..tuners.lighting_tuners import LightingUtilities
+from ..tuners.material_adjusters import (
     EmissionAdjuster, GlitterAdjuster, MaterialAdjusterUtilities,
     SubsurfaceAdjuster, WetAdjuster)
-from mmd_uuunyaa_tools.tuners.operators import (AttachMaterialAdjuster,
+from ..tuners.operators import (AttachMaterialAdjuster,
                                                 DetachMaterialAdjuster,
                                                 FreezeLighting)
 
@@ -191,8 +191,8 @@ class MaterialAdjusterPanel(bpy.types.Panel):
 
 
 try:
-    from mmd_uuunyaa_tools.editors.geometry_nodes import GeometryEditor
-    from mmd_uuunyaa_tools.tuners.geometry_nodes_tuners import \
+    from ..editors.geometry_nodes import GeometryEditor
+    from ..tuners.geometry_nodes_tuners import \
         GeometryNodesUtilities
 
     class GeometryNodesPanel(bpy.types.Panel):

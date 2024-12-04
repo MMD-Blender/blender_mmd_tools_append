@@ -3,7 +3,7 @@
 # This file is part of MMD UuuNyaa Tools.
 
 import bpy
-from mmd_uuunyaa_tools.asset_search.assets import AssetType, AssetUpdater
+from ..asset_search.assets import AssetType, AssetUpdater
 
 
 def update_search_query(_, context):

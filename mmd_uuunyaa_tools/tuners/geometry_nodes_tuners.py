@@ -5,11 +5,11 @@
 from typing import Optional
 
 import bpy
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.tuners import TunerABC, TunerRegistry
+from ..m17n import _
+from ..tuners import TunerABC, TunerRegistry
 
 try:
-    from mmd_uuunyaa_tools.editors.geometry_nodes import GeometryEditor
+    from ..editors.geometry_nodes import GeometryEditor
 
     class GeometryNodesUtilities:
         @staticmethod

@@ -6,9 +6,9 @@ import os
 from typing import Iterable
 
 import bpy
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.editors.nodes import NodeEditor
-from mmd_uuunyaa_tools.m17n import _
+from .. import PACKAGE_PATH
+from ..editors.nodes import NodeEditor
+from ..m17n import _
 
 try:
     from bpy.types import (GeometryNode, GeometryNodeAlignRotationToVector,

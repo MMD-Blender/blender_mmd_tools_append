@@ -9,9 +9,9 @@ from typing import Set
 
 import bmesh
 import bpy
-from mmd_uuunyaa_tools.editors import segmentation
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import (import_mmd_tools,
+from ..editors import segmentation
+from ..m17n import _
+from ..utilities import (import_mmd_tools,
                                          is_mmd_tools_installed,
                                          label_multiline)
 

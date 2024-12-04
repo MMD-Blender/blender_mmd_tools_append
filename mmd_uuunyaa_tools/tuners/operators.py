@@ -3,8 +3,8 @@
 # This file is part of MMD UuuNyaa Tools.
 
 import bpy
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.tuners import (lighting_tuners, material_adjusters,
+from ..m17n import _
+from ..tuners import (lighting_tuners, material_adjusters,
                                       material_tuners)
 
 
@@ -94,7 +94,7 @@ class DetachMaterialAdjuster(bpy.types.Operator):
 
 
 try:
-    from mmd_uuunyaa_tools.tuners.geometry_nodes_tuners import (
+    from ..tuners.geometry_nodes_tuners import (
         TUNERS, GeometryNodesUtilities)
 
     class TuneGeometryNodes(bpy.types.Operator):

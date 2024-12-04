@@ -20,8 +20,8 @@ import os
 import sys
 import traceback
 
-from mmd_uuunyaa_tools import auto_load
-from mmd_uuunyaa_tools.m17n import _
+from . import auto_load
+from .m17n import _
 
 bl_info = {
     'name': 'mmd_uuunyaa_tools',

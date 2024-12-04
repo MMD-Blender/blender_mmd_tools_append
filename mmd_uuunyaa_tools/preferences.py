@@ -8,10 +8,10 @@ import tempfile
 
 import bpy
 
-from mmd_uuunyaa_tools import addon_updater_ops, utilities
-from mmd_uuunyaa_tools.asset_search.assets import AssetUpdater
-from mmd_uuunyaa_tools.asset_search.operators import DeleteCachedFiles
-from mmd_uuunyaa_tools.m17n import _
+from . import addon_updater_ops, utilities
+from .asset_search.assets import AssetUpdater
+from .asset_search.operators import DeleteCachedFiles
+from .m17n import _
 
 
 @addon_updater_ops.make_annotations

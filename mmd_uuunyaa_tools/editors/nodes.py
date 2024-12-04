@@ -14,9 +14,9 @@ from bpy.types import (Node, NodeFrame, NodeGroup, NodeSocket, ShaderNode,
                        ShaderNodeOutputMaterial, ShaderNodeRGBCurve,
                        ShaderNodeTexImage, ShaderNodeTexSky, ShaderNodeValue,
                        ShaderNodeVertexColor)
-from mmd_uuunyaa_tools import PACKAGE_PATH
-from mmd_uuunyaa_tools.m17n import _
-from mmd_uuunyaa_tools.utilities import raise_installation_error
+from .. import PACKAGE_PATH
+from ..m17n import _
+from ..utilities import raise_installation_error
 
 PATH_BLENDS_UUUNYAA_MATERIALS = os.path.join(PACKAGE_PATH, 'blends', 'UuuNyaa_Materials.blend')
 
