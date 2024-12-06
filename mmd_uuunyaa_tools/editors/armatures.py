@@ -334,8 +334,8 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
         return self.raw_object.pose.bones
 
     @property
-    def pose_bone_groups(self) -> bpy.types.BoneGroups:
-        return self.raw_object.pose.bone_groups
+    def pose_bone_groups(self) -> bpy.types.BoneCollections:
+        return self.raw_object.pose.bone_Collections
 
     @property
     def edit_bones(self) -> bpy.types.ArmatureEditBones:
