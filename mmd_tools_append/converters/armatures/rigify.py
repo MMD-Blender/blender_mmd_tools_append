@@ -9,7 +9,7 @@ import bpy
 from mathutils import Color, Euler, Matrix, Vector
 
 from ...editors.armatures import DriverVariable, PoseBoneEditor
-from .mmd import MMDArmatureObject
+from .mmd import MMDArmatureObject, MMDBoneType
 from .mmd_bind import ControlType, DataPath, GroupType, MMDBindArmatureObjectABC, MMDBindInfo, MMDBindType, MMDBoneInfo
 
 

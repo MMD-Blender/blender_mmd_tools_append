@@ -70,8 +70,11 @@ def is_mmd_tools_installed():
     )
 
     for name in candidates:
-        if name in sys.modules or importlib.util.find_spec(name) is not None:
-            return True
+        try:
+            if name in sys.modules or importlib.util.find_spec(name) is not None:
+                return True
+        except:
+            pass
 
     return False
 
