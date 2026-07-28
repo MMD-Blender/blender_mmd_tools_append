@@ -11,7 +11,7 @@ import shutil
 import stat
 import urllib
 import zipfile
-from typing import List, Optional
+from typing import Any, Callable, Dict, Optional
 
 import bpy
 import requests
@@ -22,33 +22,51 @@ from ..utilities import MessageException, import_from_file
 from .assets import AssetDescription, _Utilities
 
 
-class RestrictionChecker(ast.NodeVisitor):
-    def __init__(self, *functions: List[str]):
+class RestrictedRunner:
+    """Evaluate and execute download & import actions using AST."""
+
+    def __init__(self, functions: Dict[str, Callable]):
         self._functions = functions
 
-    def visit(self, node: ast.AST):
-        node_name = node.__class__.__name__
+    def execute(self, code: str) -> Any:
+        """Safely execute string as code."""
 
-        if node_name not in {
-            "Module",
-            "Expr",
-            "Call",
-            "Constant",
-            "Name",
-            "Str",
-            "JoinedStr",
-            "FormattedValue",
-            "Load",
-            "Num",
-            "keyword",
-        }:
-            raise NotImplementedError(ast.dump(node))
+        tree = ast.parse(code)
+        return self._eval(tree)
 
-        if node_name == "Call":
-            if node.func.id not in self._functions:
-                raise NotImplementedError(ast.dump(node))
+    def _eval(self, node: ast.AST) -> Any:
+        if isinstance(node, ast.Module):
+            result = None
+            for stmt in node.body:
+                result = self._eval(stmt)
+            return result
 
-        return self.generic_visit(node)
+        if isinstance(node, ast.Expr):
+            return self._eval(node.value)
+
+        if isinstance(node, ast.Constant):
+            return node.value
+
+        if isinstance(node, ast.Name):
+            if node.id in self._functions:
+                return self._functions[node.id]
+            raise NotImplementedError(f"Name '{node.id}' is not allowed in: {ast.dump(node)}")
+
+        if isinstance(node, ast.Call):
+            if not isinstance(node.func, ast.Name):
+                raise NotImplementedError(f"Unsupported call format: {ast.dump(node)}")
+
+            func_name = node.func.id
+            if func_name not in self._functions:
+                raise NotImplementedError(f"Function '{func_name}' is not allowed: {ast.dump(node)}")
+
+            func = self._functions[func_name]
+            args = [self._eval(arg) for arg in node.args]
+            kwargs = {kw.arg: self._eval(kw.value) for kw in node.keywords if kw.arg is not None}
+
+            return func(*args, **kwargs)
+
+        raise NotImplementedError(f"Unsupported AST node: {ast.dump(node)}")
 
 
 class DownloadActionExecutor:
@@ -194,8 +212,6 @@ class DownloadActionExecutor:
 
     @staticmethod
     def execute_action(download_action: str):
-        tree = ast.parse(download_action)
-
         functions = {
             "get": functools.partial(DownloadActionExecutor.get),
             "tstorage": functools.partial(DownloadActionExecutor.tstorage),
@@ -205,13 +221,7 @@ class DownloadActionExecutor:
             "onedrive": functools.partial(DownloadActionExecutor.onedrive),
             "uploader": functools.partial(DownloadActionExecutor.uploader),
         }
-
-        RestrictionChecker(*(functions.keys())).visit(tree)
-
-        ast.dump(tree)
-        return eval(  # pylint: disable=eval-used
-            download_action, {"__builtins__": {}}, {**functions}
-        )
+        return RestrictedRunner(functions).execute(download_action)
 
 
 class ImportActionExecutor:
@@ -402,8 +412,6 @@ class ImportActionExecutor:
 
     @staticmethod
     def execute_import_action(asset: AssetDescription, target_file: Optional[str]):
-        tree = ast.parse(asset.import_action)
-
         functions = {
             "unzip": functools.partial(ImportActionExecutor.unzip, zip_file_path=target_file, asset=asset),
             "un7zip": functools.partial(ImportActionExecutor.un7zip, zip_file_path=target_file, asset=asset),
@@ -417,12 +425,8 @@ class ImportActionExecutor:
             "delete_objects": functools.partial(ImportActionExecutor.delete_objects),
         }
 
-        RestrictionChecker(*(functions.keys())).visit(tree)
-
         try:
-            exec(  # pylint: disable=exec-used
-                compile(tree, "<source>", "exec"), {"__builtins__": {}}, {**functions}
-            )
+            RestrictedRunner(functions).execute(asset.import_action)
         except FileNotFoundError as ex:
             if os.sys.platform == "win32":
                 message = str(ex)
