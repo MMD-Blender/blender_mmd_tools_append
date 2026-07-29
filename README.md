@@ -1,5 +1,5 @@
 # MMD Tools Append (formerly MMD UuuNyaa Tools)
-MMD Tools Append is a blender addon for adjusting scenes, models and materials in concert with [MMD-Blender/blender_mmd_tools](https://github.com/MMD-Blender/blender_mmd_tools).
+MMD Tools Append is a Blender addon for adjusting scenes, models and materials in concert with [MMD-Blender/blender_mmd_tools](https://github.com/MMD-Blender/blender_mmd_tools).
 
 MMD Tools Appendは[MMD-Blender/blender_mmd_tools](https://github.com/MMD-Blender/blender_mmd_tools)と連携してシーン、モデル、マテリアルを調整するためのBlenderアドオンです。
 
@@ -28,6 +28,7 @@ MMD Tools Append needs your contribution!
 - Asset creation (lighting, materials, accessories, etc)
 - Asset maintenance
 - Software development
+- Addon localization
 
 If you are interested in supporting this project, please reach out via the following channels:
 - [MMD Tools Append Issues](https://github.com/MMD-Blender/blender_mmd_tools_append/issues)

@@ -66,3 +66,11 @@ Releases may be performed by maintainers who meet both of the following requirem
 2. Pushing the tag triggers a GitHub Action that builds artifacts and creates a draft release
 3. Manually finalize and publish the GitHub Release draft
 4. Manually upload the artifacts to [Blender Extensions](https://extensions.blender.org/add-ons/mmd-tools-append/)
+
+## Getting Help
+If you need help with development:
+- Ask questions in the [MMD & Blender Discord Server](https://discord.gg/zRgUkuaPWw) `#addon-development` channel
+- Open an issue to discuss implementation details
+- Refer to existing code for patterns and approaches
+
+We appreciate your contributions and look forward to working together to improve MMD Tools Append!
