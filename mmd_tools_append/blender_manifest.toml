@@ -1,7 +1,7 @@
 schema_version = "1.0.0"
 
 id = "mmd_tools_append"
-version = "4.5.11"
+version = "4.5.12"
 name = "MMD Tools Append"
 tagline = "Appendix tools for MMD model & scene editing"
 maintainer = "UuuNyaa <uuunyaa@gmail.com>"

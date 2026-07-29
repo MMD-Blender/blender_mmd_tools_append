@@ -14,12 +14,12 @@ translations_tuple = (
         ((), ()),
         (
             "ja_JP",
-            "Project-Id-Version: MMD Tools Append 4.5.11 (0)\n",
+            "Project-Id-Version: MMD Tools Append 4.5.12 (0)\n",
             (False, ("Blender's translation file (po format).", "Copyright (C) 2024 The Blender Authors.", "This file is distributed under the same license as the Blender package.", "FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.")),
         ),
         (
             "zh_HANS",
-            "Project-Id-Version: MMD Tools Append 4.5.11 (0)\n",
+            "Project-Id-Version: MMD Tools Append 4.5.12 (0)\n",
             (False, ("Blender's translation file (po format).", "Copyright (C) 2024 The Blender Authors.", "This file is distributed under the same license as the Blender package.", "FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.")),
         ),
     ),
