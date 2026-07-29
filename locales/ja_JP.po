@@ -731,12 +731,14 @@ msgid "Combine Rigify rig and MMD armature."
 msgstr "RigifyリグとMMDアーマチュアを統合します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate.bind_leg_d
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_rigify_focused_integrate.bind_leg_d
 msgid "Bind Leg D bones"
 msgstr "足Dボーンをバインド"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate.bind_leg_d
-msgid "Bind leg bones to leg D bones (e.g. 足首D)"
-msgstr "足ボーンを足Dボーン (足首Dなど) にバインドします"
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_rigify_focused_integrate.bind_leg_d
+msgid "Bind leg bones to leg D bones (e.g. 足首D) to prevent leg IK shifting"
+msgstr "足ボーンを足Dボーン (足首Dなど) にバインドし足IKの移動を抑えます"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate.is_join_armatures
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_rigify_focused_integrate.is_join_armatures
@@ -993,6 +995,11 @@ msgstr "プラスチック 発光"
 msgid "Plastic Bump"
 msgstr "プラスチック 凹凸"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_FIGURE'
+#. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_FIGURE'
+msgid "Figure"
+msgstr "フィギュア"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_METAL_NOBLE'
 #. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_METAL_NOBLE'
 msgid "Metal Noble"
@@ -1002,11 +1009,6 @@ msgstr "貴金属"
 #. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_METAL_BASE'
 msgid "Metal Base"
 msgstr "卑金属"
-
-#. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_STONE_GEM'
-#. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_STONE_GEM'
-msgid "Stone Gem"
-msgstr "石 宝石"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_LIQUID_WATER'
 #. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_LIQUID_WATER'
@@ -1018,6 +1020,11 @@ msgstr "水"
 msgid "Liquid Cloudy"
 msgstr "液体 白濁"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_STONE_GEM'
+#. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_STONE_GEM'
+msgid "Stone Gem"
+msgstr "石 宝石"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_ARTISTIC_WATERCOLOR'
 #. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_ARTISTIC_WATERCOLOR'
 msgid "Artistic Watercolor"
@@ -1028,33 +1035,28 @@ msgstr "表現手法 水彩画"
 msgid "Toon Shader"
 msgstr "トーンシェーダー"
 
-#. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_material.material:'MATERIAL_FIGURE'
-#. :src: bpy.types.MaterialPropertyGroup.thumbnails:'MATERIAL_FIGURE'
-msgid "Figure"
-msgstr "フィギュア"
-
 #. :src: bpy.types.AssetSearchQuery.type:'MODEL_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:33
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:34
 msgid "Model (.pmx)"
 msgstr "モデル (.pmx)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'MODEL_BLENDER'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:34
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:35
 msgid "Model (.blend)"
 msgstr "モデル (.blend)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'MOTION_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:35
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:36
 msgid "Motion (.vmd)"
 msgstr "モーション (.vmd)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'POSE_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:36
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:37
 msgid "Pose (.vpd)"
 msgstr "ポーズ (.vpd)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'WORLD_BLENDER'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:39
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:40
 msgid "World (.blend)"
 msgstr "ワールド (.blend)"
 
@@ -1183,41 +1185,41 @@ msgstr "弦固定ウェイト"
 msgid "Speed Multiplier"
 msgstr "速度の乗数"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:158
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:173
 msgid "Failed to download assets from uploader.jp. The response format may have changed."
 msgstr "uploader.jpからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:84
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:99
 msgid "Failed to download assets from SmutBase. The response format may have changed."
 msgstr "SmutBaseからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:111
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:126
 msgid "Failed to download assets from BowlRoll. Incorrect download key."
 msgstr "BowlRollからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:148
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:163
 msgid "Failed to download assets from OneDrive. Incorrect download key."
 msgstr "OneDriveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:127
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:142
 msgid "Failed to download assets from Google Drive. Incorrect download key."
 msgstr "Google Driveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:242
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:257
 msgid ""
 "Failed to execute unrar or WinRAR\n"
 "Please install unrar or WinRAR and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:262
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:277
 msgid ""
 "Failed to execute 7z\n"
 "Please install p7zip-full or 7-zip and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:336
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:348
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:364
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:351
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:363
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:379
 msgid ""
 "Failed to invoke mmd_tools\n"
 "Please install mmd_tools."
@@ -1225,31 +1227,31 @@ msgstr ""
 "mmd_toolsの呼び出しに失敗しました\n"
 "mmd_toolsをインストールしてください."
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:352
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:367
 msgid ""
 "Select an object.\n"
 "The target object for motion import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:368
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:383
 msgid ""
 "Select an object.\n"
 "The target object for pose import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:415
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:430
 msgid "The file path is too long. This can be alleviated to some extent by shortening the Asset Extract Root Folder in the Add-on Preferences."
 msgstr "ファイルパスが長すぎます。アドオンプリファレンスのアセット展開ルートフォルダーを短くすることで軽減できます。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:32
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:33
 msgid "All"
 msgstr "全て"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:37
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:38
 msgid "Lighting"
 msgstr "照明"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:38
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:39
 msgid "Material"
 msgstr "マテリアル"
 
@@ -1601,11 +1603,11 @@ msgstr ""
 msgid "{}: {}"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:430
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:439
 msgid "Removed  bones."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:467
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:476
 msgid "Translated  bones."
 msgstr ""
 
@@ -1614,27 +1616,31 @@ msgstr ""
 msgid "Iterations"
 msgstr "反復"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:647
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:656
 msgid "Reset Humanoid data."
 msgstr "ヒューマノイドをリセットしました"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:433
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:97
+msgid "This armature does not have required MMD bone: "
+msgstr "アーマチュアにMMD必須ボーンがありません. "
+
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:442
 msgid "Failed to remove rig: "
 msgstr "リグの除去に失敗しました: "
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:466
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:479
 msgid "Failed to translate bones: "
 msgstr "ボーンの翻訳に失敗しました: "
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:826
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:839
 msgid "Renamed  bones with  duplicates. (click to see details)"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:828
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:841
 msgid "Renamed  bones."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:830
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:843
 msgid "This armature does not have required MMD bones. "
 msgstr "アーマチュアにMMD必須ボーンがありません. "
 
@@ -1646,7 +1652,7 @@ msgstr ""
 "Rigifyの呼び出しに失敗しました\n"
 "Rigifyアドオンを有効にしてください."
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:800
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:813
 msgid "Bone  was selected  times."
 msgstr ""
 
@@ -1759,7 +1765,7 @@ msgstr "コリジョン:"
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1065
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:77
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:28
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:145
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:147
 msgid "Batch Operation:"
 msgstr "一括操作:"
 
@@ -1767,7 +1773,7 @@ msgstr "一括操作:"
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1068
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:78
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:29
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:152
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:154
 msgctxt "Operator"
 msgid "Copy to Selected"
 msgstr "選択にコピー"
@@ -1990,7 +1996,7 @@ msgstr "放射調整器"
 msgid "Glitter Adjuster"
 msgstr "グリッター調整器"
 
-#: extensions/user_default/mmd_tools_append/editors/nodes.py:358
+#: extensions/user_default/mmd_tools_append/editors/nodes.py:368
 msgid "Sun Direction"
 msgstr "太陽の方向"
 
@@ -2618,30 +2624,30 @@ msgstr "MMD Appendマテリアル"
 msgid "MMD Append Material Adjuster"
 msgstr "MMD Appendマテリアル調整器"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:33
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:35
 msgid "Light Strength"
 msgstr "照明強度"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:34
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:36
 msgid "Image Strength"
 msgstr "表示強度"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:56
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:58
 msgid "for Eevee lighting, check Render Properties."
 msgstr "Eevee照明用レンダープロパティを確認"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:61
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:63
 msgctxt "Operator"
 msgid "Bake Indirect Lighting"
 msgstr "間接照明をベイク"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:101
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:142
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:244
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:103
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:144
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:250
 msgid "thumbnails"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:148
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:150
 msgctxt "Operator"
 msgid "Copy to Active"
 msgstr "アクティブにコピー"
@@ -2654,15 +2660,15 @@ msgstr "全体トゥーン/スフィア調整器"
 msgid "MMD Append Geometry Nodes"
 msgstr "MMD Appendジオメトリノード"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:46
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:48
 msgid "MMD Append World not found."
 msgstr "MMD Appendワールドが見つからない"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:51
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:53
 msgid "IrradianceVolume not found. Please add it."
 msgstr "イラディアンスボリュームが見つからないので追加してください"
 
-#: extensions/user_default/mmd_tools_append/tuners/panels.py:184
+#: extensions/user_default/mmd_tools_append/tuners/panels.py:194
 msgid "{material_name} is unsupported. Select other material to be output from Principled BSDF."
 msgstr "{material_name}は未対応です。プリンシプルBSDFから出力のある他のマテリアルを選択してください。"
 
@@ -2671,11 +2677,11 @@ msgctxt "Operator"
 msgid "Emission"
 msgstr "放射"
 
-#: extensions/user_default/mmd_tools_append/utilities.py:123
+#: extensions/user_default/mmd_tools_append/utilities.py:133
 msgid "MMD Tools Append is not installed correctly. Please reinstall MMD Tools Append using the correct steps."
 msgstr "MMD Tools Appendが正しくインストールされていません。正しい手順でMMD Tools Appendを再インストールしてください。"
 
-#: extensions/user_default/mmd_tools_append/utilities.py:98
+#: extensions/user_default/mmd_tools_append/utilities.py:108
 msgid "MMD Tools is not installed correctly. Please install MMD Tools using the correct steps, as MMD Tools Append depends on MMD Tools."
 msgstr "MMD Toolsが正しくインストールされていません。MMD Append ToolsはMMD Toolsに依存しているので、正しい手順でMMD Toolsを再インストールしてください。"
 
