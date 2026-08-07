@@ -20,7 +20,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
     prop_name_mmd_append_bind_mmd_rigify = "mmd_append_bind_mmd_rigify"
 
     prop_name_mmd_bcol_category = "mmd_append_MMDBoneCollection"
-    mmd_bcol_categorys: dict[str, str] = {
+    mmd_bcol_categories: dict[str, str] = {
         "M": "Main",
         "O": "Others",
         "S/D": "Shadow/Dummy",
@@ -274,7 +274,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         self.datapaths = datapaths
 
         # Used for classifying MMD Bone collection in panels.py
-        k_collections = self.mmd_bcol_categorys.values()
+        k_collections = self.mmd_bcol_categories.values()
         MMDBColCategory: dict[str, list[str]] = {k: [] for k in k_collections}
         # expected result: {"Main": [], "Others": [], "Shadow/Dummy": []}
 

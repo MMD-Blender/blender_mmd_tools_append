@@ -626,7 +626,7 @@ class SetupSegmentationColorPaletteOperator(bpy.types.Operator):
         if palette is None:
             palette = bpy.data.palettes.new(SEGMENTATION_COLOR_PALETTE_NAME)
             palette_colors = palette.colors
-            for color in segmentation.SEGMANTATION_COLORS:
+            for color in segmentation.SEGMENTATION_COLORS:
                 palette_colors.new().color = color[:3]
 
         context.tool_settings.vertex_paint.palette = palette
@@ -649,7 +649,7 @@ class RestoreSegmentationColorPaletteOperator(bpy.types.Operator):
         palette: bpy.types.Palette = bpy.data.palettes.get(SEGMENTATION_COLOR_PALETTE_NAME)
         palette_colors = palette.colors
         palette_colors.clear()
-        for color in segmentation.SEGMANTATION_COLORS:
+        for color in segmentation.SEGMENTATION_COLORS:
             palette_colors.new().color = color[:3]
 
         return {"FINISHED"}

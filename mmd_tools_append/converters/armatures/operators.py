@@ -161,7 +161,7 @@ class MMDRigifyOperatorABC:
         mmd_bind_bones = mmd_armature_object.exist_actual_bone_names
 
         bcol_prop_name = rigify_armature_object.prop_name_mmd_bcol_category
-        bcol_categorys = rigify_armature_object.mmd_bcol_categorys
+        bcol_categories = rigify_armature_object.mmd_bcol_categories
 
         # show "Others" bones only
         show_bone_collection_names: list[str] = []
@@ -172,16 +172,16 @@ class MMDRigifyOperatorABC:
 
             if "mmd_" in bone_collection.name:
                 # mmd_shadow/mmd_dummy or Collection is empty
-                bone_collection[bcol_prop_name] = bcol_categorys["S/D"]
+                bone_collection[bcol_prop_name] = bcol_categories["S/D"]
                 continue
 
             bone_names = [s.name for s in bone_collection.bones]
             if set(bone_names).isdisjoint(mmd_bind_bones):
                 # if Collection doesn't contain "Main" bones
                 show_bone_collection_names.append(bone_collection.name)
-                bone_collection[bcol_prop_name] = bcol_categorys["O"]  # Others
+                bone_collection[bcol_prop_name] = bcol_categories["O"]  # Others
             else:
-                bone_collection[bcol_prop_name] = bcol_categorys["M"]  # Main
+                bone_collection[bcol_prop_name] = bcol_categories["M"]  # Main
 
         # join armatures
         rigify_armature: bpy.types.Armature = rigify_armature_object.raw_armature

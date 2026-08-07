@@ -23,7 +23,7 @@ def _to_blender_color(uint8_color: int) -> float:
 
 RGBA = Tuple[float, float, float, float]
 # fmt: off
-SEGMANTATION_COLORS: List[RGBA] = [
+SEGMENTATION_COLORS: List[RGBA] = [
     (
         _to_blender_color(0xff & (rgb >> 16)),  # Red
         _to_blender_color(0xff & (rgb >> 8)),  # Blue
@@ -315,21 +315,21 @@ def auto_segment(
             if is_not_perimeter_cost_factor_0:
                 dst_segment.perimeter = dst_segment.non_contact_perimeter + sum(sci2segment_contacts[sci].length for sci in dst_segment_contact_ids)
 
-            # collect mergable segment contacts
-            spi2mergable_segment_contacts: Dict[SegmentPairId, Set[SegmentContact]] = collections.defaultdict(set)
+            # collect mergeable segment contacts
+            spi2mergeable_segment_contacts: Dict[SegmentPairId, Set[SegmentContact]] = collections.defaultdict(set)
             for edge_sci in dst_segment_contact_ids:
                 sc = sci2segment_contacts[edge_sci]
                 spi = _to_segment_pair_id(sc.segment0, sc.segment1, segment_pair_shift)
-                spi2mergable_segment_contacts[spi].add(sc)
+                spi2mergeable_segment_contacts[spi].add(sc)
 
-            # merge mergable segment contacts
-            for mergable_segment_contacts in spi2mergable_segment_contacts.values():
-                if len(mergable_segment_contacts) <= 1:
+            # merge mergeable segment contacts
+            for mergeable_segment_contacts in spi2mergeable_segment_contacts.values():
+                if len(mergeable_segment_contacts) <= 1:
                     continue
 
-                mergable_segment_contacts_iter = iter(mergable_segment_contacts)
-                merged_sc = next(mergable_segment_contacts_iter)
-                for sc in mergable_segment_contacts_iter:
+                mergeable_segment_contacts_iter = iter(mergeable_segment_contacts)
+                merged_sc = next(mergeable_segment_contacts_iter)
+                for sc in mergeable_segment_contacts_iter:
                     merged_sc.cost += sc.cost
                     merged_sc.length += sc.length
                     _remove_segment_contact(sc.index)
@@ -363,15 +363,15 @@ def assign_vertex_colors(
     color_layer: bmesh.types.BMLayerItem,
     segmentation_vertex_color_random_seed: int,
 ):
-    segmantation_colors = SEGMANTATION_COLORS.copy()
-    segmantation_color_count = len(segmantation_colors)
+    segmentation_colors = SEGMENTATION_COLORS.copy()
+    segmentation_color_count = len(segmentation_colors)
 
     if segmentation_vertex_color_random_seed != 0:
         rng = random.Random(segmentation_vertex_color_random_seed)
-        rng.shuffle(segmantation_colors)
+        rng.shuffle(segmentation_colors)
 
     for index, segment in enumerate(segments):
-        segmentation_color = segmantation_colors[index % segmantation_color_count]
+        segmentation_color = segmentation_colors[index % segmentation_color_count]
         for tri_loop0 in segment.tri_loop0s:
             tri_loop0[color_layer] = segmentation_color
             tri_loop0.link_loop_prev[color_layer] = segmentation_color
@@ -385,7 +385,7 @@ def paint_selected_face_colors(mesh_object: bpy.types.Object, color: Optional[RG
     color_layer = get_color_layer(target_bmesh, segmentation_vertex_color_attribute_name)
 
     if color is None:
-        color = random.choice(SEGMANTATION_COLORS)
+        color = random.choice(SEGMENTATION_COLORS)
 
     tri_loops = target_bmesh.calc_loop_triangles()
     tri_loop: List[bmesh.types.BMLoop]
