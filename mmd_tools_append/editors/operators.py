@@ -11,6 +11,7 @@ import bpy
 from bpy.app.translations import pgettext as _
 
 from ..editors import segmentation
+from ..editors.armatures import ArmatureEditor
 from ..utilities import label_multiline
 
 
@@ -262,6 +263,26 @@ class RemoveUnusedVertexGroups(bpy.types.Operator):
                 if vertex_group.index in used_vertex_group_indices:
                     continue
                 vertex_groups.remove(vertex_group)
+
+        return {"FINISHED"}
+
+
+class DissolveWeightBone(bpy.types.Operator):
+    bl_idname = "mmd_tools_append.dissolve_weight_bone"
+    bl_label = "Dissolve Weight Bones"
+    bl_description = "Merge the selected bones and corresponding vertex groups with their parents"
+    bl_options = {"REGISTER", "UNDO"}
+
+    def execute(self, context):
+        for obj in context.selected_objects:
+            if obj.type != "ARMATURE":
+                continue
+
+            editor = ArmatureEditor(obj)
+            selected_bones = [b for b in editor.edit_bones if b and b.select]
+
+            for b in selected_bones:
+                editor.dissolve_bone(b)
 
         return {"FINISHED"}
 

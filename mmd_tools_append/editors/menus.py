@@ -4,6 +4,7 @@
 import bpy
 
 from ..editors.operators import (
+    DissolveWeightBone,
     RemoveUnusedShapeKeys,
     RemoveUnusedVertexGroups,
     SelectMovedPoseBones,
@@ -29,6 +30,28 @@ class RemoveUnusedVertexGroupsMenu(bpy.types.Menu):
     @staticmethod
     def unregister():
         bpy.types.MESH_MT_vertex_group_context_menu.remove(RemoveUnusedVertexGroupsMenu.draw_menu)
+
+
+class DissolveWeightBoneMenu(bpy.types.Menu):
+    bl_idname = "ARMATURE_MT_mmd_tools_append_dissolve_weight_bone"
+    bl_label = "MMD Append"
+
+    def draw(self, _):
+        pass
+
+    @staticmethod
+    def draw_menu(this, _):
+        this.layout.operator(DissolveWeightBone.bl_idname)
+
+    @staticmethod
+    def register():
+        bpy.types.VIEW3D_MT_edit_armature_delete.append(DissolveWeightBoneMenu.draw_menu)
+        bpy.types.VIEW3D_MT_armature_context_menu.append(DissolveWeightBoneMenu.draw_menu)
+
+    @staticmethod
+    def unregister():
+        bpy.types.VIEW3D_MT_edit_armature_delete.remove(DissolveWeightBoneMenu.draw_menu)
+        bpy.types.VIEW3D_MT_armature_context_menu.remove(DissolveWeightBoneMenu.draw_menu)
 
 
 class SelectShapeKeyTargetVerticesMenu(bpy.types.Menu):
