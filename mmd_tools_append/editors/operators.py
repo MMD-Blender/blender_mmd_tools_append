@@ -392,8 +392,8 @@ class SelectMovedPoseBones(bpy.types.Operator):
     def execute(self, context):
         tolerance = self.tolerance
 
-        def isclose(l: float, r: float) -> bool:
-            return math.isclose(l, r, abs_tol=tolerance)
+        def isclose(lhs: float, rhs: float) -> bool:
+            return math.isclose(lhs, rhs, abs_tol=tolerance)
 
         obj: bpy.types.Object
         for obj in context.selected_objects:

@@ -391,3 +391,46 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
         if collection:
             collection.assign(bone)
         return bone
+
+    def dissolve_bone(self, target: bpy.types.EditBone):
+        """Merge the bone (target) to its parent and combine related vertex groups."""
+
+        self.raw_armature.use_mirror_x = False
+
+        parent = target.parent
+        parent.tail = target.tail
+        target_name = target.name
+        self.edit_bones.remove(target)
+
+        meshes = self._get_related_mesh()
+        for m in meshes:
+            self._combine_vertex_group(m, parent.name, target_name)
+
+    def _get_related_mesh(self) -> list[bpy.types.Object]:
+        related_meshes = []
+        for o in bpy.data.objects:
+            if o.type == "MESH":
+                if any(m.type == "ARMATURE" and m.object == self.raw_object for m in o.modifiers):
+                    related_meshes.append(o)
+        return related_meshes
+
+    @staticmethod
+    def _combine_vertex_group(mesh_obj: bpy.types.Object, parent: str, child: str):
+        vgs = mesh_obj.vertex_groups
+        if child not in vgs:
+            return
+
+        if parent not in vgs:
+            vgs[child].name = parent
+            return
+
+        parent_vg = vgs[parent]
+        child_vg = vgs[child]
+        child_index = child_vg.index
+
+        for v in mesh_obj.data.vertices:
+            for g in v.groups:
+                if g.group == child_index:
+                    parent_vg.add([v.index], g.weight, "ADD")
+        vgs.remove(child_vg)
+        print("Combined 2 vertex groups: ", parent, child)
