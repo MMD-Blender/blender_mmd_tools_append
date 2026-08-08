@@ -192,27 +192,24 @@ class MMDRigifyOperatorABC:
         mmd_armature["rig_id"] = rig_id
         mmd_armature_object.raw_object.display_type = "WIRE"
 
-        show_bone_collection_names = list(
-            set(show_bone_collection_names)
-            | set(
-                [
-                    "Face",
-                    "Torso",
-                    "Torso (Tweak)",
-                    "Fingers",
-                    "Arm.L (FK)",
-                    "Arm.R (FK)",
-                    "Leg.L (IK)",
-                    "Leg.R (IK)",
-                    "Root",
-                ]
-            )
-        )
+        SKIP_COLLECTION_NAMES = [
+            "Face",
+            "Torso",
+            "Torso (Tweak)",
+            "Fingers",
+            "Arm.L (IK)",
+            "Arm.R (IK)",
+            "Arm.L (FK)",
+            "Arm.R (FK)",
+            "Leg.L (IK)",
+            "Leg.R (IK)",
+            "Root",
+        ]
 
         for bone_collection in mmd_armature.collections:
             if bone_collection.name in show_bone_collection_names:
                 bone_collection.is_visible = True
-            else:
+            elif bone_collection.name not in SKIP_COLLECTION_NAMES:
                 bone_collection.is_visible = False
 
         mmd_armature_object.raw_object.show_in_front = True
@@ -239,11 +236,23 @@ class MMDRigifyIntegrateFocusOnMMD(MMDRigifyOperatorABC, bpy.types.Operator):
     )
 
     @staticmethod
-    def set_view_layers(rigify_armature_object: bpy.types.Object):
+    def set_bone_collections(rigify_armature_object: bpy.types.Object):
         rig_armature: bpy.types.Armature = rigify_armature_object.raw_armature
-        for bone_col in rig_armature.collections:
-            if bone_col.name not in {"mmd_shadow", "mmd_dummy"}:
-                bone_col.is_visible = True
+        for collection in rig_armature.collections:
+            if collection.name in {
+                "Face",
+                "Torso",
+                "Torso (Tweak)",
+                "Fingers",
+                "Arm.L (FK)",
+                "Arm.R (FK)",
+                "Leg.L (IK)",
+                "Leg.R (IK)",
+                "Root",
+            }:
+                collection.is_visible = True
+            else:
+                collection.is_visible = False
 
     def execute(self, context: bpy.types.Context):
         rigify_armature_raw_object, mmd_armature_raw_object = self.find_armature_objects(context.selected_objects)
@@ -264,7 +273,7 @@ class MMDRigifyIntegrateFocusOnMMD(MMDRigifyOperatorABC, bpy.types.Operator):
         rigify_armature_object.bind_bones(mmd_armature_object, self.bind_leg_d)
 
         bpy.ops.object.mode_set(mode="OBJECT")
-        self.set_view_layers(rigify_armature_object)
+        self.set_bone_collections(rigify_armature_object)
 
         if self.is_join_armatures:
             self.adjust_bone_collections(rigify_armature_object, mmd_armature_object)
@@ -299,7 +308,7 @@ class MMDRigifyIntegrateFocusOnRigify(MMDRigifyOperatorABC, bpy.types.Operator):
     )
 
     @staticmethod
-    def set_view_layers(rigify_armature_object: bpy.types.Object):
+    def set_bone_collections(rigify_armature_object: bpy.types.Object):
         rig_armature: bpy.types.Armature = rigify_armature_object.raw_armature
         for collection in rig_armature.collections:
             if collection.name in {
@@ -335,7 +344,7 @@ class MMDRigifyIntegrateFocusOnRigify(MMDRigifyOperatorABC, bpy.types.Operator):
         rigify_armature_object.bind_bones(mmd_armature_object, self.bind_leg_d)
 
         bpy.ops.object.mode_set(mode="OBJECT")
-        self.set_view_layers(rigify_armature_object)
+        self.set_bone_collections(rigify_armature_object)
 
         if self.is_join_armatures:
             self.adjust_bone_collections(rigify_armature_object, mmd_armature_object)
