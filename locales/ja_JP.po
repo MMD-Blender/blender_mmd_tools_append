@@ -128,7 +128,7 @@ msgid "Right hand fingers"
 msgstr "右手の指"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_add_center_of_gravity_object
-#: extensions/user_default/mmd_tools_append/panels.py:196
+#: extensions/user_default/mmd_tools_append/panels.py:206
 msgctxt "Operator"
 msgid "Add Center of Gravity"
 msgstr "重心を追加"
@@ -251,6 +251,11 @@ msgctxt "Operator"
 msgid "Detach Material Adjuster"
 msgstr "マテリアル調整器を除去"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone
+msgctxt "Operator"
+msgid "Dissolve Weight Bones"
+msgstr "ウェイトボーンを溶解"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_freeze_lighting
 msgctxt "Operator"
 msgid "Freeze Lighting"
@@ -272,7 +277,7 @@ msgid "Initialize Humanoid Renamer"
 msgstr "ヒューマノイドを初期化"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_rename
-#: extensions/user_default/mmd_tools_append/panels.py:298
+#: extensions/user_default/mmd_tools_append/panels.py:308
 msgctxt "Operator"
 msgid "Humanoid Rename"
 msgstr "ヒューマノイド名称変更"
@@ -413,7 +418,7 @@ msgid "Show Message Box"
 msgstr "メッセージボックスを表示"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_stretch_bone_to_vertex
-#: extensions/user_default/mmd_tools_append/panels.py:195
+#: extensions/user_default/mmd_tools_append/panels.py:205
 msgctxt "Operator"
 msgid "Stretch Bone to Vertex"
 msgstr "ボーンを頂点にストレッチ"
@@ -570,6 +575,10 @@ msgstr "選択に適用"
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_copy_tune_material_settings.to_selection
 msgid "Apply Append material to materials in selected object"
 msgstr "選択中のオブジェクトのマテリアルにAppendマテリアルを適用します"
+
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone
+msgid "Merge the selected bones and corresponding vertex groups with their parents"
+msgstr "選択中のボーンと対応する頂点グループを親ボーンに結合します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation
 msgid "Automatically set bone orientation based on child bone"
@@ -1185,41 +1194,41 @@ msgstr "弦固定ウェイト"
 msgid "Speed Multiplier"
 msgstr "速度の乗数"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:173
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:191
 msgid "Failed to download assets from uploader.jp. The response format may have changed."
 msgstr "uploader.jpからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:99
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:117
 msgid "Failed to download assets from SmutBase. The response format may have changed."
 msgstr "SmutBaseからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:126
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:144
 msgid "Failed to download assets from BowlRoll. Incorrect download key."
 msgstr "BowlRollからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:163
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:181
 msgid "Failed to download assets from OneDrive. Incorrect download key."
 msgstr "OneDriveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:142
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:160
 msgid "Failed to download assets from Google Drive. Incorrect download key."
 msgstr "Google Driveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:257
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:267
 msgid ""
 "Failed to execute unrar or WinRAR\n"
 "Please install unrar or WinRAR and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:277
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:287
 msgid ""
 "Failed to execute 7z\n"
 "Please install p7zip-full or 7-zip and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:351
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:363
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:379
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:361
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:373
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:389
 msgid ""
 "Failed to invoke mmd_tools\n"
 "Please install mmd_tools."
@@ -1227,19 +1236,19 @@ msgstr ""
 "mmd_toolsの呼び出しに失敗しました\n"
 "mmd_toolsをインストールしてください."
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:367
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:377
 msgid ""
 "Select an object.\n"
 "The target object for motion import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:383
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:393
 msgid ""
 "Select an object.\n"
 "The target object for pose import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:430
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:434
 msgid "The file path is too long. This can be alleviated to some extent by shortening the Asset Extract Root Folder in the Add-on Preferences."
 msgstr "ファイルパスが長すぎます。アドオンプリファレンスのアセット展開ルートフォルダーを短くすることで軽減できます。"
 
@@ -1762,7 +1771,7 @@ msgid "Collision:"
 msgstr "コリジョン:"
 
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:238
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1065
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1106
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:77
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:28
 #: extensions/user_default/mmd_tools_append/tuners/panels.py:147
@@ -1770,7 +1779,7 @@ msgid "Batch Operation:"
 msgstr "一括操作:"
 
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:241
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1068
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1109
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:78
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:29
 #: extensions/user_default/mmd_tools_append/tuners/panels.py:154
@@ -1833,11 +1842,11 @@ msgstr "複数のMMDモデルが選択されています。ひとつずつモデ
 msgid "MMD Append Pyramid Cloth Adjuster"
 msgstr "MMD Appendピラミッドクロス調整器"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1055
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1096
 msgid "Weights:"
 msgstr "ウエイト:"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1061
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1102
 msgid "Cloth Physics:"
 msgstr "クロス物理:"
 
@@ -1900,22 +1909,22 @@ msgstr "MMD Append"
 msgid "Select Moved"
 msgstr "操作済選択"
 
-#: extensions/user_default/mmd_tools_append/editors/menus.py:81
+#: extensions/user_default/mmd_tools_append/editors/menus.py:104
 msgctxt "Operator"
 msgid "Moved"
 msgstr "操作済"
 
-#: extensions/user_default/mmd_tools_append/editors/menus.py:86
+#: extensions/user_default/mmd_tools_append/editors/menus.py:109
 msgctxt "Operator"
 msgid "Rotated"
 msgstr "回転済"
 
-#: extensions/user_default/mmd_tools_append/editors/menus.py:91
+#: extensions/user_default/mmd_tools_append/editors/menus.py:114
 msgctxt "Operator"
 msgid "Translated"
 msgstr "移動済"
 
-#: extensions/user_default/mmd_tools_append/editors/menus.py:96
+#: extensions/user_default/mmd_tools_append/editors/menus.py:119
 msgctxt "Operator"
 msgid "Scaled"
 msgstr "スケール済"
@@ -2017,7 +2026,7 @@ msgstr "ウエイトしきい値"
 msgid "Tolerance"
 msgstr "許容範囲"
 
-#: extensions/user_default/mmd_tools_append/editors/operators.py:559
+#: extensions/user_default/mmd_tools_append/editors/operators.py:580
 msgid ""
 "contact: , cost last/max: /\n"
 "segment: , area min/max: /\n"
@@ -2025,7 +2034,7 @@ msgid ""
 "operation:  secs, auto_segment  secs"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/editors/operators.py:527
+#: extensions/user_default/mmd_tools_append/editors/operators.py:548
 msgid "There is no target segment; In Edit Mode, select the faces you want to paint."
 msgstr "対象のセグメントがありません。編集モードでペイントしたい面を選択してください。"
 
@@ -2156,107 +2165,107 @@ msgctxt "Operator"
 msgid "Add Pyramid"
 msgstr "ピラミッドを追加"
 
-#: extensions/user_default/mmd_tools_append/panels.py:189
+#: extensions/user_default/mmd_tools_append/panels.py:192
 msgctxt "Operator"
 msgid "Pyramid to Cloth"
 msgstr "ピラミッドをクロスに"
 
-#: extensions/user_default/mmd_tools_append/panels.py:190
+#: extensions/user_default/mmd_tools_append/panels.py:198
 msgctxt "Operator"
 msgid "Repaint Weight"
 msgstr "ウェイト再ペイント"
 
-#: extensions/user_default/mmd_tools_append/panels.py:193
+#: extensions/user_default/mmd_tools_append/panels.py:203
 msgid "Misc:"
 msgstr "その他"
 
-#: extensions/user_default/mmd_tools_append/panels.py:240
+#: extensions/user_default/mmd_tools_append/panels.py:250
 msgid "Humanoid Renamer"
 msgstr "ヒューマノイド名称変更"
 
-#: extensions/user_default/mmd_tools_append/panels.py:257
+#: extensions/user_default/mmd_tools_append/panels.py:267
 msgctxt "Operator"
 msgid "Auto Detect"
 msgstr "自動認識"
 
-#: extensions/user_default/mmd_tools_append/panels.py:299
+#: extensions/user_default/mmd_tools_append/panels.py:309
 msgctxt "Operator"
 msgid "Reset"
 msgstr "リセット"
 
-#: extensions/user_default/mmd_tools_append/panels.py:319
+#: extensions/user_default/mmd_tools_append/panels.py:329
 msgid "Color Layer&AOV Name"
 msgstr "カラーレイヤー&AOV名"
 
-#: extensions/user_default/mmd_tools_append/panels.py:333
+#: extensions/user_default/mmd_tools_append/panels.py:343
 msgid "Auto Segmentation:"
 msgstr "自動セグメンテーション:"
 
-#: extensions/user_default/mmd_tools_append/panels.py:336
+#: extensions/user_default/mmd_tools_append/panels.py:346
 msgid "Thresholds:"
 msgstr "しきい値:"
 
-#: extensions/user_default/mmd_tools_append/panels.py:338
+#: extensions/user_default/mmd_tools_append/panels.py:348
 msgid "Cost"
 msgstr "コスト"
 
-#: extensions/user_default/mmd_tools_append/panels.py:340
+#: extensions/user_default/mmd_tools_append/panels.py:350
 msgid "Area Max"
 msgstr "面積最大"
 
-#: extensions/user_default/mmd_tools_append/panels.py:341
+#: extensions/user_default/mmd_tools_append/panels.py:351
 msgid "Min"
 msgstr "最小"
 
-#: extensions/user_default/mmd_tools_append/panels.py:343
+#: extensions/user_default/mmd_tools_append/panels.py:353
 msgid "Cost Factors:"
 msgstr "コスト係数:"
 
-#: extensions/user_default/mmd_tools_append/panels.py:346
+#: extensions/user_default/mmd_tools_append/panels.py:356
 msgid "Face Angle"
 msgstr "面角度"
 
-#: extensions/user_default/mmd_tools_append/panels.py:347
+#: extensions/user_default/mmd_tools_append/panels.py:357
 msgid "Perimeter"
 msgstr "外周"
 
-#: extensions/user_default/mmd_tools_append/panels.py:348
+#: extensions/user_default/mmd_tools_append/panels.py:358
 msgid "Material Change"
 msgstr "マテリアル変化"
 
-#: extensions/user_default/mmd_tools_append/panels.py:352
+#: extensions/user_default/mmd_tools_append/panels.py:362
 msgid "Edge "
 msgstr "辺 "
 
-#: extensions/user_default/mmd_tools_append/panels.py:353
+#: extensions/user_default/mmd_tools_append/panels.py:363
 msgid "Sharp"
 msgstr "シャープ"
 
-#: extensions/user_default/mmd_tools_append/panels.py:354
+#: extensions/user_default/mmd_tools_append/panels.py:364
 msgid "Seam"
 msgstr "シーム"
 
-#: extensions/user_default/mmd_tools_append/panels.py:358
+#: extensions/user_default/mmd_tools_append/panels.py:368
 msgid "Vertex Group "
 msgstr "頂点グループ "
 
-#: extensions/user_default/mmd_tools_append/panels.py:359
+#: extensions/user_default/mmd_tools_append/panels.py:369
 msgid "Weight"
 msgstr "ウェイト"
 
-#: extensions/user_default/mmd_tools_append/panels.py:360
+#: extensions/user_default/mmd_tools_append/panels.py:370
 msgid "Change"
 msgstr "変化"
 
-#: extensions/user_default/mmd_tools_append/panels.py:362
+#: extensions/user_default/mmd_tools_append/panels.py:372
 msgid "Other Parameters:"
 msgstr "他のパラメーター:"
 
-#: extensions/user_default/mmd_tools_append/panels.py:365
+#: extensions/user_default/mmd_tools_append/panels.py:375
 msgid "Color Random Seed"
 msgstr "カラーランダムシード"
 
-#: extensions/user_default/mmd_tools_append/panels.py:367
+#: extensions/user_default/mmd_tools_append/panels.py:377
 msgctxt "Operator"
 msgid "Execute Auto Segmentation"
 msgstr "自動セグメンテーションを実行"
@@ -2291,40 +2300,40 @@ msgctxt "Operator"
 msgid "Rigid Body to Cloth"
 msgstr "リジッドボディをクロスに"
 
-#: extensions/user_default/mmd_tools_append/panels.py:244
+#: extensions/user_default/mmd_tools_append/panels.py:254
 msgid "Select armature first."
 msgstr "アーマチュアを選択してください"
 
-#: extensions/user_default/mmd_tools_append/panels.py:249
+#: extensions/user_default/mmd_tools_append/panels.py:259
 msgid "Humanoid not initialized."
 msgstr "ヒューマノイドが初期化されていません"
 
-#: extensions/user_default/mmd_tools_append/panels.py:250
+#: extensions/user_default/mmd_tools_append/panels.py:260
 msgctxt "Operator"
 msgid "Initialize Humanoid"
 msgstr "ヒューマノイド初期化"
 
-#: extensions/user_default/mmd_tools_append/panels.py:291
+#: extensions/user_default/mmd_tools_append/panels.py:301
 msgid ":"
 msgstr ":"
 
-#: extensions/user_default/mmd_tools_append/panels.py:280
+#: extensions/user_default/mmd_tools_append/panels.py:290
 msgid "Left"
 msgstr "左"
 
-#: extensions/user_default/mmd_tools_append/panels.py:281
+#: extensions/user_default/mmd_tools_append/panels.py:291
 msgid "Right"
 msgstr "右"
 
-#: extensions/user_default/mmd_tools_append/panels.py:285
+#: extensions/user_default/mmd_tools_append/panels.py:295
 msgid "Base"
 msgstr "根本"
 
-#: extensions/user_default/mmd_tools_append/panels.py:286
+#: extensions/user_default/mmd_tools_append/panels.py:296
 msgid "Mid"
 msgstr "中央"
 
-#: extensions/user_default/mmd_tools_append/panels.py:287
+#: extensions/user_default/mmd_tools_append/panels.py:297
 msgid "Tip"
 msgstr "先端"
 
