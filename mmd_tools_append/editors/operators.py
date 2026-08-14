@@ -18,7 +18,7 @@ from ..utilities import label_multiline
 class SetupRenderEngineForEevee(bpy.types.Operator):
     bl_idname = "mmd_tools_append.setup_render_engine_for_eevee"
     bl_label = "Setup Render Engine for Eevee"
-    bl_description = "Setup render engine properties for Eevee."
+    bl_description = "Setup render engine properties for Eevee"
     bl_options = {"REGISTER", "UNDO"}
 
     use_motion_blur: bpy.props.BoolProperty(name="Use Motion Blur", default=False)
@@ -77,7 +77,7 @@ class SetupRenderEngineForEevee(bpy.types.Operator):
 class SetupRenderEngineForToonEevee(bpy.types.Operator):
     bl_idname = "mmd_tools_append.setup_render_engine_for_toon_eevee"
     bl_label = "Setup Render Engine for Toon Eevee"
-    bl_description = "Setup render engine properties for Toon Eevee."
+    bl_description = "Setup render engine properties for Toon Eevee"
     bl_options = {"REGISTER", "UNDO"}
 
     use_motion_blur: bpy.props.BoolProperty(name="Use Motion Blur", default=False)
@@ -131,7 +131,7 @@ class SetupRenderEngineForToonEevee(bpy.types.Operator):
 class SetupRenderEngineForWorkbench(bpy.types.Operator):
     bl_idname = "mmd_tools_append.setup_render_engine_for_workbench"
     bl_label = "Setup Render Engine for Workbench"
-    bl_description = "Setup render engine properties for Workbench."
+    bl_description = "Setup render engine properties for Workbench"
     bl_options = {"REGISTER", "UNDO"}
 
     use_shadow: bpy.props.BoolProperty(name="Use Shadow", default=True)

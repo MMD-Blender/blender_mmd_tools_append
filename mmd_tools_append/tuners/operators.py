@@ -64,7 +64,7 @@ class TuneMaterial(bpy.types.Operator):
 class CopyTuneMaterialSettings(bpy.types.Operator):
     bl_idname = "mmd_tools_append.copy_tune_material_settings"
     bl_label = "Copy Append Material"
-    bl_description = "Apply current Append material to materials of the selected objects."
+    bl_description = "Apply current Append material to materials of the selected objects"
     bl_options = {"REGISTER", "UNDO"}
 
     to_active: bpy.props.BoolProperty(name="Apply to active object", description="Apply Append material to materials in active object", default=False)

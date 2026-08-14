@@ -634,7 +634,7 @@ translations_tuple = (
         ("zh_HANS", "", (False, ())),
     ),
     (
-        ("*", "Add pyramid meshes from selected breast bones."),
+        ("*", "Add pyramid meshes from selected breast bones"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_add_pyramid_mesh_by_breast_bone",), ()),
         ("ja_JP", "選択された胸ボーンからピラミッドメッシュを追加します", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -694,7 +694,7 @@ translations_tuple = (
         ("zh_HANS", "姿势腿", (False, ())),
     ),
     (
-        ("*", "Convert pyramid meshes to cloth simulation."),
+        ("*", "Convert pyramid meshes to cloth simulation"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_convert_pyramid_mesh_to_cloth",), ()),
         ("ja_JP", "ピラミッドメッシュをクロスシミュレーションに変換します", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -730,7 +730,7 @@ translations_tuple = (
         ("zh_HANS", "丝带硬度", (False, ())),
     ),
     (
-        ("*", "Apply current Append material to materials of the selected objects."),
+        ("*", "Apply current Append material to materials of the selected objects"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_copy_tune_material_settings",), ()),
         ("ja_JP", "現在のAppendマテリアルを選択中のオブジェクトのマテリアルに適用します", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -947,10 +947,10 @@ translations_tuple = (
         ("zh_HANS", "随机色彩", (False, ())),
     ),
     (
-        ("*", "Generate Human (metarig) from MMD Armature."),
+        ("*", "Generate Human (metarig) from MMD Armature"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_mmd_armature_add_metarig",), ()),
         ("ja_JP", "MMDアーマチュアからHuman (metarig)を生成します", (False, ())),
-        ("zh_HANS", "", (False, ())),
+        ("zh_HANS", "从MMD骨架生成 Human (metarig)", (False, ())),
     ),
     (
         ("*", "Clean Armature"),
@@ -977,7 +977,7 @@ translations_tuple = (
         ("zh_HANS", "", (False, ())),
     ),
     (
-        ("*", "Combine Rigify rig and MMD armature."),
+        ("*", "Combine Rigify rig and MMD armature"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate", "bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_rigify_focused_integrate"), ()),
         ("ja_JP", "RigifyリグとMMDアーマチュアを統合します", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -1037,7 +1037,7 @@ translations_tuple = (
         ("zh_HANS", "从活动网格中删除未用到的顶点组", (False, ())),
     ),
     (
-        ("*", "Remove non-deform bones from armature. Works for non-Rigify rigs as well.\nMay break bone structure."),
+        ("*", "Remove non-deform bones from armature. Works for non-Rigify rigs as well.\nMay break bone structure"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_rigify_derigger",), ()),
         ("ja_JP", "アーマチュアから非変形ボーンを削除します. Rigify以外のリグにも対応しています.\nボーン構造が崩れる恐れがあります", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -1103,7 +1103,7 @@ translations_tuple = (
         ("zh_HANS", "上半身2为", (False, ())),
     ),
     (
-        ("*", "Translate Rigify metarig bone names to MMD."),
+        ("*", "Translate Rigify metarig bone names to MMD"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_rigify_translator",), ()),
         ("ja_JP", "Rigifyメタリグに存在するボーン名をMMD用に翻訳します", (False, ())),
         ("zh_HANS", "", (False, ())),
@@ -1157,7 +1157,7 @@ translations_tuple = (
         ("zh_HANS", "从活动网格中删选择形态键目标顶点", (False, ())),
     ),
     (
-        ("*", "Setup render engine properties for Eevee."),
+        ("*", "Setup render engine properties for Eevee"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_eevee",), ()),
         ("ja_JP", "レンダーエンジンプロパティをEevee用に設定", (False, ())),
         ("zh_HANS", "为Eevee设置渲染引擎属性", (False, ())),
@@ -1176,13 +1176,13 @@ translations_tuple = (
         ("zh_HANS", "使用胶片透明", (False, ())),
     ),
     (
-        ("*", "Setup render engine properties for Toon Eevee."),
+        ("*", "Setup render engine properties for Toon Eevee"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_toon_eevee",), ()),
         ("ja_JP", "レンダーエンジンプロパティをトーンEevee用に設定", (False, ())),
         ("zh_HANS", "为卡通Eevee设置渲染引擎属性", (False, ())),
     ),
     (
-        ("*", "Setup render engine properties for Workbench."),
+        ("*", "Setup render engine properties for Workbench"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_workbench",), ()),
         ("ja_JP", "レンダーエンジンプロパティをWorkbench用に設定", (False, ())),
         ("zh_HANS", "为Workbench设置渲染引擎属性", (False, ())),
@@ -2164,13 +2164,13 @@ translations_tuple = (
     ),
     (
         ("*", "Removed  bones."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:439",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:448",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "Translated  bones."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:476",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:485",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2182,7 +2182,7 @@ translations_tuple = (
     ),
     (
         ("*", "Reset Humanoid data."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:656",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:665",), ()),
         ("ja_JP", "ヒューマノイドをリセットしました", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2194,31 +2194,31 @@ translations_tuple = (
     ),
     (
         ("*", "Failed to remove rig: "),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:442",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:451",), ()),
         ("ja_JP", "リグの除去に失敗しました: ", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "Failed to translate bones: "),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:479",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:488",), ()),
         ("ja_JP", "ボーンの翻訳に失敗しました: ", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "Renamed  bones with  duplicates. (click to see details)"),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:839",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:848",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "Renamed  bones."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:841",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:850",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "This armature does not have required MMD bones. "),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:843",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:852",), ()),
         ("ja_JP", "アーマチュアにMMD必須ボーンがありません. ", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2230,7 +2230,7 @@ translations_tuple = (
     ),
     (
         ("*", "Bone  was selected  times."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:813",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:822",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),

@@ -17,7 +17,7 @@ from .rigify import MMDRigifyArmatureObject, RigifyArmatureObject
 class MMDArmatureAddMetarig(bpy.types.Operator):
     bl_idname = "mmd_tools_append.mmd_armature_add_metarig"
     bl_label = "Add Human (metarig) from MMD Armature"
-    bl_description = "Generate Human (metarig) from MMD Armature."
+    bl_description = "Generate Human (metarig) from MMD Armature"
     bl_options = {"REGISTER", "UNDO"}
 
     use_mmd_orientation: bpy.props.BoolProperty(name="Align to MMD orientation", description="Adjust bone rolls to fit common MMD arm and finger orientations", default=True)
@@ -221,7 +221,7 @@ class MMDRigifyOperatorABC:
 class MMDRigifyIntegrateFocusOnMMD(MMDRigifyOperatorABC, bpy.types.Operator):
     bl_idname = "mmd_tools_append.mmd_rigify_mmd_focused_integrate"
     bl_label = "MMD compatibility focused Integrate"
-    bl_description = "Combine Rigify rig and MMD armature."
+    bl_description = "Combine Rigify rig and MMD armature"
     bl_options = {"REGISTER", "UNDO"}
 
     is_join_armatures: bpy.props.BoolProperty(
@@ -288,7 +288,7 @@ class MMDRigifyIntegrateFocusOnMMD(MMDRigifyOperatorABC, bpy.types.Operator):
 class MMDRigifyIntegrateFocusOnRigify(MMDRigifyOperatorABC, bpy.types.Operator):
     bl_idname = "mmd_tools_append.mmd_rigify_rigify_focused_integrate"
     bl_label = "Rigify operability focused Integrate"
-    bl_description = "Combine Rigify rig and MMD armature."
+    bl_description = "Combine Rigify rig and MMD armature"
     bl_options = {"REGISTER", "UNDO"}
 
     is_join_armatures: bpy.props.BoolProperty(
@@ -415,7 +415,7 @@ class MMDRigifyConvert(bpy.types.Operator):
 class MMDRigifyDerigger(bpy.types.Operator):
     bl_idname = "mmd_tools_append.rigify_derigger"
     bl_label = "Remove rig from armature"
-    bl_description = "Remove non-deform bones from armature. Works for non-Rigify rigs as well.\nMay break bone structure."
+    bl_description = "Remove non-deform bones from armature. Works for non-Rigify rigs as well.\nMay break bone structure"
     bl_options = {"REGISTER", "UNDO"}
 
     remove_constraints: bpy.props.BoolProperty(name="Remove Bone Constraints", default=True)
@@ -459,7 +459,7 @@ class MMDRigifyDerigger(bpy.types.Operator):
 class MMDRigifyTranslator(bpy.types.Operator):
     bl_idname = "mmd_tools_append.rigify_translator"
     bl_label = "Translate Rigify names to MMD"
-    bl_description = "Translate Rigify metarig bone names to MMD."
+    bl_description = "Translate Rigify metarig bone names to MMD"
     bl_options = {"REGISTER", "UNDO"}
 
     @classmethod
