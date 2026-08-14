@@ -487,7 +487,7 @@ msgid "Set up local axis for arms and fingers"
 msgstr "腕と指にローカル軸を設定します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_add_pyramid_mesh_by_breast_bone
-msgid "Add pyramid meshes from selected breast bones."
+msgid "Add pyramid meshes from selected breast bones"
 msgstr "選択された胸ボーンからピラミッドメッシュを追加します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_add_pyramid_mesh_by_breast_bone.base_area_factor
@@ -532,7 +532,7 @@ msgid "Pose legs"
 msgstr "脚をポーズ"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_convert_pyramid_mesh_to_cloth
-msgid "Convert pyramid meshes to cloth simulation."
+msgid "Convert pyramid meshes to cloth simulation"
 msgstr "ピラミッドメッシュをクロスシミュレーションに変換します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_convert_rigid_body_to_cloth
@@ -557,7 +557,7 @@ msgid "Ribbon Stiffness"
 msgstr "リボン剛性"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_copy_tune_material_settings
-msgid "Apply current Append material to materials of the selected objects."
+msgid "Apply current Append material to materials of the selected objects"
 msgstr "現在のAppendマテリアルを選択中のオブジェクトのマテリアルに適用します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_copy_tune_material_settings.to_active
@@ -715,7 +715,7 @@ msgid "Random Color"
 msgstr "ランダムカラー"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_armature_add_metarig
-msgid "Generate Human (metarig) from MMD Armature."
+msgid "Generate Human (metarig) from MMD Armature"
 msgstr "MMDアーマチュアからHuman (metarig)を生成します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_armature_add_metarig.is_clean_armature
@@ -736,7 +736,7 @@ msgstr "ボーンを通常のMMDモデルにおける腕と指の向きに合わ
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_rigify_focused_integrate
-msgid "Combine Rigify rig and MMD armature."
+msgid "Combine Rigify rig and MMD armature"
 msgstr "RigifyリグとMMDアーマチュアを統合します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_mmd_rigify_mmd_focused_integrate.bind_leg_d
@@ -783,7 +783,7 @@ msgstr "アクティブメッシュから未使用頂点グループをすべて
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_rigify_derigger
 msgid ""
 "Remove non-deform bones from armature. Works for non-Rigify rigs as well.\n"
-"May break bone structure."
+"May break bone structure"
 msgstr ""
 "アーマチュアから非変形ボーンを削除します. Rigify以外のリグにも対応しています.\n"
 "ボーン構造が崩れる恐れがあります"
@@ -829,7 +829,7 @@ msgid "Upper Body2 as"
 msgstr "上半身２として"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_rigify_translator
-msgid "Translate Rigify metarig bone names to MMD."
+msgid "Translate Rigify metarig bone names to MMD"
 msgstr "Rigifyメタリグに存在するボーン名をMMD用に翻訳します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_select_cloth_mesh.only_cache_equals
@@ -867,7 +867,7 @@ msgid "Select shape key target vertices from the active meshes"
 msgstr "アクティブメッシュのシェイプキー対象の頂点を選択"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_eevee
-msgid "Setup render engine properties for Eevee."
+msgid "Setup render engine properties for Eevee"
 msgstr "レンダーエンジンプロパティをEevee用に設定"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_eevee.film_transparent
@@ -877,11 +877,11 @@ msgid "Use Film Transparent"
 msgstr "フィルム透過を使用"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_toon_eevee
-msgid "Setup render engine properties for Toon Eevee."
+msgid "Setup render engine properties for Toon Eevee"
 msgstr "レンダーエンジンプロパティをトーンEevee用に設定"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_setup_render_engine_for_workbench
-msgid "Setup render engine properties for Workbench."
+msgid "Setup render engine properties for Workbench"
 msgstr "レンダーエンジンプロパティをWorkbench用に設定"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_geometry_nodes.geometry_nodes:'GEOMETRY_SEQUINS'
@@ -1612,11 +1612,11 @@ msgstr ""
 msgid "{}: {}"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:439
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:448
 msgid "Removed  bones."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:476
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:485
 msgid "Translated  bones."
 msgstr ""
 
@@ -1625,7 +1625,7 @@ msgstr ""
 msgid "Iterations"
 msgstr "反復"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:656
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:665
 msgid "Reset Humanoid data."
 msgstr "ヒューマノイドをリセットしました"
 
@@ -1633,23 +1633,23 @@ msgstr "ヒューマノイドをリセットしました"
 msgid "This armature does not have required MMD bone: "
 msgstr "アーマチュアにMMD必須ボーンがありません. "
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:442
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:451
 msgid "Failed to remove rig: "
 msgstr "リグの除去に失敗しました: "
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:479
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:488
 msgid "Failed to translate bones: "
 msgstr "ボーンの翻訳に失敗しました: "
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:839
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:848
 msgid "Renamed  bones with  duplicates. (click to see details)"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:841
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:850
 msgid "Renamed  bones."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:843
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:852
 msgid "This armature does not have required MMD bones. "
 msgstr "アーマチュアにMMD必須ボーンがありません. "
 
@@ -1661,7 +1661,7 @@ msgstr ""
 "Rigifyの呼び出しに失敗しました\n"
 "Rigifyアドオンを有効にしてください."
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:813
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:822
 msgid "Bone  was selected  times."
 msgstr ""
 
