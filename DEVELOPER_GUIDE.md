@@ -56,13 +56,13 @@ blender_mmd_tools_append/
 
 ### Translating the Extension
 We use [Manage UI Translations addon](https://developer.blender.org/docs/handbook/translating/translator_guide/#manage-ui-translations-add-on) suggested by Blender.
-However, if you want to simply modify only the translated strings, you can ignore this section and directly edit the [`m17n.py`](mmd_tools_append/m17n.py) file.
-For more details, check out [MMD Tools Developer Guide](https://github.com/MMD-Blender/blender_mmd_tools/blob/main/DEVELOPER_GUIDE.md#translating-the-extension).
+This allows the developers to easily sync new UI strings and the translation entries. For more details, check out [MMD Tools Developer Guide](https://github.com/MMD-Blender/blender_mmd_tools/blob/main/DEVELOPER_GUIDE.md#translating-the-extension).
+You can edit the [`m17n.py`](mmd_tools_append/m17n.py) directly to translate the addon. However, since it is a Python script, you need to know the Python syntax and make sure it is written correctly.
 
 #### Easier, safer method
-Instead of editing `m17n.py` directly, we recommend using [Poedit](https://poedit.com) to edit the .po files located in [`locales`](locales) folder.
+Instead of editing `m17n.py` directly, we recommend using [Poedit](https://poedit.com) to edit the .po files located in the [`locales`](locales) folder.
 To test the translation, download and put [po_to_m17n.py](https://gist.github.com/ulyssas/f28c53790ca5f234f10ba8d18fd948c8) into the `locales` folder.
-When you run the script in Python, `m17n.py` will be updated according to the edited .po files. (You need Python 3.11 or later)
+When you run the script in Python, `m17n.py` will be updated according to the edited .po files. (Requires Python 3.11 or later)
 
 You can submit the translation by creating [issues](https://github.com/MMD-Blender/blender_mmd_tools_append/issues) and uploading the .po file. (Or create Pull Request if you know how to do it)
 But do not upload the generated `m17n.py`, as it has different content and structure from the original file.
