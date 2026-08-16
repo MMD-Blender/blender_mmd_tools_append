@@ -55,7 +55,37 @@ blender_mmd_tools_append/
 - Follow [MMD Tools Python Style](https://github.com/MMD-Blender/blender_mmd_tools/blob/main/DEVELOPER_GUIDE.md#python-style)
 
 ### Translating the Extension
-We use [Manage UI translations Addon](https://developer.blender.org/docs/handbook/translating/translator_guide/#manage-ui-translations-add-on) suggested by Blender. For more details, check out [MMD Tools Developer Guide](https://github.com/MMD-Blender/blender_mmd_tools/blob/main/DEVELOPER_GUIDE.md#translating-the-extension).
+We use [Manage UI Translations addon](https://developer.blender.org/docs/handbook/translating/translator_guide/#manage-ui-translations-add-on) suggested by Blender.
+However, if you want to simply modify only the translated strings, you can ignore this section and directly edit the [`m17n.py`](mmd_tools_append/m17n.py) file.
+For more details, check out [MMD Tools Developer Guide](https://github.com/MMD-Blender/blender_mmd_tools/blob/main/DEVELOPER_GUIDE.md#translating-the-extension).
+
+#### Easier, safer method
+Instead of editing `m17n.py` directly, we recommend using [Poedit](https://poedit.com) to edit the .po files located in [`locales`](locales) folder.
+To test the translation, download and put [po_to_m17n.py](https://gist.github.com/ulyssas/f28c53790ca5f234f10ba8d18fd948c8) into the `locales` folder.
+When you run the script in Python, `m17n.py` will be updated according to the edited .po files. (You need Python 3.11 or later)
+
+You can submit the translation by creating [issues](https://github.com/MMD-Blender/blender_mmd_tools_append/issues) and uploading the .po file. (Or create Pull Request if you know how to do it)
+But do not upload the generated `m17n.py`, as it has different content and structure from the original file.
+
+#### Process
+1. Download the repository via zip (green `Code` button).
+2. Move `mmd_tools_append` folder to `Blender/[BLENDER_VERSION]/extensions/user_default/mmd_tools_append`.
+3. Edit the .po files in the `locales` folder using Poedit.
+4. Place `po_to_m17n.py` inside `locales` folder then execute the script in the terminal:
+
+Example command (Windows):
+```
+cd Downloads/blender_mmd_tools_append-main/locales
+python po_to_m17n.py -a "%APPDATA%/Blender Foundation/Blender/5.2/extensions/user_default/mmd_tools_append"
+```
+
+macOS:
+```
+cd Downloads/blender_mmd_tools_append-main/locales
+python3 po_to_m17n.py -a "~/Library/Application Support/Blender/5.2/extensions/user_default/mmd_tools_append"
+```
+
+5. Check the translation in Blender. Make sure to restart Blender if it was already opened.
 
 ## Release Process
 Releases may be performed by maintainers who meet both of the following requirements:
