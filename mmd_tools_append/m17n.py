@@ -1206,6 +1206,12 @@ translations_tuple = (
         ("zh_HANS", "亮片", (False, ())),
     ),
     (
+        ("*", "Droplets"),
+        (("bpy.types.MMD_TOOLS_APPEND_OT_tune_geometry_nodes.geometry_nodes:'GEOMETRY_DROPLETS'", "bpy.types.GeometryNodesPropertyGroup.thumbnails:'GEOMETRY_DROPLETS'"), ()),
+        ("ja_JP", "水滴", (False, ())),
+        ("zh_HANS", "", (False, ())),
+    ),
+    (
         ("*", "Left Accent"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_tune_lighting.lighting:'LIGHTING_LEFT_ACCENT'", "bpy.types.LightingPropertyGroup.thumbnails:'LIGHTING_LEFT_ACCENT'"), ()),
         ("ja_JP", "左アクセント", (False, ())),

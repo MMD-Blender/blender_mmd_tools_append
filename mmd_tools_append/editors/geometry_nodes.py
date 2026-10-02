@@ -46,6 +46,9 @@ class GeometryEditor(NodeEditor):
     def get_random_rotation_point_instance_node(self) -> ShaderNodeGroup:
         return self.get_node_group("Random Rotation Point Instance", label="Random Rotation Point Instance")
 
+    def get_instance_water_droplets_node(self) -> ShaderNodeGroup:
+        return self.get_node_group("Instance Water Droplets", label="Instance Water Droplets")
+
     def reset(self):
         node_frame = self.find_adjusters_node_frame()
         if node_frame is not None:
