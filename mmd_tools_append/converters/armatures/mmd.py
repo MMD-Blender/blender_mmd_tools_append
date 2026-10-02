@@ -290,6 +290,19 @@ class MMDArmatureObject(ArmatureEditor):
                 if pose_bone is not None:
                     pose_bone.mmd_bone.enabled_local_axes = False
 
+            # fix Gigi Murin & Citlali
+            for suffix in (".L", ".R"):
+                leg_p = self.edit_bones[f"足{suffix}"].parent
+                leg_d_p = self.edit_bones[f"足D{suffix}"].parent
+                if leg_p != leg_d_p:
+                    depth_leg = len(leg_p.parent_recursive) if leg_p else -1
+                    depth_leg_d = len(leg_d_p.parent_recursive) if leg_d_p else -1
+                    chosen_parent = leg_p if depth_leg >= depth_leg_d else leg_d_p
+
+                    self.edit_bones[f"足{suffix}"].parent = chosen_parent
+                    self.edit_bones[f"足D{suffix}"].parent = chosen_parent
+                    self.edit_bones[f"_shadow_足D{suffix}"].parent = chosen_parent
+
         # toe
         self.move_bone(mmd_edit_bones["右つま先ＩＫ"], head=mmd_edit_bones["右足首"].tail)
         self.move_bone(mmd_edit_bones["左つま先ＩＫ"], head=mmd_edit_bones["左足首"].tail)
