@@ -1,7 +1,7 @@
 # Copyright 2021 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import Iterable, Iterator, List
+from collections.abc import Iterable
 
 import bpy
 from bpy.app.translations import pgettext as _
@@ -441,8 +441,8 @@ class ConvertRigidBodyToClothOperator(bpy.types.Operator):
             mmd_find_root = import_mmd_tools().core.model.FnModel.find_root_object
 
             target_mmd_root_object = None
-            rigid_body_objects: List[bpy.types.Object] = []
-            mesh_objects: List[bpy.types.Object] = []
+            rigid_body_objects: list[bpy.types.Object] = []
+            mesh_objects: list[bpy.types.Object] = []
 
             obj: bpy.types.Object
             for obj in context.selected_objects:
@@ -628,7 +628,7 @@ class ClothAdjusterSettingsPropertyGroup(bpy.types.PropertyGroup):
                 set_bind_modifier(modifier, bind)
 
         cloth_corrective_smooth_modifier = cloth_mesh_editor.find_corrective_smooth_modifier()
-        target_mesh_modifiers: List[bpy.types.SurfaceDeformModifier] = [m for o in bpy.data.objects for m in o.modifiers if m.type == "SURFACE_DEFORM" and m.target == cloth_mesh_object]
+        target_mesh_modifiers: list[bpy.types.SurfaceDeformModifier] = [m for o in bpy.data.objects for m in o.modifiers if m.type == "SURFACE_DEFORM" and m.target == cloth_mesh_object]
 
         if cloth_corrective_smooth_modifier is not None:
             if subdivision_level == 0:

@@ -1,7 +1,7 @@
 # Copyright 2021 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import Iterable, Optional, Tuple
+from collections.abc import Iterable
 
 import bpy
 from bpy.app.translations import pgettext as _
@@ -100,11 +100,11 @@ class MMDArmatureAddMetarig(bpy.types.Operator):
 
 class MMDRigifyOperatorABC:
     @classmethod
-    def find_armature_objects(cls, objects: Iterable[bpy.types.Object]) -> Tuple[Optional[bpy.types.Object], Optional[bpy.types.Object]]:
+    def find_armature_objects(cls, objects: Iterable[bpy.types.Object]) -> tuple[bpy.types.Object | None, bpy.types.Object | None]:
         mmd_tools = import_mmd_tools()
 
-        rigify_object: Optional[bpy.types.Object] = None
-        mmd_object: Optional[bpy.types.Object] = None
+        rigify_object: bpy.types.Object | None = None
+        mmd_object: bpy.types.Object | None = None
 
         for obj in objects:
             if obj.type != "ARMATURE":

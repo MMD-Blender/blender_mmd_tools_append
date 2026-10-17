@@ -2,7 +2,7 @@
 # This file is part of MMD Tools Append.
 
 import os
-from typing import Iterable
+from collections.abc import Iterable
 
 import bpy
 from bpy.types import (

@@ -2,7 +2,7 @@
 # This file is part of MMD Tools Append.
 
 import math
-from typing import Dict, Iterable, Tuple
+from collections.abc import Iterable
 
 import bpy
 from mathutils import Euler, Matrix, Vector
@@ -145,7 +145,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
             (False, True, "R", "pole_parent"): ControlType.LEG_R_POLE_PARENT,
         }
 
-        datapaths: Dict[ControlType, DataPath] = {
+        datapaths: dict[ControlType, DataPath] = {
             ControlType.BIND_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, self.prop_name_mmd_append_bind_mmd_autorig),
             ControlType.EYE_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, "mmd_append_eye_mmd_autorig"),
             ControlType.LEG_L_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, "mmd_append_leg_l_mmd_autorig"),
@@ -203,7 +203,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
     def leg_r_mmd_autorig(self, value):
         self._set_property(ControlType.LEG_R_MMD_MMD_APPEND, value)
 
-    def _add_upper_arm_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_upper_arm_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add upper arm twist (腕捩)
         upper_arm_twist_fk_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_upper_arm_twist_fk.l")
         self.bone_collections["Main"].assign(upper_arm_twist_fk_l_bone)
@@ -225,7 +225,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return upper_arm_twist_fk_l_bone, upper_arm_twist_fk_r_bone
 
-    def _add_wrist_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_wrist_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add wrist twist (手捩)
         wrist_twist_fk_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_wrist_twist_fk.l")
         self.bone_collections["Main"].assign(wrist_twist_fk_l_bone)
@@ -247,7 +247,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return wrist_twist_fk_l_bone, wrist_twist_fk_r_bone
 
-    def _add_leg_ik_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_leg_ik_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add Leg IKP (足IK親) bones
         leg_ik_parent_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_leg_ik_parent.l")
         self.bone_collections["Main"].assign(leg_ik_parent_l_bone)
@@ -276,7 +276,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return leg_ik_parent_l_bone, leg_ik_parent_r_bone
 
-    def _add_toe_ik_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_toe_ik_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add toe IK (つま先ＩＫ)
         toe_ik_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_toe_ik.l")
         self.bone_collections["Main"].assign(toe_ik_l_bone)
@@ -294,7 +294,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return toe_ik_l_bone, toe_ik_r_bone
 
-    def _add_eye_fk_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_eye_fk_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone, bpy.types.EditBone]:
         rig_eyes_fk_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_eyes_fk")
         rig_eyes_fk_bone.head = rig_edit_bones["head.x"].tail + rig_edit_bones["head.x"].vector
         rig_eyes_fk_bone.head.y = rig_edit_bones["c_eye.l"].head.y
@@ -328,7 +328,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return rig_edit_bones["c_root_master.x"]
 
-    def _add_root_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_root_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add center (センター) bone
         center_bone = self.get_or_create_bone(rig_edit_bones, "c_traj")
 
@@ -341,7 +341,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return center_bone, groove_bone
 
-    def _add_shoulder_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_parent_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_parent.l")
         shoulder_parent_l_bone.head = rig_edit_bones["c_shoulder.l"].head
         shoulder_parent_l_bone.tail = shoulder_parent_l_bone.head + Vector([0, 0, rig_edit_bones["c_shoulder.l"].length / 2])
@@ -362,7 +362,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_parent_l_bone, shoulder_parent_r_bone
 
-    def _add_shoulder_cancel_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel.l")
         shoulder_cancel_l_bone.head = rig_edit_bones["c_shoulder.l"].tail
         shoulder_cancel_l_bone.tail = shoulder_cancel_l_bone.head + Vector([0, 0, rig_edit_bones["c_shoulder.l"].length / 2])
@@ -383,7 +383,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_cancel_l_bone, shoulder_cancel_r_bone
 
-    def _add_shoulder_cancel_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_dummy_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel_dummy.l")
         shoulder_cancel_dummy_l_bone.head = rig_edit_bones["c_shoulder.l"].head
         shoulder_cancel_dummy_l_bone.tail = shoulder_cancel_dummy_l_bone.head + Vector([0, 0, rig_edit_bones["c_shoulder.l"].length / 2])
@@ -400,7 +400,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_cancel_dummy_l_bone, shoulder_cancel_dummy_r_bone
 
-    def _add_shoulder_cancel_shadow_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_shadow_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_shadow_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel_shadow.l")
         shoulder_cancel_shadow_l_bone.head = rig_edit_bones["c_shoulder.l"].head
         shoulder_cancel_shadow_l_bone.tail = shoulder_cancel_shadow_l_bone.head + Vector([0, 0, rig_edit_bones["c_shoulder.l"].length / 2])
@@ -460,7 +460,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
         """Imitate the behavior of MMD armature as much as possible."""
         # pylint: disable=too-many-statements, too-many-locals
 
-        pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
 
         self.create_props(pose_bones[self.prop_storage_bone_name])
         self.remove_constraints(pose_bones)
@@ -712,7 +712,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
         # torso hack
         self.torso_head_follow = 1.000  # follow chest
 
-    def _set_bone_custom_shapes(self, pose_bones: Dict[str, bpy.types.PoseBone]):
+    def _set_bone_custom_shapes(self, pose_bones: dict[str, bpy.types.PoseBone]):
         bone_widgets = [
             ("groove", "WGT-Root.2Way", 20.0, "body.x"),
             ("mmd_append_shoulder_parent.l", "WGT-rig_upper_arm_tweak.L", 0.5, "body.l"),
@@ -751,7 +751,7 @@ class AutoRigArmatureObject(MMDBindArmatureObjectABC):
         # pose_bones["mmd_append_eye_fk.l"].bone_group = rig_bone_groups["body.l"]
         # pose_bones["mmd_append_eye_fk.r"].bone_group = rig_bone_groups["body.r"]
 
-    def _imitate_mmd_eye_behavior(self, pose_bones: Dict[str, bpy.types.PoseBone]):
+    def _imitate_mmd_eye_behavior(self, pose_bones: dict[str, bpy.types.PoseBone]):
         if not self.has_face_bones():
             return
 

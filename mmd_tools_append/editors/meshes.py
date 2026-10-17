@@ -1,11 +1,12 @@
 # Copyright 2021 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from collections.abc import Iterable
+from typing import Any, Optional
 
 import bpy
 
-SettingsOrNone = Optional[Dict[str, Any]]
+SettingsOrNone = Optional[dict[str, Any]]
 
 
 class MeshEditor:
@@ -55,7 +56,7 @@ class MeshEditor:
             **kwargs,
         )
 
-    def find_subsurface_modifier(self, name: str) -> Optional[bpy.types.SubsurfModifier]:
+    def find_subsurface_modifier(self, name: str) -> bpy.types.SubsurfModifier | None:
         for modifier in self.mesh_object.modifiers:
             if modifier.type == "SUBSURF" and modifier.name == name:
                 return modifier
@@ -70,7 +71,7 @@ class MeshEditor:
     def add_armature_modifier(self, name: str, armature_object: bpy.types.Object, **kwargs) -> bpy.types.Modifier:
         return self.add_modifier("ARMATURE", name, object=armature_object, **kwargs)
 
-    def find_armature_modifier(self, name: Optional[str]) -> Optional[bpy.types.ArmatureModifier]:
+    def find_armature_modifier(self, name: str | None) -> bpy.types.ArmatureModifier | None:
         for modifier in self.mesh_object.modifiers:
             if modifier.type != "ARMATURE":
                 continue
@@ -83,13 +84,13 @@ class MeshEditor:
     def add_corrective_smooth_modifier(self, name: str, **kwargs) -> bpy.types.CorrectiveSmoothModifier:
         return self.add_modifier("CORRECTIVE_SMOOTH", name, **kwargs)
 
-    def find_corrective_smooth_modifier(self) -> Optional[bpy.types.CorrectiveSmoothModifier]:
+    def find_corrective_smooth_modifier(self) -> bpy.types.CorrectiveSmoothModifier | None:
         return self.find_singleton_modifier("CORRECTIVE_SMOOTH")
 
     def add_surface_deform_modifier(self, name: str, **kwargs) -> bpy.types.SurfaceDeformModifier:
         return self.add_modifier("SURFACE_DEFORM", name, **kwargs)
 
-    def find_singleton_modifier(self, modifier_type: str) -> Optional[bpy.types.Modifier]:
+    def find_singleton_modifier(self, modifier_type: str) -> bpy.types.Modifier | None:
         if modifier_type not in {"CLOTH", "COLLISION", "CORRECTIVE_SMOOTH", "DYNAMIC_PAINT"}:
             raise NotImplementedError(f"{modifier_type} is not supported.")
 
@@ -115,7 +116,7 @@ class MeshEditor:
 
         self.mesh_object.modifiers.remove(modifier)
 
-    def find_cloth_modifier(self) -> Optional[bpy.types.ClothModifier]:
+    def find_cloth_modifier(self) -> bpy.types.ClothModifier | None:
         return self.find_singleton_modifier("CLOTH")
 
     def get_cloth_modifier(self, name: str = "Cloth") -> bpy.types.ClothModifier:
@@ -124,13 +125,13 @@ class MeshEditor:
     def edit_cloth_modifier(self, name: str, **kwargs) -> bpy.types.ClothModifier:
         return self.edit_singleton_modifier(self.get_cloth_modifier(name), **kwargs)
 
-    def find_cloth_settings(self) -> Optional[bpy.types.ClothSettings]:
+    def find_cloth_settings(self) -> bpy.types.ClothSettings | None:
         modifier = self.find_cloth_modifier()
         if modifier is None:
             return None
         return modifier.settings
 
-    def find_cloth_collision_settings(self) -> Optional[bpy.types.ClothCollisionSettings]:
+    def find_cloth_collision_settings(self) -> bpy.types.ClothCollisionSettings | None:
         modifier = self.find_cloth_modifier()
         if modifier is None:
             return None
@@ -139,10 +140,10 @@ class MeshEditor:
     def remove_cloth_modifier(self):
         self.remove_singleton_modifier("CLOTH")
 
-    def find_collision_modifier(self) -> Optional[bpy.types.CollisionModifier]:
+    def find_collision_modifier(self) -> bpy.types.CollisionModifier | None:
         return self.find_singleton_modifier("COLLISION")
 
-    def find_collision_settings(self) -> Optional[bpy.types.CollisionSettings]:
+    def find_collision_settings(self) -> bpy.types.CollisionSettings | None:
         modifier = self.find_collision_modifier()
         if modifier is None:
             return None
@@ -173,13 +174,13 @@ class MeshEditor:
     def remove_collision_modifier(self):
         self.remove_singleton_modifier("COLLISION")
 
-    def find_dynamic_paint_modifier(self) -> Optional[bpy.types.DynamicPaintModifier]:
+    def find_dynamic_paint_modifier(self) -> bpy.types.DynamicPaintModifier | None:
         return self.find_singleton_modifier("DYNAMIC_PAINT")
 
     def get_dynamic_paint_modifier(self, name: str = "Dynamic Paint") -> bpy.types.DynamicPaintModifier:
         return self.get_singleton_modifier("DYNAMIC_PAINT", name)
 
-    def find_dynamic_paint_brush_settings(self) -> Optional[bpy.types.DynamicPaintBrushSettings]:
+    def find_dynamic_paint_brush_settings(self) -> bpy.types.DynamicPaintBrushSettings | None:
         modifier = self.find_dynamic_paint_modifier()
         if modifier is None:
             return None
@@ -197,7 +198,7 @@ class MeshEditor:
 
         return modifier
 
-    def find_dynamic_paint_canvas_settings(self) -> Optional[bpy.types.DynamicPaintCanvasSettings]:
+    def find_dynamic_paint_canvas_settings(self) -> bpy.types.DynamicPaintCanvasSettings | None:
         modifier = self.find_dynamic_paint_modifier()
         if modifier is None:
             return None
@@ -215,7 +216,7 @@ class MeshEditor:
 
         return modifier
 
-    def find_rigid_body_object(self) -> Optional[bpy.types.RigidBodyObject]:
+    def find_rigid_body_object(self) -> bpy.types.RigidBodyObject | None:
         return self.mesh_object.rigid_body
 
     @staticmethod
@@ -226,7 +227,7 @@ class MeshEditor:
 
         return False
 
-    def find_vertex_group(self, name: str) -> Optional[bpy.types.VertexGroup]:
+    def find_vertex_group(self, name: str) -> bpy.types.VertexGroup | None:
         return self.mesh_object.vertex_groups.get(name, None)
 
     def add_vertex_group(self, name: str) -> bpy.types.VertexGroup:
@@ -238,7 +239,7 @@ class MeshEditor:
             vertex_group = self.add_vertex_group(name)
         return vertex_group
 
-    def edit_vertex_group(self, name: str, vertex_weight_operations: List[Tuple[List[int], float, str]]):
+    def edit_vertex_group(self, name: str, vertex_weight_operations: list[tuple[list[int], float, str]]):
         vertex_group = self.get_vertex_group(name)
         for vertex_weight_operation in vertex_weight_operations:
             vertex_group.add(
@@ -248,7 +249,7 @@ class MeshEditor:
             )
         return vertex_group
 
-    def find_armature_object(self) -> Optional[bpy.types.Object]:
+    def find_armature_object(self) -> bpy.types.Object | None:
         return self.mesh_object.find_armature()
 
 

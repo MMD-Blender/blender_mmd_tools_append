@@ -7,9 +7,10 @@ import json
 import os
 import re
 import traceback
+from collections.abc import ItemsView, ValuesView
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, ItemsView, Tuple, ValuesView
+from typing import Any
 
 import requests
 from bpy.app.translations import pgettext as _
@@ -48,13 +49,13 @@ class AssetDescription:
         type: AssetType,
         url: str,
         name: str,
-        tags: Dict[str, str],
+        tags: dict[str, str],
         updated_at: datetime,
         thumbnail_url: str,
         source_url: str,
         download_action: str,
         import_action: str,
-        aliases: Dict[str, str],
+        aliases: dict[str, str],
         note: str,
     ):
         self.id = id
@@ -88,7 +89,7 @@ class AssetDescription:
 
 class _Utilities:
     @staticmethod
-    def to_dict(asset: AssetDescription) -> Dict[str, Any]:
+    def to_dict(asset: AssetDescription) -> dict[str, Any]:
         return {
             "id": asset.id,
             "type": asset.type,
@@ -105,7 +106,7 @@ class _Utilities:
         }
 
     @staticmethod
-    def from_dict(asset: Dict[str, Any]) -> AssetDescription:
+    def from_dict(asset: dict[str, Any]) -> AssetDescription:
         return AssetDescription(
             id=asset["id"],
             type=AssetType[asset["type"]],
@@ -148,7 +149,7 @@ class _Utilities:
         )
 
     @staticmethod
-    def to_context(asset: AssetDescription) -> Dict[str, str]:
+    def to_context(asset: AssetDescription) -> dict[str, str]:
         return {
             "id": asset.id,
             "type": asset.type.name,
@@ -157,7 +158,7 @@ class _Utilities:
         }
 
     @staticmethod
-    def resolve_path(asset: AssetDescription) -> Tuple[str, str]:
+    def resolve_path(asset: AssetDescription) -> tuple[str, str]:
         preferences = get_preferences()
         asset_extract_root_folder = preferences.asset_extract_root_folder
         asset_extract_folder = preferences.asset_extract_folder
@@ -188,7 +189,7 @@ class _Utilities:
 
 class AssetRegistry:
     def __init__(self, *assets: AssetDescription):
-        self.assets: Dict[str, AssetDescription] = {}
+        self.assets: dict[str, AssetDescription] = {}
         for asset in assets:
             self.add(asset)
 

@@ -4,7 +4,6 @@
 import math
 import re
 from difflib import get_close_matches
-from typing import Dict, Set, Tuple
 
 import bpy
 from mathutils import Color, Euler, Matrix, Vector
@@ -238,7 +237,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
             (False, True, "R", "pole_parent"): ControlType.LEG_R_POLE_PARENT,
         }
 
-        datapaths: Dict[ControlType, DataPath] = {
+        datapaths: dict[ControlType, DataPath] = {
             ControlType.BIND_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, self.prop_name_mmd_append_bind_mmd_rigify),
             ControlType.EYE_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, "mmd_append_eye_mmd_rigify"),
             ControlType.LEG_L_MMD_MMD_APPEND: DataPath(self.prop_storage_bone_name, "mmd_append_leg_l_mmd_rigify"),
@@ -350,7 +349,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
     def toe_r_mmd_rigify(self, value):
         self._set_property(ControlType.TOE_R_MMD_MMD_APPEND, value)
 
-    def _add_upper_arm_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_upper_arm_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add upper arm twist (腕捩)
         upper_arm_twist_fk_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_upper_arm_twist_fk.L")
         self.bone_collections["Arm.L (FK)"].assign(upper_arm_twist_fk_l_bone)
@@ -372,7 +371,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return upper_arm_twist_fk_l_bone, upper_arm_twist_fk_r_bone
 
-    def _add_wrist_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_wrist_twist_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add wrist twist (手捩)
         wrist_twist_fk_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_wrist_twist_fk.L")
         self.bone_collections["Arm.L (FK)"].assign(wrist_twist_fk_l_bone)
@@ -394,7 +393,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return wrist_twist_fk_l_bone, wrist_twist_fk_r_bone
 
-    def _add_leg_ik_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_leg_ik_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add Leg IKP (足IK親) bone
         leg_ik_parent_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_leg_ik_parent.L")
         self.bone_collections["Leg.L (Tweak)"].assign(leg_ik_parent_l_bone)
@@ -424,7 +423,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return leg_ik_parent_l_bone, leg_ik_parent_r_bone
 
-    def _add_foot_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_foot_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         """Add dummy foot bone for copying rotation, inspired by MMR."""
         rig_foot_dummy_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_foot_dummy.L")
         rig_foot_dummy_l_bone.head = rig_edit_bones["ORG-foot.L"].head
@@ -442,7 +441,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return rig_foot_dummy_l_bone, rig_foot_dummy_r_bone
 
-    def _add_toe_ik_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_toe_ik_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add toe IK (つま先ＩＫ)
         toe_ik_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_toe_ik.L")
         self.bone_collections["Leg.L (Tweak)"].assign(toe_ik_l_bone)
@@ -460,7 +459,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return toe_ik_l_bone, toe_ik_r_bone
 
-    def _add_eye_fk_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_eye_fk_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone, bpy.types.EditBone]:
         eye_master_l = rig_edit_bones.get("eye_master.L") or rig_edit_bones.get("master_eye.L")
         eye_master_r = rig_edit_bones.get("eye_master.R") or rig_edit_bones.get("master_eye.R")
 
@@ -505,7 +504,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return rig_edit_bones["torso"]
 
-    def _add_root_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_root_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         # add center (センター) bone
         thigh_center = self.to_center(rig_edit_bones["ORG-thigh.L"].head, rig_edit_bones["ORG-thigh.L"].head)
 
@@ -527,7 +526,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return center_bone, groove_bone
 
-    def _add_shoulder_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_parent_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_parent_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_parent.L")
         shoulder_parent_l_bone.head = rig_edit_bones["ORG-shoulder.L"].head
         shoulder_parent_l_bone.tail = shoulder_parent_l_bone.head + Vector([0, 0, rig_edit_bones["ORG-shoulder.L"].length / 2])
@@ -550,7 +549,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_parent_l_bone, shoulder_parent_r_bone
 
-    def _add_shoulder_cancel_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel.L")
         shoulder_cancel_l_bone.head = rig_edit_bones["ORG-shoulder.L"].tail
         shoulder_cancel_l_bone.tail = shoulder_cancel_l_bone.head + Vector([0, 0, rig_edit_bones["ORG-shoulder.L"].length / 2])
@@ -571,7 +570,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_cancel_l_bone, shoulder_cancel_r_bone
 
-    def _add_shoulder_cancel_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_dummy_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_dummy_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel_dummy.L")
         shoulder_cancel_dummy_l_bone.head = rig_edit_bones["ORG-shoulder.L"].head
         shoulder_cancel_dummy_l_bone.tail = shoulder_cancel_dummy_l_bone.head + Vector([0, 0, rig_edit_bones["ORG-shoulder.L"].length / 2])
@@ -588,7 +587,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         return shoulder_cancel_dummy_l_bone, shoulder_cancel_dummy_r_bone
 
-    def _add_shoulder_cancel_shadow_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> Tuple[bpy.types.EditBone, bpy.types.EditBone]:
+    def _add_shoulder_cancel_shadow_bones(self, rig_edit_bones: bpy.types.ArmatureEditBones) -> tuple[bpy.types.EditBone, bpy.types.EditBone]:
         shoulder_cancel_shadow_l_bone = self.get_or_create_bone(rig_edit_bones, "mmd_append_shoulder_cancel_shadow.L")
         shoulder_cancel_shadow_l_bone.head = rig_edit_bones["ORG-shoulder.L"].head
         shoulder_cancel_shadow_l_bone.tail = shoulder_cancel_shadow_l_bone.head + Vector([0, 0, rig_edit_bones["ORG-shoulder.L"].length / 2])
@@ -704,7 +703,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         self._add_eye_fk_bones(rig_edit_bones)
 
     def setup_pose(self):
-        pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
 
         self.create_props(pose_bones[self.prop_storage_bone_name])
         PoseBoneEditor.remove_constraints(pose_bones)
@@ -717,7 +716,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         self.setup_pose()
 
-        pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
 
         self._imitate_mmd_eye_behavior(pose_bones)
 
@@ -955,7 +954,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         self.torso_neck_follow = 1.000  # follow chest
         self.torso_head_follow = 1.000
 
-    def _reset_spine_rest_length(self, pose_bones: Dict[str, bpy.types.PoseBone]):
+    def _reset_spine_rest_length(self, pose_bones: dict[str, bpy.types.PoseBone]):
         # reset rest_length
         # https://blenderartists.org/t/resetting-stretch-to-constraints-via-python/650628
         PoseBoneEditor.edit_constraints(pose_bones["DEF-spine"], "STRETCH_TO", rest_length=0.000)
@@ -963,7 +962,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         PoseBoneEditor.edit_constraints(pose_bones["DEF-spine.002"], "STRETCH_TO", rest_length=0.000)
         PoseBoneEditor.edit_constraints(pose_bones["DEF-spine.003"], "STRETCH_TO", rest_length=0.000)  # follow chest
 
-    def _set_bone_custom_shapes(self, pose_bones: Dict[str, bpy.types.PoseBone]):
+    def _set_bone_custom_shapes(self, pose_bones: dict[str, bpy.types.PoseBone]):
         bone_widgets = [
             ("center", "WGT-Root.Round.", 10.0, "Root"),
             ("groove", "WGT-Root.2Way", 20.0, "Root"),
@@ -1074,7 +1073,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
             poss_bone.color.custom.select = Color(colors["FK"]["Select"])
             poss_bone.color.custom.active = Color(colors["FK"]["Active"])
 
-    def _imitate_mmd_eye_behavior(self, pose_bones: Dict[str, bpy.types.PoseBone]):
+    def _imitate_mmd_eye_behavior(self, pose_bones: dict[str, bpy.types.PoseBone]):
         if not self.has_face_bones():
             return
 
@@ -1451,7 +1450,7 @@ class MMDRigifyArmatureObject(RigifyArmatureObject):
         if not MMDArmatureObject.is_mmd_armature_object(obj):
             return False
 
-        pose_bones: Dict[str, bpy.types.PoseBone] = obj.pose.bones
+        pose_bones: dict[str, bpy.types.PoseBone] = obj.pose.bones
 
         prop_storage_bone = pose_bones[RigifyArmatureObject.prop_storage_bone_name]
         if RigifyArmatureObject.prop_name_mmd_append_bind_mmd_rigify not in prop_storage_bone:
@@ -1707,7 +1706,7 @@ class MMDRigifyArmatureObject(RigifyArmatureObject):
         rigify_pose_bones = self.pose_bones
 
         # bind rigify -> mmd
-        mmd_pose_bones: Dict[str, bpy.types.PoseBone] = mmd_armature_object.strict_pose_bones
+        mmd_pose_bones: dict[str, bpy.types.PoseBone] = mmd_armature_object.strict_pose_bones
         for mmd_bind_info in self.mmd_bind_infos:  # pylint: disable=maybe-no-member
             if mmd_bind_info.bind_type == MMDBindType.NONE:
                 continue
@@ -1751,7 +1750,7 @@ class MMDRigifyArmatureObject(RigifyArmatureObject):
             )
 
     def remove_unused_face_bones(self):
-        rig_pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        rig_pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
 
         def remove_influence_drivers(pose_bone_name: str):
             if pose_bone_name not in rig_pose_bones:
@@ -1807,9 +1806,9 @@ class MMDRigifyArmatureObject(RigifyArmatureObject):
             }
         )
 
-    def _hide_bones(self, hide_bone_names: Set[str]):
+    def _hide_bones(self, hide_bone_names: set[str]):
         rig_bones: bpy.types.ArmatureBones = self.bones
-        pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
         for hide_bone_name in hide_bone_names:
             if hide_bone_name not in rig_bones:
                 continue
@@ -1849,7 +1848,7 @@ class MMDRigifyArmatureObject(RigifyArmatureObject):
     def imitate_mmd_pose_behavior_focus_on_rigify(self):
         self.setup_pose()
 
-        rig_pose_bones: Dict[str, bpy.types.PoseBone] = self.pose_bones
+        rig_pose_bones: dict[str, bpy.types.PoseBone] = self.pose_bones
 
         # set spine
         self._reset_spine_rest_length(rig_pose_bones)

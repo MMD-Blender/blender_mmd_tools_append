@@ -2,7 +2,6 @@
 # This file is part of MMD Tools Append.
 
 import os
-from typing import Optional
 
 import bpy
 
@@ -22,7 +21,7 @@ class LightingUtilities:
     def object_marker(self) -> ObjectMarker:
         return self.object_appender
 
-    def find_active_lighting(self) -> Optional[bpy.types.Object]:
+    def find_active_lighting(self) -> bpy.types.Object | None:
         for obj in self.collection.objects.values():
             if obj.type != "EMPTY" or obj.parent is not None or not self.object_marker.is_marked(obj):
                 continue

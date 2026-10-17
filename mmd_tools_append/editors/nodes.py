@@ -3,7 +3,8 @@
 
 import os
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
+from collections.abc import Iterable
+from typing import Any
 
 import bpy
 
@@ -25,7 +26,7 @@ class NodeEditor(ABC):
         return label.replace(" ", "_").lower()
 
     @staticmethod
-    def grid_to_position(grid_x: int, grid_y: int) -> Tuple[int, int]:
+    def grid_to_position(grid_x: int, grid_y: int) -> tuple[int, int]:
         return (grid_x * 100, (grid_y - 3) * 100)
 
     _library_blend_file_path = str
@@ -89,13 +90,13 @@ class NodeEditor(ABC):
 
         return self.new_node(node_type, label, name)
 
-    def get_node_frame(self, label: str = None, names: List[str] = ["mmd_append_node_frame", "uuunyaa_node_frame"]) -> bpy.types.NodeFrame:
+    def get_node_frame(self, label: str = None, names: list[str] = ["mmd_append_node_frame", "uuunyaa_node_frame"]) -> bpy.types.NodeFrame:
         for name in names:
             node = self.get_node(bpy.types.NodeFrame, label=label, name=name)
             if node:
                 return node
 
-    def find_node_frame(self, label: str = None, names: List[str] = ["mmd_append_node_frame", "uuunyaa_node_frame"]) -> bpy.types.NodeFrame:
+    def find_node_frame(self, label: str = None, names: list[str] = ["mmd_append_node_frame", "uuunyaa_node_frame"]) -> bpy.types.NodeFrame:
         for name in names:
             node = self.find_node(bpy.types.NodeFrame, label=label, name=name)
             if node:
@@ -112,7 +113,7 @@ class NodeEditor(ABC):
         node.node_tree = bpy.data.node_groups[group_name]
         return node
 
-    def edit(self, node: bpy.types.Node, inputs: Dict[str, Any] = {}, properties: Dict[str, Any] = {}, force=False) -> bpy.types.Node:
+    def edit(self, node: bpy.types.Node, inputs: dict[str, Any] = {}, properties: dict[str, Any] = {}, force=False) -> bpy.types.Node:
         # pylint: disable=dangerous-default-value
         # because readonly
         if node is None:
@@ -123,7 +124,7 @@ class NodeEditor(ABC):
             setattr(node, name, value)
         return node
 
-    def set_node_inputs(self, node: bpy.types.Node, values: Dict[str, Any], force=False) -> bpy.types.Node:
+    def set_node_inputs(self, node: bpy.types.Node, values: dict[str, Any], force=False) -> bpy.types.Node:
         for key, value in values.items():
             if isinstance(value, bpy.types.NodeSocket):
                 if force or not node.inputs[key].is_linked:
@@ -154,7 +155,7 @@ class MaterialEditor(NodeEditor):
         return ((color + 0.055) / 1.055) ** 2.4
 
     @staticmethod
-    def to_link_or_rgb(color: Union[bpy.types.NodeSocket, Tuple[float, float, float, float]]) -> Union[bpy.types.NodeSocket, Tuple[float, float, float]]:
+    def to_link_or_rgb(color: bpy.types.NodeSocket | tuple[float, float, float, float]) -> bpy.types.NodeSocket | tuple[float, float, float]:
         if isinstance(color, bpy.types.NodeSocket):
             return color
 
@@ -164,7 +165,7 @@ class MaterialEditor(NodeEditor):
         raise ValueError("color must be a NodeSocket or a sequence of at least three floats")
 
     @staticmethod
-    def to_link_or_rgba(color: Union[bpy.types.NodeSocket, Tuple[float, float, float]], alpha=1.0) -> Union[bpy.types.NodeSocket, Tuple[float, float, float, float]]:
+    def to_link_or_rgba(color: bpy.types.NodeSocket | tuple[float, float, float], alpha=1.0) -> bpy.types.NodeSocket | tuple[float, float, float, float]:
         if isinstance(color, bpy.types.NodeSocket):
             return color
 
@@ -174,7 +175,7 @@ class MaterialEditor(NodeEditor):
         raise ValueError("color must be a NodeSocket or a sequence of at least three floats")
 
     @staticmethod
-    def hex_to_rgb(hex_int: int) -> Tuple[float, float, float]:
+    def hex_to_rgb(hex_int: int) -> tuple[float, float, float]:
         # pylint: disable=invalid-name
         # r,g,b is commonly used
         r = (hex_int & 0xFF0000) >> 16
@@ -183,7 +184,7 @@ class MaterialEditor(NodeEditor):
         return tuple(MaterialEditor.srgb_to_linearrgb(c / 0xFF) for c in (r, g, b))
 
     @staticmethod
-    def hex_to_rgba(hex_int: int, alpha=1.0) -> Tuple[float, float, float, float]:
+    def hex_to_rgba(hex_int: int, alpha=1.0) -> tuple[float, float, float, float]:
         # pylint: disable=invalid-name
         # r,g,b is commonly used
         r = (hex_int & 0xFF0000) >> 16
@@ -223,7 +224,7 @@ class MaterialEditor(NodeEditor):
     def find_principled_shader_node(self) -> bpy.types.ShaderNodeBsdfPrincipled:
         return self.find_node(bpy.types.ShaderNodeBsdfPrincipled, label="", name="Principled BSDF")
 
-    def find_active_principled_shader_node(self) -> Optional[bpy.types.ShaderNodeBsdfPrincipled]:
+    def find_active_principled_shader_node(self) -> bpy.types.ShaderNodeBsdfPrincipled | None:
         node_output = self.get_output_node()
         node_socket = node_output.inputs["Surface"]
         node_socket_links = node_socket.links
@@ -253,7 +254,7 @@ class MaterialEditor(NodeEditor):
     def get_base_texture_node(self) -> bpy.types.ShaderNodeTexImage:
         return self.find_node(bpy.types.ShaderNodeTexImage, label="Mmd Base Tex")
 
-    def get_diffuse_color_node(self) -> Union[bpy.types.ShaderNodeGroup, bpy.types.ShaderNodeTexImage, None]:
+    def get_diffuse_color_node(self) -> bpy.types.ShaderNodeGroup | bpy.types.ShaderNodeTexImage | None:
         mmd_shader_node = self.get_mmd_shader_node()
         if mmd_shader_node and "Color" in mmd_shader_node.outputs:
             return mmd_shader_node
@@ -333,7 +334,7 @@ class MaterialEditor(NodeEditor):
             }
         )
 
-    def set_material_properties(self, properties: Dict[str, Any] = {}):
+    def set_material_properties(self, properties: dict[str, Any] = {}):
         # pylint: disable=dangerous-default-value
         # because readonly
         for name, value in properties.items():

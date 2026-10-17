@@ -4,7 +4,6 @@
 from abc import abstractmethod
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, List, Optional
 
 import bpy
 
@@ -38,8 +37,8 @@ class MMDBindType(Enum):
 class MMDBindInfo:
     bone_info: MMDBoneInfo
 
-    pose_bone_name: Optional[str]
-    bind_bone_name: Optional[str]
+    pose_bone_name: str | None
+    bind_bone_name: str | None
 
     group_type: GroupType
     bind_type: MMDBindType
@@ -92,7 +91,7 @@ class ControlType(Enum):
     LEG_R_POLE_PARENT = "leg_r_pole_parent"
 
 
-CONTROL_DESCRIPTION: Dict[ControlType, str] = {
+CONTROL_DESCRIPTION: dict[ControlType, str] = {
     ControlType.BIND_MMD_MMD_APPEND: "Toggle MMD bone binding",
     ControlType.EYE_MMD_MMD_APPEND: "Switch between MMD and Rigify eye controller",
     ControlType.LEG_L_MMD_MMD_APPEND: "Toggle Left thigh_ik constraint",
@@ -104,8 +103,8 @@ CONTROL_DESCRIPTION: Dict[ControlType, str] = {
 
 class MMDBindArmatureObjectABC(ArmatureEditor, PoseBoneEditor):
     # pylint: disable=too-many-public-methods
-    datapaths: Dict[str, DataPath]
-    mmd_bind_infos: List[MMDBindInfo]
+    datapaths: dict[str, DataPath]
+    mmd_bind_infos: list[MMDBindInfo]
 
     def create_props(self, prop_storage_bone: bpy.types.PoseBone):
         for control_type in [
@@ -123,7 +122,7 @@ class MMDBindArmatureObjectABC(ArmatureEditor, PoseBoneEditor):
             desc = CONTROL_DESCRIPTION.get(control_type)
             self.add_prop(prop_storage_bone, data_path.prop_name, description=desc)
 
-    def assign_mmd_bone_names(self, mmd2pose_bone_name_overrides: Optional[Dict[str, str]] = None):
+    def assign_mmd_bone_names(self, mmd2pose_bone_name_overrides: dict[str, str] | None = None):
         pose_bones = self.pose_bones
         mmd_bone_name2pose_bone_names = {b.bone_info.mmd_bone_name: b.pose_bone_name for b in self.mmd_bind_infos}
 

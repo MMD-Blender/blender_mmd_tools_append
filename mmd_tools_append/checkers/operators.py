@@ -4,7 +4,6 @@
 import math
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Set, Tuple
 
 import bpy
 from bpy.app.translations import pgettext as _
@@ -55,7 +54,7 @@ class CheckResult:
     status: CheckResultStatus
     impact: float
     data_path: str
-    message: Optional[str]
+    message: str | None
     indent: int = 0
     editable: bool = True
 
@@ -173,7 +172,7 @@ class CheckEeveeRenderingPerformance(bpy.types.Operator):
         )
 
     @classmethod
-    def check_use_pass_cryptomatte_object(cls, context: bpy.types.Context) -> Optional[CheckResult]:
+    def check_use_pass_cryptomatte_object(cls, context: bpy.types.Context) -> CheckResult | None:
         if not hasattr(context.view_layer, "use_pass_cryptomatte_object"):
             return None
 
@@ -186,7 +185,7 @@ class CheckEeveeRenderingPerformance(bpy.types.Operator):
         )
 
     @classmethod
-    def check_use_pass_cryptomatte_material(cls, context: bpy.types.Context) -> Optional[CheckResult]:
+    def check_use_pass_cryptomatte_material(cls, context: bpy.types.Context) -> CheckResult | None:
         if not hasattr(context.view_layer, "use_pass_cryptomatte_material"):
             return None
 
@@ -199,7 +198,7 @@ class CheckEeveeRenderingPerformance(bpy.types.Operator):
         )
 
     @classmethod
-    def check_use_pass_cryptomatte_asset(cls, context: bpy.types.Context) -> Optional[CheckResult]:
+    def check_use_pass_cryptomatte_asset(cls, context: bpy.types.Context) -> CheckResult | None:
         if not hasattr(context.view_layer, "use_pass_cryptomatte_asset"):
             return None
 
@@ -292,7 +291,7 @@ class CheckEeveeRenderingPerformance(bpy.types.Operator):
         )
 
     @classmethod
-    def check_use_pass_volume_direct(cls, context: bpy.types.Context) -> Optional[CheckResult]:
+    def check_use_pass_volume_direct(cls, context: bpy.types.Context) -> CheckResult | None:
         if not hasattr(context.view_layer.eevee, "use_pass_volume_direct"):
             return None
 
@@ -359,7 +358,7 @@ class CheckEeveeRenderingPerformance(bpy.types.Operator):
         return CheckResult(_("File Format"), status, impact, "scene.render.image_settings.file_format", _("= JPEG is Good"))
 
     @staticmethod
-    def resolve_data_path(context: bpy.types.Object, data_path: str) -> Tuple[bpy.types.Object, str]:
+    def resolve_data_path(context: bpy.types.Object, data_path: str) -> tuple[bpy.types.Object, str]:
         path_fragments = data_path.split(".")
         if len(path_fragments) < 2:
             return (context, data_path)

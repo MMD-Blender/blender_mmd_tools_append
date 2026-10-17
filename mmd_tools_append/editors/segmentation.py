@@ -8,7 +8,6 @@ import dataclasses
 import itertools
 import math
 import random
-from typing import Dict, List, Optional, Set, Tuple
 
 import bmesh
 import bpy
@@ -21,9 +20,9 @@ def _to_blender_color(uint8_color: int) -> float:
     # return color / 12.92 if color < 0.04045 else math.pow((color + 0.055) / 1.055, 2.4)
 
 
-RGBA = Tuple[float, float, float, float]
+RGBA = tuple[float, float, float, float]
 # fmt: off
-SEGMENTATION_COLORS: List[RGBA] = [
+SEGMENTATION_COLORS: list[RGBA] = [
     (
         _to_blender_color(0xff & (rgb >> 16)),  # Red
         _to_blender_color(0xff & (rgb >> 8)),  # Blue
@@ -78,8 +77,8 @@ class Segment:
     area: float = 0.0
     perimeter: float = 0.0
     non_contact_perimeter: float = 0.0
-    tri_loop0s: Set[bmesh.types.BMLoop] = dataclasses.field(default_factory=set)
-    segment_contact_ids: Set[SegmentContactId] = dataclasses.field(default_factory=set)
+    tri_loop0s: set[bmesh.types.BMLoop] = dataclasses.field(default_factory=set)
+    segment_contact_ids: set[SegmentContactId] = dataclasses.field(default_factory=set)
 
     def __hash__(self):
         return self.index
@@ -147,10 +146,10 @@ class SegmentContact:
 
 @dataclasses.dataclass
 class SegmentResult:
-    segments: Set[Segment]
-    remain_segment_contacts: List[SegmentContact]
+    segments: set[Segment]
+    remain_segment_contacts: list[SegmentContact]
     last_merged_cost: float
-    tri_loops: List[bmesh.types.BMLoop]
+    tri_loops: list[bmesh.types.BMLoop]
 
 
 def _to_loop_pair_id(loop0: bmesh.types.BMLoop, loop1: bmesh.types.BMLoop, loop_pair_shift: int) -> LoopPairId:
@@ -198,7 +197,7 @@ def _get_cost_normalized(segment_contact: SegmentContact) -> float:
 
 def _setup_output_aov(node_tree: bpy.types.NodeTree, segmentation_output_aov_name: str):
     nodes = node_tree.nodes
-    segmentation_output_aov_node: Optional[bpy.types.ShaderNodeOutputAOV] = next((n for n in nodes if n.type == "OUTPUT_AOV" and n.name == segmentation_output_aov_name), None)
+    segmentation_output_aov_node: bpy.types.ShaderNodeOutputAOV | None = next((n for n in nodes if n.type == "OUTPUT_AOV" and n.name == segmentation_output_aov_name), None)
     if segmentation_output_aov_node is None:
         segmentation_output_aov_node = nodes.new(type=bpy.types.ShaderNodeOutputAOV.__name__)
         segmentation_output_aov_node.name = segmentation_output_aov_name
@@ -226,7 +225,7 @@ def auto_segment(
     material_change_cost_factor: float,
     edge_sharp_cost_factor: float,
     edge_seam_cost_factor: float,
-    ignore_vertex_group_indices: Set[int],
+    ignore_vertex_group_indices: set[int],
 ) -> SegmentResult:
     tri_loops = target_bmesh.calc_loop_triangles()
     sci2segment_contacts, segment_count = _calc_segment_contacts(
@@ -263,7 +262,7 @@ def auto_segment(
             del cost_sorted_segment_contacts[i]
             return
 
-    result_segments: Set[Segment] = set()
+    result_segments: set[Segment] = set()
     result_loop_count: int = 0
 
     last_merged_cost: float = 0
@@ -316,7 +315,7 @@ def auto_segment(
                 dst_segment.perimeter = dst_segment.non_contact_perimeter + sum(sci2segment_contacts[sci].length for sci in dst_segment_contact_ids)
 
             # collect mergeable segment contacts
-            spi2mergeable_segment_contacts: Dict[SegmentPairId, Set[SegmentContact]] = collections.defaultdict(set)
+            spi2mergeable_segment_contacts: dict[SegmentPairId, set[SegmentContact]] = collections.defaultdict(set)
             for edge_sci in dst_segment_contact_ids:
                 sc = sci2segment_contacts[edge_sci]
                 spi = _to_segment_pair_id(sc.segment0, sc.segment1, segment_pair_shift)
@@ -359,7 +358,7 @@ def get_color_layer(target_bmesh: bmesh.types.BMesh, segmentation_vertex_color_a
 
 
 def assign_vertex_colors(
-    segments: Set[Segment],
+    segments: set[Segment],
     color_layer: bmesh.types.BMLayerItem,
     segmentation_vertex_color_random_seed: int,
 ):
@@ -378,7 +377,7 @@ def assign_vertex_colors(
             tri_loop0.link_loop_next[color_layer] = segmentation_color
 
 
-def paint_selected_face_colors(mesh_object: bpy.types.Object, color: Optional[RGBA], segmentation_vertex_color_attribute_name: str):
+def paint_selected_face_colors(mesh_object: bpy.types.Object, color: RGBA | None, segmentation_vertex_color_attribute_name: str):
     target_bmesh: bmesh.types.BMesh = bmesh.new()
     mesh: bpy.types.Mesh = mesh_object.data
     target_bmesh.from_mesh(mesh, face_normals=False, vertex_normals=False)
@@ -388,7 +387,7 @@ def paint_selected_face_colors(mesh_object: bpy.types.Object, color: Optional[RG
         color = random.choice(SEGMENTATION_COLORS)
 
     tri_loops = target_bmesh.calc_loop_triangles()
-    tri_loop: List[bmesh.types.BMLoop]
+    tri_loop: list[bmesh.types.BMLoop]
     for tri_loop in tri_loops:
         if not tri_loop[0].face.select:
             continue
@@ -421,14 +420,14 @@ def _calc_segment_contacts(
     material_change_cost_factor: float,
     edge_sharp_cost_factor: float,
     edge_seam_cost_factor: float,
-    vi2vgi2weights: Dict[int, Dict[int, float]],
+    vi2vgi2weights: dict[int, dict[int, float]],
     target_bmesh: bmesh.types.BMesh,
-    tri_loops: List[bmesh.types.BMLoop],
-) -> Tuple[Dict[SegmentContactId, SegmentContact], int]:
+    tri_loops: list[bmesh.types.BMLoop],
+) -> tuple[dict[SegmentContactId, SegmentContact], int]:
     vertex_count = len(target_bmesh.verts)
     vertex_pair_shift = int(math.log2(vertex_count) / 2 + 1)
 
-    vpi2weights: Dict[VertexPairId, float] = {}
+    vpi2weights: dict[VertexPairId, float] = {}
 
     def _calc_vertex_group_weight_cost(vert0: bmesh.types.BMVert, vert1: bmesh.types.BMVert) -> float:
         vpi = _to_vertex_pair_id(vert0, vert1, vertex_pair_shift)
@@ -447,7 +446,7 @@ def _calc_segment_contacts(
 
         return vpi2weights.setdefault(vpi, weight)
 
-    tli2heaviest_vgi: Dict[TriLoopIndex, int] = {}
+    tli2heaviest_vgi: dict[TriLoopIndex, int] = {}
 
     def _calc_heaviest_vertex_group_index(tli: TriLoopIndex, loop: bmesh.types.BMLoop) -> int:
         if tli in tli2heaviest_vgi:
@@ -455,7 +454,7 @@ def _calc_segment_contacts(
 
         max_vgi: int = -1
         max_weight: float = -1.0
-        vgi2weights: Dict[int, float] = {}
+        vgi2weights: dict[int, float] = {}
         for vgi, weight in itertools.chain(
             vi2vgi2weights[loop.vert.index].items(),
             vi2vgi2weights[loop.link_loop_next.vert.index].items(),
@@ -469,7 +468,7 @@ def _calc_segment_contacts(
         return tli2heaviest_vgi.setdefault(tli, max_vgi)
 
     # loop_pair_id
-    processed_loop_pair_ids: Set[LoopPairId] = set()
+    processed_loop_pair_ids: set[LoopPairId] = set()
 
     __next_segment_id: int = 0
 
@@ -482,16 +481,16 @@ def _calc_segment_contacts(
     loop_pair_shift = int(math.log2(loop_count) / 2 + 1)
 
     # tri_loop_index to segment map
-    tli2segment: Dict[TriLoopIndex, Segment] = collections.defaultdict(_new_segment)
+    tli2segment: dict[TriLoopIndex, Segment] = collections.defaultdict(_new_segment)
 
     # segment_contact_index to segment_contact map
-    sci2segment_contacts: Dict[SegmentContactId, SegmentContact] = {}
+    sci2segment_contacts: dict[SegmentContactId, SegmentContact] = {}
 
     half_pi_inverse = 2 / math.pi
 
     next_segment_contact_id: SegmentContactId = 0
 
-    tri_loop: List[bmesh.types.BMLoop]
+    tri_loop: list[bmesh.types.BMLoop]
     for tri_loop in tri_loops:
         tri_loop0 = tri_loop[0]
         this_face = tri_loop0.face
@@ -593,12 +592,12 @@ def _calc_segment_contacts(
     return sci2segment_contacts, len(tli2segment)
 
 
-def _calc_vi2vgi2weights(target_bmesh: bmesh.types.BMesh, ignore_vertex_group_indices: Set[int]) -> Dict[int, Dict[int, float]]:
+def _calc_vi2vgi2weights(target_bmesh: bmesh.types.BMesh, ignore_vertex_group_indices: set[int]) -> dict[int, dict[int, float]]:
     deform_layer = target_bmesh.verts.layers.deform.verify()
     return {v.index: {vgi: weight for vgi, weight in v[deform_layer].items() if vgi not in ignore_vertex_group_indices} for v in target_bmesh.verts}
 
 
-def get_ignore_vertex_group_indices(mesh_object: bpy.types.Object) -> Set[int]:
+def get_ignore_vertex_group_indices(mesh_object: bpy.types.Object) -> set[int]:
     deform_bone_names = {b.name for m in mesh_object.modifiers if m.is_active and m.type == "ARMATURE" for b in m.object.data.bones if b.use_deform}
 
     ignore_vertex_group_indices = {vg.index for vg in mesh_object.vertex_groups if vg.name not in deform_bone_names}

@@ -1,7 +1,6 @@
 # Copyright 2021 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import Optional
 
 import bpy
 
@@ -11,14 +10,14 @@ from ..tuners import TunerABC, TunerRegistry
 
 class GeometryNodesUtilities:
     @staticmethod
-    def find_geometry_node_tree(obj: bpy.types.Object) -> Optional[bpy.types.GeometryNodeTree]:
+    def find_geometry_node_tree(obj: bpy.types.Object) -> bpy.types.GeometryNodeTree | None:
         modifier = GeometryNodesUtilities.find_geometry_node_modifier(obj)
         if modifier:
             return modifier.node_group
         return None
 
     @staticmethod
-    def find_geometry_node_modifier(obj: bpy.types.Object) -> Optional[bpy.types.NodesModifier]:
+    def find_geometry_node_modifier(obj: bpy.types.Object) -> bpy.types.NodesModifier | None:
         modifier: bpy.types.Modifier
         for modifier in obj.modifiers:
             if not modifier.is_active:

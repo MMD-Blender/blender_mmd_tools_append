@@ -28,14 +28,13 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import datetime
 import errno
 import os
 import re
 import subprocess
 import sys
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass
-from typing import Callable, Iterator, List, Tuple, Union
 
 _WIN32 = sys.platform == "win32"
 _EXECUTABLES = ["7z"] + (["7z.exe"] if _WIN32 else [])
@@ -91,15 +90,15 @@ class x7ZipInfo:
 
     """
 
-    filename: Union[str, None]
-    date_time: Union[Tuple[int, int, int, int, int, int], None] = None
-    file_size: Union[int, None] = None
-    compress_size: Union[int, None] = None
-    compress_type: Union[str, None] = None
-    encrypted: Union[str, None] = None
-    mode: Union[str, None] = None
-    CRC: Union[int, None] = None
-    block: Union[int, None] = None
+    filename: str | None
+    date_time: tuple[int, int, int, int, int, int] | None = None
+    file_size: int | None = None
+    compress_size: int | None = None
+    compress_type: str | None = None
+    encrypted: str | None = None
+    mode: str | None = None
+    CRC: int | None = None
+    block: int | None = None
 
     def is_dir(self) -> bool:
         """Returns True if entry is a directory."""
@@ -165,7 +164,7 @@ class _Executor:
         except:
             return False
 
-    def _popen(self, command: Union[str, List[str]]) -> subprocess.Popen:
+    def _popen(self, command: str | list[str]) -> subprocess.Popen:
         """Disconnect command from parent fds, read only from stdout."""
         try:
             return subprocess.Popen(
@@ -183,7 +182,7 @@ class _Executor:
                 raise x7ZipCannotExec("Cannot execute 7-zip") from None
             raise
 
-    def execute(self, command: Union[str, List[str]]) -> Iterator[str]:
+    def execute(self, command: str | list[str]) -> Iterator[str]:
         linesep = os.linesep
         p = self._popen(command)
         while True:
@@ -219,7 +218,7 @@ class _Executor:
         else:
             raise x7ZipExecError(error_message)
 
-    _parsers: List[Tuple[str, str, Callable[[str], str], int]] = [
+    _parsers: list[tuple[str, str, Callable[[str], str], int]] = [
         (
             param[0],
             param[1],
@@ -239,7 +238,7 @@ class _Executor:
         ]
     ]
 
-    def execute_list(self, archive_name: str, password: Union[str, None] = None) -> Iterator[x7ZipInfo]:
+    def execute_list(self, archive_name: str, password: str | None = None) -> Iterator[x7ZipInfo]:
         info = None
         for line in self.execute(
             [
@@ -280,10 +279,10 @@ class _Executor:
     def execute_extract(
         self,
         archive_name: str,
-        output_directory: Union[str, None] = None,
-        file_names: Union[List[str], None] = None,
-        password: Union[str, None] = None,
-        other_options: Union[List[str], None] = None,
+        output_directory: str | None = None,
+        file_names: list[str] | None = None,
+        password: str | None = None,
+        other_options: list[str] | None = None,
     ):
         command = [self.executable, "x", "-sccUTF-8", archive_name]
 
@@ -325,9 +324,9 @@ class x7ZipFile:
 
     def __init__(
         self,
-        file: Union[str, bytes, os.PathLike],
+        file: str | bytes | os.PathLike,
         mode: str = "r",
-        pwd: Union[str, None] = None,
+        pwd: str | None = None,
     ):
         """Open the 7-zip file with mode read 'r'."""
         self._file = file if not isinstance(file, os.PathLike) else str(file)
@@ -379,7 +378,7 @@ class x7ZipFile:
         """Release open resources."""
         pass
 
-    def infolist(self) -> List[x7ZipInfo]:
+    def infolist(self) -> list[x7ZipInfo]:
         """Return x7ZipInfo objects for all files/directories in archive."""
         if self._info_list is None:
             self._info_list = self._executor.execute_list(self._file, password=self._pwd)
@@ -395,15 +394,15 @@ class x7ZipFile:
         except KeyError:
             raise x7ZipNoEntry(f"No such file: {member}") from None
 
-    def namelist(self) -> List[str]:
+    def namelist(self) -> list[str]:
         """Return list of filenames in archive."""
         return [info.filename for info in self.infolist()]
 
     @staticmethod
-    def to_filename(member: Union[str, x7ZipInfo]) -> str:
+    def to_filename(member: str | x7ZipInfo) -> str:
         return member.filename if isinstance(member, x7ZipInfo) else member
 
-    def extract(self, member: Union[str, x7ZipInfo], path: Union[str, None] = None, pwd: Union[str, None] = None):
+    def extract(self, member: str | x7ZipInfo, path: str | None = None, pwd: str | None = None):
         """Extract single file into current directory.
 
         Parameters:
@@ -417,7 +416,7 @@ class x7ZipFile:
         """
         self._executor.execute_extract(archive_name=self._file, output_directory=path, file_names=[x7ZipFile.to_filename(member)], password=pwd or self._pwd, other_options=["-y"])
 
-    def extractall(self, path: Union[str, None] = None, members: Union[List[Union[str, x7ZipInfo]], None] = None, pwd: Union[str, None] = None):
+    def extractall(self, path: str | None = None, members: list[str | x7ZipInfo] | None = None, pwd: str | None = None):
         """Extract all files into current directory.
 
         Parameters:

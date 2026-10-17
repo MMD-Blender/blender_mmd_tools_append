@@ -5,7 +5,6 @@ import functools
 import os
 import time
 from enum import Enum
-from typing import List, Optional, Tuple
 
 import bpy
 import bpy.utils.previews
@@ -19,7 +18,7 @@ from .assets import ASSETS, AssetDescription, AssetType
 from .cache import CONTENT_CACHE, Content, Task
 from .operators import DeleteDebugAssetJson, ReloadAssetJsons, UpdateAssetJson, UpdateDebugAssetJson
 
-PREVIEWS: Optional[bpy.utils.previews.ImagePreviewCollection]
+PREVIEWS: bpy.utils.previews.ImagePreviewCollection | None
 
 
 class AssetState(Enum):
@@ -37,7 +36,7 @@ class Utilities:
         return ASSETS.is_extracted(asset.id) or CONTENT_CACHE.try_get_content(asset.download_action) is not None
 
     @staticmethod
-    def get_asset_state(asset: AssetDescription) -> Tuple[AssetState, Optional[Content], Optional[Task]]:
+    def get_asset_state(asset: AssetDescription) -> tuple[AssetState, Content | None, Task | None]:
         if ASSETS.is_extracted(asset.id):
             return (AssetState.EXTRACTED, None, None)
 
@@ -101,7 +100,7 @@ class AssetSearch(bpy.types.Operator):
         enabled_tag_names = {tag.name for tag in query_tags if tag.enabled}
         enabled_tag_count = len(enabled_tag_names)
 
-        search_results: List[AssetDescription] = []
+        search_results: list[AssetDescription] = []
         search_results = [
             asset
             for asset in ASSETS.values()

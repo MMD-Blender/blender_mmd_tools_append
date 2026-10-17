@@ -3,9 +3,9 @@
 #   UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 import bmesh
 import bpy
@@ -32,17 +32,17 @@ _translation_properties = [
 
 @dataclass
 class Edges:
-    up_edges: Set[bmesh.types.BMEdge] = field(default_factory=set)
-    down_edges: Set[bmesh.types.BMEdge] = field(default_factory=set)
-    side_edges: Set[bmesh.types.BMEdge] = field(default_factory=set)
+    up_edges: set[bmesh.types.BMEdge] = field(default_factory=set)
+    down_edges: set[bmesh.types.BMEdge] = field(default_factory=set)
+    side_edges: set[bmesh.types.BMEdge] = field(default_factory=set)
 
 
 @dataclass
 class Vertices:
-    up_verts: Set[bmesh.types.BMVert] = field(default_factory=set)
-    down_verts: Set[bmesh.types.BMVert] = field(default_factory=set)
-    ribbon_verts: Set[bmesh.types.BMVert] = field(default_factory=set)
-    side_verts: Set[bmesh.types.BMVert] = field(default_factory=set)
+    up_verts: set[bmesh.types.BMVert] = field(default_factory=set)
+    down_verts: set[bmesh.types.BMVert] = field(default_factory=set)
+    ribbon_verts: set[bmesh.types.BMVert] = field(default_factory=set)
+    side_verts: set[bmesh.types.BMVert] = field(default_factory=set)
     all_ribbon: bool = False
 
 
@@ -51,8 +51,8 @@ class RigidBodyToClothConverter:
     def convert(
         cls,
         mmd_root_object: bpy.types.Object,
-        rigid_body_objects: List[bpy.types.Object],
-        mesh_objects: List[bpy.types.Object],
+        rigid_body_objects: list[bpy.types.Object],
+        mesh_objects: list[bpy.types.Object],
         subdivision_level: int,
         ribbon_stiffness: float,
         physics_mode: PhysicsMode,
@@ -70,7 +70,7 @@ class RigidBodyToClothConverter:
             bone_names = [rb.mmd_rigid.bone for rb in rigid_body_objects if rb.mmd_rigid.bone]
             cls.clean_physics_bones(bone_names, mmd_armature_object)
 
-        pose_bones: List[bpy.types.PoseBone] = []
+        pose_bones: list[bpy.types.PoseBone] = []
         for rigid_body_object in rigid_body_objects:
             pose_bone = mmd_armature_object.pose.bones.get(rigid_body_object.mmd_rigid.bone)
 
@@ -176,7 +176,7 @@ class RigidBodyToClothConverter:
 
     @staticmethod
     def clean_physics_bones(
-        physics_bone_names: List[str],
+        physics_bone_names: list[str],
         mmd_armature_object: bpy.types.Object,
     ):
         """
@@ -215,7 +215,7 @@ class RigidBodyToClothConverter:
     ):
         # pylint: disable=too-many-arguments, too-many-locals
 
-        unnecessary_vertex_groups: List[bpy.types.VertexGroup] = []
+        unnecessary_vertex_groups: list[bpy.types.VertexGroup] = []
 
         mmd_mesh: bpy.types.Mesh = mmd_mesh_object.data
         mmd_bm: bmesh.types.BMesh = bmesh.new()
@@ -261,7 +261,7 @@ class RigidBodyToClothConverter:
     @staticmethod
     def new_pin_vertex_group(
         cloth_mesh_object: bpy.types.Object,
-        side_joint_objects: List[bpy.types.Object],
+        side_joint_objects: list[bpy.types.Object],
         new_up_verts,
         new_side_verts,
         rigid_body_index_dict,
@@ -314,8 +314,8 @@ class RigidBodyToClothConverter:
         cloth_bm.normal_update()
 
     @staticmethod
-    def extend_side_vertices(cloth_bm: bmesh.types.BMesh, vertices: Vertices, edges: Edges) -> List[Optional[bmesh.types.BMVert]]:
-        new_side_verts: List[Optional[bmesh.types.BMVert]] = [None for i in range(len(cloth_bm.verts))]
+    def extend_side_vertices(cloth_bm: bmesh.types.BMesh, vertices: Vertices, edges: Edges) -> list[bmesh.types.BMVert | None]:
+        new_side_verts: list[bmesh.types.BMVert | None] = [None for i in range(len(cloth_bm.verts))]
 
         for vert in vertices.side_verts:
             new_location = None
@@ -333,10 +333,10 @@ class RigidBodyToClothConverter:
         return new_side_verts
 
     @staticmethod
-    def extend_ribbon_vertices(cloth_bm: bmesh.types.BMesh) -> List[Optional[bmesh.types.BMVert]]:
+    def extend_ribbon_vertices(cloth_bm: bmesh.types.BMesh) -> list[bmesh.types.BMVert | None]:
         # 挤出飘带顶点
         # extrude ribbon edge
-        new_ribbon_verts: List[Optional[bmesh.types.BMVert]] = [None for i in range(len(cloth_bm.verts))]
+        new_ribbon_verts: list[bmesh.types.BMVert | None] = [None for i in range(len(cloth_bm.verts))]
 
         for vert in cloth_bm.verts:
             if not vert.is_wire:
@@ -362,12 +362,12 @@ class RigidBodyToClothConverter:
     @staticmethod
     def extend_up_edges(
         cloth_bm: bmesh.types.BMesh,
-        pose_bones: List[bpy.types.PoseBone],
+        pose_bones: list[bpy.types.PoseBone],
         vertices: Vertices,
         edges: Edges,
         physics_mode: PhysicsMode,
-    ) -> List[Optional[bmesh.types.BMVert]]:
-        new_up_verts: List[Optional[bmesh.types.BMVert]] = [None for i in range(len(cloth_bm.verts))]
+    ) -> list[bmesh.types.BMVert | None]:
+        new_up_verts: list[bmesh.types.BMVert | None] = [None for i in range(len(cloth_bm.verts))]
 
         # 延长头部顶点
         # extend root vertex
@@ -395,8 +395,8 @@ class RigidBodyToClothConverter:
         return new_up_verts
 
     @staticmethod
-    def extend_down_edges(cloth_bm: bmesh.types.BMesh, pose_bones: List[bpy.types.PoseBone], vertices: Vertices, edges: Edges) -> List[Optional[bmesh.types.BMVert]]:
-        new_down_verts: List[Optional[bmesh.types.BMVert]] = [None for i in range(len(cloth_bm.verts))]
+    def extend_down_edges(cloth_bm: bmesh.types.BMesh, pose_bones: list[bpy.types.PoseBone], vertices: Vertices, edges: Edges) -> list[bmesh.types.BMVert | None]:
+        new_down_verts: list[bmesh.types.BMVert | None] = [None for i in range(len(cloth_bm.verts))]
         # 延长尾部顶点
         # extend tail vertex
         for vert in vertices.down_verts:
@@ -424,10 +424,10 @@ class RigidBodyToClothConverter:
         return new_down_verts
 
     @staticmethod
-    def collect_joints(mmd_model, rigid_body_index_dict: Dict[bpy.types.Object, int]) -> Tuple[List[bpy.types.Object], List[Tuple[int, int]], List[bpy.types.Object]]:
-        joint_objects: List[bpy.types.Object] = []
-        joint_edge_indices: List[Tuple[int, int]] = []
-        side_joint_objects: List[bpy.types.Object] = []
+    def collect_joints(mmd_model, rigid_body_index_dict: dict[bpy.types.Object, int]) -> tuple[list[bpy.types.Object], list[tuple[int, int]], list[bpy.types.Object]]:
+        joint_objects: list[bpy.types.Object] = []
+        joint_edge_indices: list[tuple[int, int]] = []
+        side_joint_objects: list[bpy.types.Object] = []
 
         for obj in mmd_model.joints():
             obj1 = obj.rigid_body_constraint.object1
@@ -441,7 +441,7 @@ class RigidBodyToClothConverter:
         return joint_objects, joint_edge_indices, side_joint_objects
 
     @staticmethod
-    def collect_vertices(cloth_bm: bmesh.types.BMesh, pose_bones: List[bpy.types.PoseBone], physics_mode: PhysicsMode, extend_ribbon_area: bool) -> Vertices:
+    def collect_vertices(cloth_bm: bmesh.types.BMesh, pose_bones: list[bpy.types.PoseBone], physics_mode: PhysicsMode, extend_ribbon_area: bool) -> Vertices:
         vertices = Vertices()
 
         for vert in cloth_bm.verts:
@@ -507,7 +507,7 @@ class RigidBodyToClothConverter:
         return edges
 
     @staticmethod
-    def clean_mesh(cloth_bm: bmesh.types.BMesh, save_edges: List[Tuple[int, int]]):
+    def clean_mesh(cloth_bm: bmesh.types.BMesh, save_edges: list[tuple[int, int]]):
         def remove_edges(cloth_bm: bmesh.types.BMesh, save_edges):
             # 删除多余边
             # remove extra edge

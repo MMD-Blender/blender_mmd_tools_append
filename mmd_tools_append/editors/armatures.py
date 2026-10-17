@@ -5,8 +5,8 @@ import math
 import os
 import re
 from abc import ABC
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Optional
 
 import bpy
 import rna_prop_ui
@@ -113,7 +113,7 @@ class PoseBoneEditor(ABC):
         target_object: bpy.types.Object,
         subtarget: str,
         space: str,
-        influence_data_path: Optional[str] = None,
+        influence_data_path: str | None = None,
         invert_influence: bool = False,
         **kwargs,
     ) -> bpy.types.Constraint:
@@ -139,7 +139,7 @@ class PoseBoneEditor(ABC):
         target_object: bpy.types.Object,
         subtarget: str,
         space: str,
-        influence_data_path: Optional[str] = None,
+        influence_data_path: str | None = None,
         invert_influence: bool = False,
         **kwargs,
     ) -> bpy.types.Constraint:
@@ -165,7 +165,7 @@ class PoseBoneEditor(ABC):
         target_object: bpy.types.Object,
         subtarget: str,
         space: str,
-        influence_data_path: Optional[str] = None,
+        influence_data_path: str | None = None,
         invert_influence: bool = False,
         **kwargs,
     ) -> bpy.types.Constraint:
@@ -191,7 +191,7 @@ class PoseBoneEditor(ABC):
         target_object: bpy.types.Object,
         subtarget: str,
         space: str,
-        influence_data_path: Optional[str] = None,
+        influence_data_path: str | None = None,
         invert_influence: bool = False,
         **kwargs,
     ) -> bpy.types.Constraint:
@@ -218,7 +218,7 @@ class PoseBoneEditor(ABC):
         subtarget: str,
         chain_count: int,
         iterations: int,
-        influence_data_path: Optional[str] = None,
+        influence_data_path: str | None = None,
         invert_influence: bool = False,
         **kwargs,
     ) -> bpy.types.Constraint:
@@ -238,7 +238,7 @@ class PoseBoneEditor(ABC):
         return constraint
 
     @staticmethod
-    def remove_constraints(pose_bones: Dict[str, bpy.types.PoseBone]):
+    def remove_constraints(pose_bones: dict[str, bpy.types.PoseBone]):
         for pose_bone in pose_bones.values():
             for constraint in pose_bone.constraints:
                 if not constraint.name.startswith("mmd_append_"):
@@ -264,7 +264,7 @@ class EditBoneEditor(ABC):
         return bone.head + bone.vector * stretch_factor
 
     @staticmethod
-    def to_bone_suffix(bone_name: str) -> Optional[str]:
+    def to_bone_suffix(bone_name: str) -> str | None:
         match = re.search(r"[_\.]([lLrR])$", bone_name)
         if not match:
             return None
@@ -320,7 +320,7 @@ class EditBoneEditor(ABC):
         edit_bone.parent = parent_bone
 
     @staticmethod
-    def load_custom_shapes(custom_shape_names: List[str]):
+    def load_custom_shapes(custom_shape_names: list[str]):
         if len(custom_shape_names) == 0:
             return
 
@@ -344,7 +344,7 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
         return self.raw_armature.bones
 
     @property
-    def pose_bones(self) -> Dict[str, bpy.types.PoseBone]:
+    def pose_bones(self) -> dict[str, bpy.types.PoseBone]:
         return self.raw_object.pose.bones
 
     @property

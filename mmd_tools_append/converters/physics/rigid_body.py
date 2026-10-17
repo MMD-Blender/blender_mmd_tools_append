@@ -1,7 +1,7 @@
 # Copyright 2021 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import Iterable
+from collections.abc import Iterable
 
 import bpy
 

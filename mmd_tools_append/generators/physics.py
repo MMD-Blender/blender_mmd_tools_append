@@ -1,7 +1,6 @@
 # Copyright 2022 UuuNyaa <UuuNyaa@gmail.com>
 # This file is part of MMD Tools Append.
 
-from typing import List
 
 import bpy
 
@@ -19,7 +18,7 @@ class AddCenterOfGravityObject(bpy.types.Operator):
 
     def execute(self, context: bpy.types.Context):
         armature_object: bpy.types.Object = context.active_object
-        selected_pose_bones: List[bpy.types.PoseBone] = context.selected_pose_bones
+        selected_pose_bones: list[bpy.types.PoseBone] = context.selected_pose_bones
 
         center_object: bpy.types.Object = bpy.data.objects.new("EMPTY", None)
         center_object.name = "CenterOfGravity"

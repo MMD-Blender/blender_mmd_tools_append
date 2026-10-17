@@ -9,9 +9,10 @@ import tempfile
 import threading
 import traceback
 from abc import ABC, abstractmethod
+from collections import OrderedDict
+from collections.abc import Callable
 from concurrent.futures import Future, ThreadPoolExecutor
 from enum import Enum
-from typing import Callable, Dict, List, Optional, OrderedDict
 
 from .. import REGISTER_HOOKS
 from ..utilities import get_preferences
@@ -67,7 +68,7 @@ class Task:
 
     url: URL
     state: State
-    callbacks: List[Callback]
+    callbacks: list[Callback]
     future: Future
     content_id: str
     fetched_size: int
@@ -77,7 +78,7 @@ class Task:
         self,
         url: URL,
         state: State,
-        callbacks: List[Callback] = None,
+        callbacks: list[Callback] = None,
     ):
         self.url = url
         self.state = state
@@ -98,11 +99,11 @@ class CacheABC(ABC):
         pass
 
     @abstractmethod
-    def try_get_content(self, url: URL) -> Optional[Content]:
+    def try_get_content(self, url: URL) -> Content | None:
         pass
 
     @abstractmethod
-    def try_get_task(self, url: URL) -> Optional[Task]:
+    def try_get_task(self, url: URL) -> Task | None:
         pass
 
     @abstractmethod
@@ -133,7 +134,7 @@ class ContentCache(CacheABC):
         self._lock = threading.RLock()
 
         self._executor = ThreadPoolExecutor(max_workers)
-        self._tasks: Dict[URL, Task] = {}
+        self._tasks: dict[URL, Task] = {}
 
         self._contents: OrderedDict[str, Content] = OrderedDict()
         self._contents_size: int = 0
@@ -308,7 +309,7 @@ class ContentCache(CacheABC):
 
         return True
 
-    def try_get_content(self, url: URL) -> Optional[Content]:
+    def try_get_content(self, url: URL) -> Content | None:
         content_id = Content.to_content_id(url)
         with self._lock:
             if content_id not in self._contents:
@@ -343,7 +344,7 @@ class ContentCache(CacheABC):
 
             return content
 
-    def try_get_task(self, url: URL) -> Optional[Task]:
+    def try_get_task(self, url: URL) -> Task | None:
         with self._lock:
             return self._tasks[url] if url in self._tasks else None
 
@@ -410,10 +411,10 @@ class ReloadableContentCache(CacheABC):
     def remove_content(self, url: URL) -> bool:
         return self._cache.remove_content(url)
 
-    def try_get_content(self, url: URL) -> Optional[Content]:
+    def try_get_content(self, url: URL) -> Content | None:
         return self._cache.try_get_content(url)
 
-    def try_get_task(self, url: URL) -> Optional[Task]:
+    def try_get_task(self, url: URL) -> Task | None:
         return self._cache.try_get_task(url)
 
     def async_get_content(self, url: URL, callback: Callback) -> Future:

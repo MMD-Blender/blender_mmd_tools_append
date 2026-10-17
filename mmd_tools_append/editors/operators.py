@@ -4,7 +4,6 @@
 import math
 import sys
 import time
-from typing import Set
 
 import bmesh
 import bpy
@@ -217,7 +216,7 @@ class RemoveUnusedVertexGroups(bpy.types.Operator):
             if obj.type != "MESH":
                 continue
 
-            used_vertex_group_indices: Set[int] = set()
+            used_vertex_group_indices: set[int] = set()
 
             mesh: bpy.types.Mesh = obj.data
 

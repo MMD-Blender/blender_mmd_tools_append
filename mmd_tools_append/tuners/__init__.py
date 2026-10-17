@@ -35,10 +35,10 @@ class TunerDescription(NamedTuple):
 
 
 class TunerRegistry:
-    def __init__(self, *tuners: Tuple[int, TunerABC]):
+    def __init__(self, *tuners: tuple[int, TunerABC]):
         self.previews = bpy.utils.previews.new()  # pylint: disable=assignment-from-no-return
 
-        self.tuners: Dict[str, TunerDescription] = {}
+        self.tuners: dict[str, TunerDescription] = {}
         for tuner_index, tuner in tuners:
             self.add(tuner_index, tuner)
 

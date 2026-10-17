@@ -3,7 +3,7 @@
 
 import math
 import random
-from typing import Iterable, List, Tuple
+from collections.abc import Iterable
 
 import bpy
 import bpy_extras
@@ -22,10 +22,10 @@ def create_skin_hair(  # pylint: disable=too-many-arguments
     fluctuation_factor: float,
     thickness: float,
     segments: int,
-) -> Tuple[List[Vector], List[Tuple[int, int, int, int]]]:
+) -> tuple[list[Vector], list[tuple[int, int, int, int]]]:
     # pylint: disable=too-many-locals
-    vertices: List[Vector] = []
-    faces: List[Tuple[int, int, int, int]] = []
+    vertices: list[Vector] = []
+    faces: list[tuple[int, int, int, int]] = []
 
     def sprout(position: Vector, length: float, number_of_cuts: int):
         quaternion = Quaternion()
@@ -55,7 +55,7 @@ def create_skin_hair(  # pylint: disable=too-many-arguments
 
             position += quaternion @ Vector([0, length / number_of_cuts, 0])
 
-    def sliding(target: List[int]) -> Iterable[Tuple[int, int]]:
+    def sliding(target: list[int]) -> Iterable[tuple[int, int]]:
         for i in range(len(target) - 1):
             yield (target[i], target[i + 1])
 
@@ -64,7 +64,7 @@ def create_skin_hair(  # pylint: disable=too-many-arguments
     segment_cos = [math.cos(i * math.pi * 2 / segments) for i in range(segments)]
     segment_sin = [math.sin(i * math.pi * 2 / segments) for i in range(segments)]
 
-    def calc_edge_vertices(origin: Vector, rotation: Quaternion, radius: float, length: float) -> List[Vector]:
+    def calc_edge_vertices(origin: Vector, rotation: Quaternion, radius: float, length: float) -> list[Vector]:
         return [origin + rotation @ Vector([radius * segment_cos[i], length, radius * segment_sin[i]]) for i in range(segments)]
 
     def frange(start: float, stop: float, step: float = 1.0) -> Iterable[float]:

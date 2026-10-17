@@ -3,7 +3,6 @@
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, Set
 
 import bpy
 from mathutils import Vector
@@ -149,7 +148,7 @@ class MMDBoneInfo(Enum):
 
 
 class MMDArmatureObject(ArmatureEditor):
-    exist_bone_types: Set[MMDBoneType]
+    exist_bone_types: set[MMDBoneType]
 
     @staticmethod
     def is_mmd_armature_object(obj: bpy.types.Object):
@@ -169,10 +168,10 @@ class MMDArmatureObject(ArmatureEditor):
 
         self.mmd_model_name = import_mmd_tools().core.model.FnModel.find_root_object(mmd_armature_object).mmd_root.name
 
-        self.mmd_bone_names: Set[str] = set({b.mmd_bone_name for b in MMDBoneInfo})
-        self.exist_strict_bone_names: Set[str] = {b.mmd_bone.name_j for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
-        self.exist_actual_bone_names: Set[str] = {b.name for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
-        self.exist_bone_types: Set[MMDBoneType] = {b.bone_type for b in MMDBoneInfo if b.mmd_bone_name in self.exist_strict_bone_names}
+        self.mmd_bone_names: set[str] = set({b.mmd_bone_name for b in MMDBoneInfo})
+        self.exist_strict_bone_names: set[str] = {b.mmd_bone.name_j for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
+        self.exist_actual_bone_names: set[str] = {b.name for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
+        self.exist_bone_types: set[MMDBoneType] = {b.bone_type for b in MMDBoneInfo if b.mmd_bone_name in self.exist_strict_bone_names}
 
     def has_bone_type(self, bone_type: MMDBoneType) -> bool:
         return bone_type in self.exist_bone_types
@@ -187,19 +186,19 @@ class MMDArmatureObject(ArmatureEditor):
         return self.strict_pose_bones[strict_mmd_bone_name].name
 
     @property
-    def strict_bones(self) -> Dict[str, bpy.types.Bone]:
+    def strict_bones(self) -> dict[str, bpy.types.Bone]:
         return {self.to_strict_mmd_bone_name(b.name): b for b in self.raw_armature.bones if b.name in self.exist_actual_bone_names}
 
     @property
-    def strict_pose_bones(self) -> Dict[str, bpy.types.PoseBone]:
+    def strict_pose_bones(self) -> dict[str, bpy.types.PoseBone]:
         return {b.mmd_bone.name_j: b for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
 
     @property
-    def actual_pose_bones(self) -> Dict[str, bpy.types.PoseBone]:
+    def actual_pose_bones(self) -> dict[str, bpy.types.PoseBone]:
         return {b.name: b for b in self.raw_object.pose.bones if b.mmd_bone.name_j in self.mmd_bone_names}
 
     @property
-    def strict_edit_bones(self) -> Dict[str, bpy.types.EditBone]:
+    def strict_edit_bones(self) -> dict[str, bpy.types.EditBone]:
         return {self.to_strict_mmd_bone_name(b.name): b for b in self.raw_armature.edit_bones if b.name in self.exist_actual_bone_names}
 
     def clean_armature(self):

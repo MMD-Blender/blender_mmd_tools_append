@@ -11,7 +11,8 @@ import shutil
 import stat
 import urllib
 import zipfile
-from typing import Any, Callable, Dict, Optional
+from collections.abc import Callable
+from typing import Any
 
 import bpy
 import requests
@@ -25,7 +26,7 @@ from .assets import AssetDescription, _Utilities
 class RestrictedRunner:
     """Evaluate and execute download & import actions using AST."""
 
-    def __init__(self, functions: Dict[str, Callable]):
+    def __init__(self, functions: dict[str, Callable]):
         self._functions = functions
 
     def execute(self, code: str) -> Any:
@@ -411,7 +412,7 @@ class ImportActionExecutor:
         bpy.ops.object.delete()
 
     @staticmethod
-    def execute_import_action(asset: AssetDescription, target_file: Optional[str]):
+    def execute_import_action(asset: AssetDescription, target_file: str | None):
         functions = {
             "unzip": functools.partial(ImportActionExecutor.unzip, zip_file_path=target_file, asset=asset),
             "un7zip": functools.partial(ImportActionExecutor.un7zip, zip_file_path=target_file, asset=asset),
