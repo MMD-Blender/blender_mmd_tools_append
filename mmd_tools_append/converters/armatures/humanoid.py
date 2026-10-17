@@ -919,7 +919,7 @@ class HumanoidEditor(ArmatureEditor):
         def _find_legs(toes: list[str]):
             """(broken on MMD because EX and ToeIK)"""
             for t in toes:
-                legs = list(reversed(traverse_parent_chain(self.edit_bones[t])))
+                legs = list(reversed(traverse_parent_chain(self.edit_bones[t], threshold=0.9)))
                 hips = item_map["Body.Hips"].slots[0].bone_name
                 if hips and hips in legs:
                     legs.remove(hips)
