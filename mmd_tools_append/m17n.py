@@ -778,6 +778,18 @@ translations_tuple = (
         ("zh_HANS", "", (False, ())),
     ),
     (
+        ("*", "Adjust Tail"),
+        (("bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone.adjust_tail",), ()),
+        ("ja_JP", "テールを調整", (False, ())),
+        ("zh_HANS", "", (False, ())),
+    ),
+    (
+        ("*", "Move tail of parent bone to child"),
+        (("bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone.adjust_tail",), ()),
+        ("ja_JP", "親ボーンのテールを子ボーンに移動します", (False, ())),
+        ("zh_HANS", "", (False, ())),
+    ),
+    (
         ("*", "Automatically set bone orientation based on child bone"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation",), ()),
         ("ja_JP", "子ボーンを元に自動でボーンの向きを整列します", (False, ())),

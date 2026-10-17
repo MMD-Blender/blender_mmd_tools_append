@@ -272,6 +272,12 @@ class DissolveWeightBone(bpy.types.Operator):
     bl_description = "Merge the selected bones and corresponding vertex groups with their parents"
     bl_options = {"REGISTER", "UNDO"}
 
+    adjust_tail: bpy.props.BoolProperty(
+        name="Adjust Tail",
+        description="Move tail of parent bone to child",
+        default=True,
+    )
+
     def execute(self, context):
         armature_objects = [obj for obj in context.objects_in_mode if obj.type == "ARMATURE"]
         if not armature_objects and context.active_object and context.active_object.type == "ARMATURE":
@@ -282,7 +288,7 @@ class DissolveWeightBone(bpy.types.Operator):
             selected_bones = [b for b in editor.edit_bones if b and b.select]
 
             for b in selected_bones:
-                editor.dissolve_bone(b)
+                editor.dissolve_bone(b, self.adjust_tail)
 
         return {"FINISHED"}
 

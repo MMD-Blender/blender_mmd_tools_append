@@ -443,9 +443,14 @@ class MMDRigifyDerigger(bpy.types.Operator):
             rigify_armature_object = RigifyArmatureObject(context.active_object)
 
             bpy.ops.object.mode_set(mode="EDIT")
-            removed_count = rigify_armature_object.derig(self.remove_constraints, self.remove_driver, self.remove_prefix, self.cleanup, self.unlock_bones)
+            removed_count, collisions = rigify_armature_object.derig(self.remove_constraints, self.remove_driver, self.remove_prefix, self.cleanup, self.unlock_bones)
 
-            self.report({"INFO"}, message=f"Removed {removed_count} bones.")
+            if collisions:
+                for orig_name, bone_name in collisions:
+                    self.report({"WARNING"}, message=f"Bone {orig_name} was renamed to {bone_name}.")
+                self.report({"WARNING"}, message=f"Removed {removed_count} bones with {len(collisions)} collisions. (click to see details)")
+            else:
+                self.report({"INFO"}, message=f"Removed {removed_count} bones.")
 
         except Exception as e:
             self.report({"ERROR"}, message=f"Failed to remove rig: {e}")

@@ -1223,8 +1223,8 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         remove_prefix: bool,
         cleanup: bool,
         unlock_bones: bool,
-    ) -> int:
-        """Remove non-deform bones. Returns how many bones were removed."""
+    ) -> tuple[int, list[tuple[str, str]]]:
+        """Remove non-deform bones. Returns how many bones were removed and how many name collisions occurred."""
         armature = self.raw_armature
         bones = armature.edit_bones
         armature.show_bone_custom_shapes = False
@@ -1258,8 +1258,9 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
         if cleanup:
             self._cleanup_derigged_rigify(parent_map)
 
+        collisions = []
         if remove_prefix:
-            self._remove_rigify_prefix()
+            collisions = self._remove_rigify_prefix()
 
         # Remove rig_id to prevent being identified as a rigify armature
         if "rig_id" in armature:
@@ -1267,7 +1268,7 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         removed_count = len(to_delete)
 
-        return removed_count
+        return removed_count, collisions
 
     def _unlock_bones(self):
         """Unlocks positions, rotations and scales of all bones."""
@@ -1370,12 +1371,19 @@ class RigifyArmatureObject(MMDBindArmatureObjectABC):
 
         print("Fixed DEF-bones in Rigify.")
 
-    def _remove_rigify_prefix(self):
+    def _remove_rigify_prefix(self) -> list[tuple[str, str]]:
         bones = self.raw_armature.edit_bones
+        collisions = []
 
         for bone in bones:
             if "-" in bone.name:
-                bone.name = bone.name.split("-", 1)[1]
+                orig_name = bone.name
+                target_name = orig_name.split("-", 1)[1]
+                bone.name = target_name
+                if bone.name != target_name:
+                    collisions.append((orig_name, bone.name))
+
+        return collisions
 
     def translate_rigify(self) -> int:
         """

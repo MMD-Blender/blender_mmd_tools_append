@@ -392,7 +392,7 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
             collection.assign(bone)
         return bone
 
-    def dissolve_bone(self, target: bpy.types.EditBone):
+    def dissolve_bone(self, target: bpy.types.EditBone, adjust_tail: bool = True):
         """Merge the bone (target) to its parent and combine related vertex groups."""
 
         self.raw_armature.use_mirror_x = False
@@ -401,7 +401,9 @@ class ArmatureEditor(EditBoneEditor, PoseBoneEditor):
         if not parent:
             return
 
-        parent.tail = target.tail
+        if adjust_tail:
+            parent.tail = target.tail
+
         target_name = target.name
         self.edit_bones.remove(target)
 
