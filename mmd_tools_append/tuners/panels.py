@@ -70,7 +70,7 @@ class SkyPanel(bpy.types.Panel):
                 continue
 
             light_probe = obj.data
-            if light_probe.type in {"GRID", "VOLUME"}:
+            if light_probe.type == "VOLUME":
                 return True
 
         return False
