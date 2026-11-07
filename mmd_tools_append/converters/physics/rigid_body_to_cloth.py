@@ -67,8 +67,13 @@ class RigidBodyToClothConverter:
         rigid_body_index_dict = {rb: i for i, rb in enumerate(rigid_body_objects)}
 
         if clean_physics_bones:
-            bone_names = [rb.mmd_rigid.bone for rb in rigid_body_objects if rb.mmd_rigid.bone]
-            cls.clean_physics_bones(bone_names, mmd_armature_object)
+            prev_show: bool = mmd_root_object.mmd_root.show_armature
+            mmd_root_object.mmd_root.show_armature = True
+            try:
+                bone_names = [rb.mmd_rigid.bone for rb in rigid_body_objects if rb.mmd_rigid.bone]
+                cls.clean_physics_bones(bone_names, mmd_armature_object)
+            finally:
+                mmd_root_object.mmd_root.show_armature = prev_show
 
         pose_bones: list[bpy.types.PoseBone] = []
         for rigid_body_object in rigid_body_objects:
