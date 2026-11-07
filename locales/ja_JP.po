@@ -39,8 +39,8 @@ msgid "Asset Extract Root Folder"
 msgstr "アセット展開ルートフォルダー"
 
 #. :src: bpy.types.MMDToolsAppendAddonPreferences.asset_extract_root_folder
-msgid "Path to extract the cached assets"
-msgstr "キャッシュしたアセットの展開パス"
+msgid "Path to extract the cached assets. It will be used as Asset Library as well"
+msgstr "キャッシュしたアセットの展開パス. アセットライブラリにも使われます"
 
 #. :src: bpy.types.MMDToolsAppendAddonPreferences.asset_json_update_on_startup_enabled
 msgid "Asset JSON Auto Update on Startup"
@@ -423,6 +423,11 @@ msgctxt "Operator"
 msgid "Stretch Bone to Vertex"
 msgstr "ボーンを頂点にストレッチ"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_sync_asset_library
+msgctxt "Operator"
+msgid "Sync to Asset Library"
+msgstr "アセットライブラリに同期"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_geometry_nodes
 msgctxt "Operator"
 msgid "Tune Geometry Nodes"
@@ -556,7 +561,7 @@ msgid "Physics Mode"
 msgstr "物理モード"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_convert_rigid_body_to_cloth.physics_mode:'BONE_CONSTRAINT'
-#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:27
+#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:28
 msgid "Bone Constraint"
 msgstr "ボーンコンストレイント"
 
@@ -587,6 +592,14 @@ msgstr "選択中のオブジェクトのマテリアルにAppendマテリアル
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone
 msgid "Merge the selected bones and corresponding vertex groups with their parents"
 msgstr "選択中のボーンと対応する頂点グループを親ボーンに結合します"
+
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone.adjust_tail
+msgid "Adjust Tail"
+msgstr "テールを調整"
+
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_dissolve_weight_bone.adjust_tail
+msgid "Move tail of parent bone to child"
+msgstr "親ボーンのテールを子ボーンに移動します"
 
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation
 msgid "Automatically set bone orientation based on child bone"
@@ -897,6 +910,11 @@ msgstr "レンダーエンジンプロパティをWorkbench用に設定"
 msgid "Sequins"
 msgstr "スパンコール"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_geometry_nodes.geometry_nodes:'GEOMETRY_DROPLETS'
+#. :src: bpy.types.GeometryNodesPropertyGroup.thumbnails:'GEOMETRY_DROPLETS'
+msgid "Droplets"
+msgstr "水滴"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_tune_lighting.lighting:'LIGHTING_LEFT_ACCENT'
 #. :src: bpy.types.LightingPropertyGroup.thumbnails:'LIGHTING_LEFT_ACCENT'
 msgid "Left Accent"
@@ -1053,27 +1071,27 @@ msgid "Toon Shader"
 msgstr "トーンシェーダー"
 
 #. :src: bpy.types.AssetSearchQuery.type:'MODEL_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:34
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:35
 msgid "Model (.pmx)"
 msgstr "モデル (.pmx)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'MODEL_BLENDER'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:35
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:36
 msgid "Model (.blend)"
 msgstr "モデル (.blend)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'MOTION_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:36
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:37
 msgid "Motion (.vmd)"
 msgstr "モーション (.vmd)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'POSE_MMD'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:37
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:38
 msgid "Pose (.vpd)"
 msgstr "ポーズ (.vpd)"
 
 #. :src: bpy.types.AssetSearchQuery.type:'WORLD_BLENDER'
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:40
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:41
 msgid "World (.blend)"
 msgstr "ワールド (.blend)"
 
@@ -1202,79 +1220,87 @@ msgstr "弦固定ウェイト"
 msgid "Speed Multiplier"
 msgstr "速度の乗数"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:191
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:192
 msgid "Failed to download assets from uploader.jp. The response format may have changed."
 msgstr "uploader.jpからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:117
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:118
 msgid "Failed to download assets from SmutBase. The response format may have changed."
 msgstr "SmutBaseからのアセットダウンロードに失敗しました。レスポンスフォーマットが変わっている可能性があります。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:144
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:145
 msgid "Failed to download assets from BowlRoll. Incorrect download key."
 msgstr "BowlRollからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:181
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:182
 msgid "Failed to download assets from OneDrive. Incorrect download key."
 msgstr "OneDriveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:160
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:161
 msgid "Failed to download assets from Google Drive. Incorrect download key."
 msgstr "Google Driveからのアセットダウンロードに失敗しました。ダウンロードキーが正しくありません。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:267
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:268
 msgid ""
 "Failed to execute unrar or WinRAR\n"
 "Please install unrar or WinRAR and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:287
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:288
 msgid ""
 "Failed to execute 7z\n"
 "Please install p7zip-full or 7-zip and setup the PATH properly."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:361
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:373
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:389
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:362
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:374
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:390
 msgid ""
 "Failed to invoke mmd_tools\n"
 "Please install mmd_tools."
 msgstr ""
 "mmd_toolsの呼び出しに失敗しました\n"
-"mmd_toolsをインストールしてください."
+"mmd_toolsをインストールしてください。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:377
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:378
 msgid ""
 "Select an object.\n"
 "The target object for motion import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:393
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:394
 msgid ""
 "Select an object.\n"
 "The target object for pose import is not selected."
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/actions.py:434
+#: extensions/user_default/mmd_tools_append/asset_search/actions.py:435
 msgid "The file path is too long. This can be alleviated to some extent by shortening the Asset Extract Root Folder in the Add-on Preferences."
 msgstr "ファイルパスが長すぎます。アドオンプリファレンスのアセット展開ルートフォルダーを短くすることで軽減できます。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:33
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:34
 msgid "All"
 msgstr "全て"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:38
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:39
 msgid "Lighting"
 msgstr "照明"
 
-#: extensions/user_default/mmd_tools_append/asset_search/assets.py:39
+#: extensions/user_default/mmd_tools_append/asset_search/assets.py:40
 msgid "Material"
 msgstr "マテリアル"
 
-#: extensions/user_default/mmd_tools_append/asset_search/operators.py:57
-msgid " does not exist."
-msgstr ""
+#: extensions/user_default/mmd_tools_append/asset_search/operators.py:133
+msgid "Finished syncing to Asset Library."
+msgstr "アセットライブラリに同期しました。"
+
+#: extensions/user_default/mmd_tools_append/asset_search/operators.py:61
+msgid "{delete_json} does not exist."
+msgstr "{delete_json} は存在しません。"
+
+#: extensions/user_default/mmd_tools_append/asset_search/operators.py:87
+msgid "No extracted assets found to sync."
+msgstr "展開されたアセットが見つかりませんでした。"
 
 #: extensions/user_default/mmd_tools_append/asset_search/panels.py:315
 msgid "MMD Append Asset Search"
@@ -1284,116 +1310,116 @@ msgstr "MMD Appendアセットサーチ"
 msgid "MMD Append Assets Operator"
 msgstr "MMD Appendアセットオペレーター"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:327
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:326
 msgid "Asset type"
 msgstr "アセットタイプ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:328
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:471
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:327
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:473
 msgid "Query"
 msgstr "クエリ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:351
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:350
 msgid "{search_result_count} of {search_result_hit_count} results"
 msgstr "{search_result_count} 件 / {search_result_hit_count} 件中"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:433
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:432
 msgid "Reload local asset JSON files"
 msgstr "ローカルアセットJSONファイルをリロード"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:439
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:438
 msgid "Download and Update to the latest assets"
 msgstr "最新アセットをダウンロードして更新"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:454
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:456
 msgid "Debug"
 msgstr "デバッグ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:460
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:462
 msgid "Fetch an asset for debug"
 msgstr "デバッグ用にアセットを取得"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:461
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:463
 msgid "issue #"
 msgstr "issue番号"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:468
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:470
 msgid "Download and Update to the latest filtered assets for debug"
 msgstr "デバッグ用にフィルタ済み最新アセットをダウンロードして更新"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:470
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:472
 msgid "Repository"
 msgstr "リポジトリ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:472
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:474
 msgid "Write to"
 msgstr "書込み先"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:474
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:476
 msgctxt "Operator"
 msgid "Update Assets JSON by query"
 msgstr "アセットJSONをクエリで更新"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:332
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:266
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:331
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:265
 msgid "Tags:"
 msgstr "タグ:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:335
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:334
 msgid "Cached"
 msgstr "キャッシュ済"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:398
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:397
 msgid "Invalid search result, Please search again."
 msgstr "無効な検索結果です。再検索してください。"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:405
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:404
 msgid "Loading {loading_count} item{plural_form_suffix}..."
 msgstr "{loading_count} 件をロード中..."
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:405
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:404
 msgid "s"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:264
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:263
 msgid "Name:"
 msgstr "名前:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:265
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:264
 msgid "Aliases:"
 msgstr "別名:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:267
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:266
 msgid "Updated at:"
 msgstr "更新時刻"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:268
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:267
 msgid "Note:"
 msgstr "メモ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:275
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:274
 msgctxt "Operator"
 msgid "Download"
 msgstr "ダウンロード"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:261
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:260
 msgid "Type:"
 msgstr "タイプ:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:283
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:282
 msgctxt "Operator"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:286
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:285
 msgid "B   ()"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:262
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:261
 msgid "ID:"
 msgstr "ID:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:270
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:269
 msgid "Source:"
 msgstr "配信元:"
 
@@ -1401,14 +1427,14 @@ msgstr "配信元:"
 msgid "Download"
 msgstr "ダウンロード"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:280
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:286
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:279
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:285
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:246
 msgid "Cache:"
 msgstr "キャッシュ:"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:290
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:296
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:289
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:295
 msgctxt "Operator"
 msgid "Import"
 msgstr "インポート"
@@ -1417,7 +1443,7 @@ msgstr "インポート"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:281
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:280
 msgid "Downloading"
 msgstr "ダウンロード中"
 
@@ -1426,14 +1452,14 @@ msgstr "ダウンロード中"
 msgid "Import"
 msgstr "インポート"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:299
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:302
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:298
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:301
 msgctxt "Operator"
 msgid "Retry"
 msgstr "リトライ"
 
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:287
-#: extensions/user_default/mmd_tools_append/asset_search/panels.py:295
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:286
+#: extensions/user_default/mmd_tools_append/asset_search/panels.py:294
 msgid "Path:"
 msgstr "パス:"
 
@@ -1442,177 +1468,177 @@ msgstr "パス:"
 msgid "Retry"
 msgstr "リトライ"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:15
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:14
 msgid "Good"
 msgstr "良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:16
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:15
 msgid "Average"
 msgstr "普通"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:17
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:16
 msgid "Warning"
 msgstr "警告"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:18
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:17
 msgid "Poor"
 msgstr "劣る"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:19
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:18
 msgid "Bad"
 msgstr "悪い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:20
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:19
 msgid "Unknown"
 msgstr "不明"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:374
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:373
 msgid "Eevee Rendering Performance Checker"
 msgstr "Eeveeレンダリングパフォーマンスチェッカー"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:451
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:450
 msgid "Object with Impact Selection:"
 msgstr "インパクトのあるオブジェクト選択:"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:81
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:80
 msgid "Blender Version"
 msgstr "Blenderバージョン"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:85
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:84
 msgid ">= 2.93 LTS is Good"
 msgstr ">= 2.93 LTSが良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:92
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:91
 msgid "Render Engine"
 msgstr "レンダーエンジン"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:96
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:95
 msgid "= Eevee is Good"
 msgstr "= Eeveeが良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:114
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:113
 msgid "Render Samples"
 msgstr "レンダーのサンプル数"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:118
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:129
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:162
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:117
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:128
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:161
 msgid "<= 16 is Good"
 msgstr "<= 16が良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:125
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:124
 msgid "Viewport Samples"
 msgstr "ビューポートのサンプル数"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:136
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:135
 msgid "Use Motion Blur"
 msgstr "モーションブラーを使用"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:140
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:172
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:185
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:198
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:211
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:221
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:231
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:241
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:251
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:261
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:271
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:281
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:291
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:304
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:314
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:324
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:334
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:139
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:171
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:184
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:197
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:210
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:220
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:230
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:240
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:250
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:260
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:270
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:280
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:290
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:303
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:313
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:323
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:333
 msgid "= False is Good"
 msgstr "= Falseが良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:158
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:157
 msgid "Depth of Field Max Size"
 msgstr "被写界深度最大サイズ"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:168
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:167
 msgid "Use Compositing"
 msgstr "コンポジティングを使用"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:181
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:180
 msgid "Pass Cryptomatte Object"
 msgstr "Cryptomatteオブジェクトをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:194
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:193
 msgid "Pass Cryptomatte Material"
 msgstr "Cryptomatteマテリアルをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:207
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:206
 msgid "Pass Cryptomatte Asset"
 msgstr "Cryptomatteアセットをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:217
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:216
 msgid "Pass Glossy Light"
 msgstr "スペキュラーライトをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:227
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:226
 msgid "Pass Diffuse Light"
 msgstr "ディフューズライトをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:237
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:236
 msgid "Pass Emit"
 msgstr "放射をパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:247
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:246
 msgid "Pass Glossy Color"
 msgstr "スペキュラーカラーをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:257
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:256
 msgid "Pass Diffuse Color"
 msgstr "ディフューズカラーをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:267
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:266
 msgid "Pass Shadow"
 msgstr "影をパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:277
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:276
 msgid "Pass Ambient Occlusion"
 msgstr "アンビエントオクルージョン(AO)をパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:287
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:286
 msgid "Pass Normal"
 msgstr "ノーマルをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:300
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:299
 msgid "Pass Volume Light"
 msgstr "ボリュームライトをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:310
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:309
 msgid "Pass Z"
 msgstr "Zをパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:320
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:319
 msgid "Pass Environment"
 msgstr "環境をパス"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:330
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:329
 msgid "Use Sequencer"
 msgstr "シーケンサーを使用"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:359
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:358
 msgid "File Format"
 msgstr "ファイルフォーマット"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:359
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:358
 msgid "= JPEG is Good"
 msgstr "= JPEGが良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:423
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:422
 msgid "Total Performance Impact"
 msgstr "合計パフォーマンスインパクト"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:423
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:422
 msgid "<= 0% is Good"
 msgstr "<= 0%が良い"
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:428
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:427
 msgid "+.2f%"
 msgstr ""
 
@@ -1620,46 +1646,47 @@ msgstr ""
 msgid "{}: {}"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:448
-msgid "Removed  bones."
-msgstr ""
-
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:485
-msgid "Translated  bones."
-msgstr ""
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:490
+msgid "Translated {translated_count} bones."
+msgstr "ボーンを {translated_count} 件翻訳しました。"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:484
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:559
 msgid "Iterations"
 msgstr "反復"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:665
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:670
 msgid "Reset Humanoid data."
-msgstr "ヒューマノイドをリセットしました"
+msgstr "ヒューマノイドをリセットしました。"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:97
-msgid "This armature does not have required MMD bone: "
-msgstr "アーマチュアにMMD必須ボーンがありません. "
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:857
+msgid "This armature does not have required MMD bone: {e}"
+msgstr "アーマチュアにMMD必須ボーンがありません: {e}"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:451
-msgid "Failed to remove rig: "
-msgstr "リグの除去に失敗しました: "
+msgid "Removed {removed_count} bones with {collisions} collisions. (click to see details)"
+msgstr "ボーンを {removed_count} 件削除しました。(衝突 {collisions} 件)"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:488
-msgid "Failed to translate bones: "
-msgstr "ボーンの翻訳に失敗しました: "
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:453
+msgid "Removed {removed_count} bones."
+msgstr "ボーンを {removed_count} 件削除しました。"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:848
-msgid "Renamed  bones with  duplicates. (click to see details)"
-msgstr ""
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:456
+msgid "Failed to remove rig: {e}"
+msgstr "リグの除去に失敗しました: {e}"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:850
-msgid "Renamed  bones."
-msgstr ""
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:493
+msgid "Failed to translate bones: {e}"
+msgstr "ボーンの翻訳に失敗しました: {e}"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:852
-msgid "This armature does not have required MMD bones. "
-msgstr "アーマチュアにMMD必須ボーンがありません. "
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:853
+msgid "Renamed {rename_count} bones with {dups} duplicates. (click to see details)"
+msgstr "ボーンを {rename_count} 件名称変更しました。(重複 {dups} 件)"
+
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:855
+msgid "Renamed {rename_count} bones."
+msgstr "ボーンを {rename_count} 件名称変更しました。"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:49
 msgid ""
@@ -1667,11 +1694,15 @@ msgid ""
 "Please enable Rigify add-on."
 msgstr ""
 "Rigifyの呼び出しに失敗しました\n"
-"Rigifyアドオンを有効にしてください."
+"Rigifyアドオンを有効にしてください。"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:822
-msgid "Bone  was selected  times."
-msgstr ""
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:450
+msgid "Bone {orig_name} was renamed to {bone_name}."
+msgstr "{orig_name} ボーンは {bone_name} に名称変更されました。"
+
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:827
+msgid "Bone {k} was selected {v} times."
+msgstr "{k} ボーンは {v} 回選択されています。"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/panels.py:17
 msgid "MMD Append Rigify"
@@ -1779,7 +1810,7 @@ msgid "Collision:"
 msgstr "コリジョン:"
 
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:238
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1106
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1105
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:77
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:28
 #: extensions/user_default/mmd_tools_append/tuners/panels.py:147
@@ -1787,7 +1818,7 @@ msgid "Batch Operation:"
 msgstr "一括操作:"
 
 #: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:241
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1109
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1108
 #: extensions/user_default/mmd_tools_append/converters/physics/collision.py:78
 #: extensions/user_default/mmd_tools_append/converters/physics/rigid_body.py:29
 #: extensions/user_default/mmd_tools_append/tuners/panels.py:154
@@ -1842,7 +1873,7 @@ msgstr "撃力を制限"
 msgid "Copy to Selected"
 msgstr "選択にコピー"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:454
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth.py:459
 msgid "Multiple MMD models selected. Please select single model at a time."
 msgstr "複数のMMDモデルが選択されています。ひとつずつモデルを選択してください。"
 
@@ -1850,15 +1881,15 @@ msgstr "複数のMMDモデルが選択されています。ひとつずつモデ
 msgid "MMD Append Pyramid Cloth Adjuster"
 msgstr "MMD Appendピラミッドクロス調整器"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1096
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1095
 msgid "Weights:"
 msgstr "ウエイト:"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1102
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:1101
 msgid "Cloth Physics:"
 msgstr "クロス物理:"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:180
+#: extensions/user_default/mmd_tools_append/converters/physics/cloth_pyramid.py:179
 msgid "Target bones not found."
 msgstr "対象ボーンが見つからない"
 
@@ -1886,15 +1917,15 @@ msgstr "アクティブサーフェス"
 msgid "MMD Append Rigid Body Adjuster"
 msgstr "MMD Appendリジッドボディ調整器"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:26
+#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:27
 msgid "Auto"
 msgstr "自動"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:28
+#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:29
 msgid "Surface Deform"
 msgstr "サーフェス変形"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:73
+#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:78
 msgid "No bones related with {rigid_body_name}, Please relate a bone to the Rigid Body."
 msgstr "{rigid_body_name}に関連するボーンがありません。リジッドボディにボーンを関連付けてください。"
 
@@ -2013,7 +2044,7 @@ msgstr "放射調整器"
 msgid "Glitter Adjuster"
 msgstr "グリッター調整器"
 
-#: extensions/user_default/mmd_tools_append/editors/nodes.py:368
+#: extensions/user_default/mmd_tools_append/editors/nodes.py:369
 msgid "Sun Direction"
 msgstr "太陽の方向"
 
@@ -2034,7 +2065,7 @@ msgstr "ウエイトしきい値"
 msgid "Tolerance"
 msgstr "許容範囲"
 
-#: extensions/user_default/mmd_tools_append/editors/operators.py:580
+#: extensions/user_default/mmd_tools_append/editors/operators.py:586
 msgid ""
 "contact: , cost last/max: /\n"
 "segment: , area min/max: /\n"
@@ -2042,18 +2073,18 @@ msgid ""
 "operation:  secs, auto_segment  secs"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/editors/operators.py:548
+#: extensions/user_default/mmd_tools_append/editors/operators.py:554
 msgid "There is no target segment; In Edit Mode, select the faces you want to paint."
 msgstr "対象のセグメントがありません。編集モードでペイントしたい面を選択してください。"
 
-#: extensions/user_default/mmd_tools_append/generators/generate_rig.py:226
+#: extensions/user_default/mmd_tools_append/generators/generate_rig.py:227
 msgctxt "Operator"
 msgid "Generate MMD humanoid"
 msgstr "MMDヒューマノイドを生成"
 
-#: extensions/user_default/mmd_tools_append/generators/generate_rig.py:209
-msgid "Failed to add MMD rig: "
-msgstr "MMDリグの追加に失敗しました: "
+#: extensions/user_default/mmd_tools_append/generators/generate_rig.py:210
+msgid "Failed to add MMD rig: {e}"
+msgstr "MMDリグの追加に失敗しました: {e}"
 
 #: extensions/user_default/mmd_tools_append/generators/physics.py:17
 msgid "Radius"
