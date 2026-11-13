@@ -605,6 +605,14 @@ msgstr "親ボーンのテールを子ボーンに移動します"
 msgid "Automatically set bone orientation based on child bone"
 msgstr "子ボーンを元に自動でボーンの向きを整列します"
 
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation.force_connect
+msgid "Force connect"
+msgstr "強制的に接続"
+
+#. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation.force_connect
+msgid "Try to connect parent and child bones"
+msgstr "強制的に親ボーンと子ボーンを接続します"
+
 #. :src: bpy.types.MMD_TOOLS_APPEND_OT_humanoid_detect
 msgid ""
 "Analyze the bone position, direction, structure and name to find Humanoid structure.\n"
@@ -1642,7 +1650,7 @@ msgstr "<= 0%が良い"
 msgid "+.2f%"
 msgstr ""
 
-#: extensions/user_default/mmd_tools_append/checkers/operators.py:441
+#: extensions/user_default/mmd_tools_append/checkers/operators.py:440
 msgid "{}: {}"
 msgstr ""
 
@@ -1660,7 +1668,7 @@ msgid "Reset Humanoid data."
 msgstr "ヒューマノイドをリセットしました。"
 
 #: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:97
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:857
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:863
 msgid "This armature does not have required MMD bone: {e}"
 msgstr "アーマチュアにMMD必須ボーンがありません: {e}"
 
@@ -1680,11 +1688,11 @@ msgstr "リグの除去に失敗しました: {e}"
 msgid "Failed to translate bones: {e}"
 msgstr "ボーンの翻訳に失敗しました: {e}"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:853
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:859
 msgid "Renamed {rename_count} bones with {dups} duplicates. (click to see details)"
 msgstr "ボーンを {rename_count} 件名称変更しました。(重複 {dups} 件)"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:855
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:861
 msgid "Renamed {rename_count} bones."
 msgstr "ボーンを {rename_count} 件名称変更しました。"
 
@@ -1700,7 +1708,7 @@ msgstr ""
 msgid "Bone {orig_name} was renamed to {bone_name}."
 msgstr "{orig_name} ボーンは {bone_name} に名称変更されました。"
 
-#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:827
+#: extensions/user_default/mmd_tools_append/converters/armatures/operators.py:833
 msgid "Bone {k} was selected {v} times."
 msgstr "{k} ボーンは {v} 回選択されています。"
 
@@ -1925,7 +1933,7 @@ msgstr "自動"
 msgid "Surface Deform"
 msgstr "サーフェス変形"
 
-#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:78
+#: extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:83
 msgid "No bones related with {rigid_body_name}, Please relate a bone to the Rigid Body."
 msgstr "{rigid_body_name}に関連するボーンがありません。リジッドボディにボーンを関連付けてください。"
 

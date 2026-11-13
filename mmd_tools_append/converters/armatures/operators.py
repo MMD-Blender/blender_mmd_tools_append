@@ -681,6 +681,12 @@ class HumanoidAutoOrientationOperator(bpy.types.Operator):
     bl_description = "Automatically set bone orientation based on child bone"
     bl_options = {"REGISTER", "UNDO"}
 
+    force_connect: bpy.props.BoolProperty(
+        name="Force connect",
+        description="Try to connect parent and child bones",
+        default=False,
+    )
+
     @classmethod
     def poll(cls, context: bpy.types.Context):
         if context.mode not in {"OBJECT", "POSE"}:
@@ -699,7 +705,7 @@ class HumanoidAutoOrientationOperator(bpy.types.Operator):
             editor = HumanoidEditor(context.active_object)
 
             bpy.ops.object.mode_set(mode="EDIT")
-            editor.auto_orientation()
+            editor.auto_orientation(force_connect=self.force_connect)
 
         except MessageException as ex:
             self.report(type={"ERROR"}, message=str(ex))

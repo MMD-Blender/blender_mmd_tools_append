@@ -447,20 +447,44 @@ class HumanoidEditor(ArmatureEditor):
         if use_local:
             apply_local()
 
-    def auto_orientation(self):
-        """Automatic Orientation, similar to legacy FBX importer"""
+    def auto_orientation(self, force_connect: bool = False):
+        """
+        Automatic Orientation, similar to legacy FBX importer.
+
+        Try to align to child bone's direction.
+        + force-connect a single child when their directions are aligned.
+        """
+        threshold = 0.8  # 90deg == 1.0
+        dist_epsilon = 0.0001  # min distance
 
         def sign(num) -> int:
             return (num > 0) - (num < 0)
 
-        def find_major_axis(bone: bpy.types.EditBone) -> tuple[int, int]:
-            child_dir = (bone.children[0].head - bone.head).normalized()
+        def get_reference_direction(bone: bpy.types.EditBone) -> Vector | None:
+            if len(bone.children) == 1:
+                direction = bone.children[0].head - bone.head
+                return direction.normalized() if direction.length > dist_epsilon else None
+            elif not bone.children and bone.parent:
+                direction = bone.head - bone.parent.head
+                return direction.normalized() if direction.length > dist_epsilon else None
+            return None
+
+        def find_major_axis(bone: bpy.types.EditBone) -> tuple[int, int] | None:
+            ref_dir = get_reference_direction(bone)
+            if not ref_dir:
+                return None
+
             prev_axes = bone.matrix.to_3x3().col
-            scores = [(abs(child_dir.dot(axis)), idx, sign(child_dir.dot(axis))) for idx, axis in enumerate(prev_axes)]
+            scores = [(abs(ref_dir.dot(axis)), idx, sign(ref_dir.dot(axis))) for idx, axis in enumerate(prev_axes)]
             _, axis_idx, axis_sign = max(scores)
             return axis_idx, axis_sign
 
-        axis_votes = [find_major_axis(bone) for bone in self.edit_bones if bone.children and len(bone.children) == 1]
+        axis_votes = []
+        for bone in self.edit_bones:
+            vote = find_major_axis(bone)
+            if vote is not None:
+                axis_votes.append(vote)
+
         if not axis_votes:
             return
 
@@ -468,6 +492,9 @@ class HumanoidEditor(ArmatureEditor):
         for bone in self.edit_bones:
             col = bone.matrix.to_3x3().col
             new_dir = col[g_axis_idx] * g_axis_sign
+            ref_dir = get_reference_direction(bone)
+            if ref_dir is not None and new_dir.dot(ref_dir) < -threshold:
+                new_dir *= -1
 
             prev_roll = bone.z_axis.copy()
             if abs(new_dir.dot(prev_roll.normalized())) > 0.99:
@@ -476,9 +503,19 @@ class HumanoidEditor(ArmatureEditor):
             bone.tail = bone.head + new_dir * bone.length
             bone.align_roll(prev_roll)
 
-            if bone.children and len(bone.children) == 1:
+            if len(bone.children) == 1:
                 child = bone.children[0]
-                if abs(bone.length - (child.head - bone.head).length) < 0.0001:
+                child_dir = child.head - bone.head
+                if child_dir.length <= dist_epsilon:
+                    continue
+
+                if force_connect and bone.length > 0:
+                    angle = bone.vector.angle(child_dir)
+                    if angle < math.pi * 0.5 * threshold:
+                        bone.tail = child.head
+                        child.use_connect = True
+
+                if bone.length > 0 and abs(bone.length - child_dir.length) < dist_epsilon:
                     bone.tail = child.head
 
     def add_leg_ik(self):

@@ -802,6 +802,18 @@ translations_tuple = (
         ("zh_HANS", "", (False, ())),
     ),
     (
+        ("*", "Force connect"),
+        (("bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation.force_connect",), ()),
+        ("ja_JP", "強制的に接続", (False, ())),
+        ("zh_HANS", "", (False, ())),
+    ),
+    (
+        ("*", "Try to connect parent and child bones"),
+        (("bpy.types.MMD_TOOLS_APPEND_OT_humanoid_auto_orientation.force_connect",), ()),
+        ("ja_JP", "強制的に親ボーンと子ボーンを接続します", (False, ())),
+        ("zh_HANS", "", (False, ())),
+    ),
+    (
         ("*", "Analyze the bone position, direction, structure and name to find Humanoid structure.\nIntended for non-MMD models, and the model must face Y- direction"),
         (("bpy.types.MMD_TOOLS_APPEND_OT_humanoid_detect",), ()),
         ("ja_JP", "ボーンの位置、向き、構造や名前を解析しヒューマノイド構造を探します.\nMMDでないモデル専用です. モデルはY軸負の向きを向くようにしてください", (False, ())),
@@ -2206,7 +2218,7 @@ translations_tuple = (
     ),
     (
         ("*", "{}: {}"),
-        (("extensions/user_default/mmd_tools_append/checkers/operators.py:441",), ()),
+        (("extensions/user_default/mmd_tools_append/checkers/operators.py:440",), ()),
         ("ja_JP", "", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2233,9 +2245,9 @@ translations_tuple = (
         (
             (
                 "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:97",
-                "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:857",
+                "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:863",
                 "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:97",
-                "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:857",
+                "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:863",
             ),
             (),
         ),
@@ -2268,13 +2280,13 @@ translations_tuple = (
     ),
     (
         ("*", "Renamed {rename_count} bones with {dups} duplicates. (click to see details)"),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:853", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:853"), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:859", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:859"), ()),
         ("ja_JP", "ボーンを {rename_count} 件名称変更しました。(重複 {dups} 件)", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
     (
         ("*", "Renamed {rename_count} bones."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:855", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:855"), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:861", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:861"), ()),
         ("ja_JP", "ボーンを {rename_count} 件名称変更しました。", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2292,7 +2304,7 @@ translations_tuple = (
     ),
     (
         ("*", "Bone {k} was selected {v} times."),
-        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:827", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:827"), ()),
+        (("extensions/user_default/mmd_tools_append/converters/armatures/operators.py:833", "extensions/user_default/mmd_tools_append/converters/armatures/operators.py:833"), ()),
         ("ja_JP", "{k} ボーンは {v} 回選択されています。", (False, ())),
         ("zh_HANS", "", (False, ())),
     ),
@@ -2629,7 +2641,7 @@ translations_tuple = (
     ),
     (
         ("*", "No bones related with {rigid_body_name}, Please relate a bone to the Rigid Body."),
-        (("extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:78",), ()),
+        (("extensions/user_default/mmd_tools_append/converters/physics/rigid_body_to_cloth.py:83",), ()),
         ("ja_JP", "{rigid_body_name}に関連するボーンがありません。リジッドボディにボーンを関連付けてください。", (False, ())),
         ("zh_HANS", "没有与{rigid_body_name}有关的骨骼，请将骨骼与刚体联系起来。", (False, ())),
     ),
